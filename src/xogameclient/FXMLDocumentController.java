@@ -35,7 +35,7 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
         
-        Parent root = FXMLLoader.load(getClass().getResource("loginscreen/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gameboardscreen/gameboard.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
