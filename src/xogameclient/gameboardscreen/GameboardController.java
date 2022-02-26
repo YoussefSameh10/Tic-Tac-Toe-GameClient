@@ -54,9 +54,10 @@ public class GameboardController implements Initializable {
     private ImageView player2Card;
     
     
-    private Image background = new Image(getClass().getResourceAsStream("assets/background.jpg"));
-    private Image imageX = new Image(getClass().getResourceAsStream("assets/X.png"));
-    private Image imageO = new Image(getClass().getResourceAsStream("assets/O.png"));
+    private final int iconSize = 75;
+    private final Image background = new Image(getClass().getResourceAsStream("assets/background.jpg"));
+    private final Image imageX = new Image(getClass().getResourceAsStream("assets/X.jpg"));
+    private final Image imageO = new Image(getClass().getResourceAsStream("assets/O.jpg"));
     
     
     
@@ -71,74 +72,63 @@ public class GameboardController implements Initializable {
     
     @FXML
     private void cell0Pressed() {
-        turn = !turn;
-        addXorO(cell0, turn);
-        System.out.println("Pressed 0");
+        cellPressed(cell0);
     }
     @FXML
     private void cell1Pressed() {
-        turn = !turn;
-        addXorO(cell1, turn);
-        System.out.println("Pressed 1");
+        cellPressed(cell1);
     }
     @FXML
     private void cell2Pressed() {
-        turn = !turn;
-        addXorO(cell2, turn);
-        System.out.println("Pressed 2");
+        cellPressed(cell2);
     }
     @FXML
     private void cell3Pressed() {
-        turn = !turn;
-        addXorO(cell3, turn);
-        System.out.println("Pressed 3");
+        cellPressed(cell3);
     }
     @FXML
     private void cell4Pressed() {
-        turn = !turn;
-        addXorO(cell4, turn);
-        System.out.println("Pressed 4");
+        cellPressed(cell4);
     }
     @FXML
     private void cell5Pressed() {
-        turn = !turn;
-        addXorO(cell5, turn);
-        System.out.println("Pressed 5");
+        cellPressed(cell5);
     }
     @FXML
     private void cell6Pressed() {
-        turn = !turn;
-        addXorO(cell6, turn);
-        System.out.println("Pressed 6");
+        cellPressed(cell6);
     }
     @FXML
     private void cell7Pressed() {
-        turn = !turn;
-        addXorO(cell7, turn);
-        System.out.println("Pressed 7");
+        cellPressed(cell7);
     }
     @FXML
     private void cell8Pressed() {
+        cellPressed(cell8);
+    }
+    
+    private void cellPressed(Button cell) {
+        addXorO(cell, turn);
         turn = !turn;
-        addXorO(cell8, turn);
-        System.out.println("Pressed 8");
     }
 
     private void addXorO(Button cell, boolean turn) {
-        System.out.println(turn);
-        System.out.println(cell);
+        
         if(turn) {
             ImageView imageviewX = new ImageView(imageX);
-            imageviewX.setFitWidth(75);
-            imageviewX.setFitHeight(75);
+            resize(imageviewX);
             cell.setGraphic(imageviewX);
         }
         else {
             ImageView imageviewO = new ImageView(imageO);
-            imageviewO.setFitWidth(75);
-            imageviewO.setFitHeight(75);
+            resize(imageviewO);
             cell.setGraphic(imageviewO);
         }
+    }
+    
+    private void resize(ImageView imgView) {
+        imgView.setFitWidth(iconSize);
+        imgView.setFitHeight(iconSize);
     }
     
 }
