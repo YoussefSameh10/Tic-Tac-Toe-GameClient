@@ -77,6 +77,8 @@ public class OnlineUsersListController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        System.out.println("QQQQQQQQ");
         // TODO
         //configureUI();
         configureListView();
@@ -88,6 +90,7 @@ public class OnlineUsersListController implements Initializable {
 //    }
     private void configureListView(){
         centerList.setItems(names);
+        System.out.println("RRRRRRRRRRR");
         centerList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //onlineuserLV.setStyle("-fx-background-color: transparent;");
         centerList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {

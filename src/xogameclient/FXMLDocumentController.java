@@ -47,16 +47,21 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void didPressLocalMultiplayerModeButton() {
-        System.out.println("Localllllllllllllll");
+    private void didPressLocalMultiplayerModeButton() throws IOException {
+         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
+        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Scene scene = new Scene(onlineUsersScene);
+        stage.setScene(scene);
+        stage.setTitle("Online Users");
+        stage.show();
     }
 
     @FXML
     private void didPressLanMultiplayerModeButton() throws IOException {
         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
-        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("onlineuserslist/OnlineUsersList.fxml"));
+        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("OnlineUsersList.fxml"));
         Scene scene = new Scene(onlineUsersScene);
-        scene.getStylesheets().add("/onlineuserslist/onlineuserslist.css");
+        scene.getStylesheets().add("onlineuserslist.css");
         stage.setScene(scene);
         stage.setTitle("Online Users");
         stage.show();
