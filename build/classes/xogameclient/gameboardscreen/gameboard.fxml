@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="950.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xogameclient.gameboardscreen.GameboardController">
+    <stylesheets>
+        <URL value="@gameboard.css" />
+    </stylesheets>
+   <children>
+      <ImageView fx:id="backgroundImage" fitHeight="713.0" fitWidth="950.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/background.jpg" />
+         </image></ImageView>
+      <GridPane layoutX="296.0" layoutY="113.0" prefHeight="350.0" prefWidth="354.0" style="-fx-background-color: transparent;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="cell0" mnemonicParsing="false" onAction="#cell0Pressed" prefHeight="191.0" prefWidth="118.0" style="-fx-background-color: transparent;" />
+            <Button fx:id="cell1" mnemonicParsing="false" onAction="#cell1Pressed" prefHeight="191.0" prefWidth="118.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" />
+            <Button fx:id="cell2" mnemonicParsing="false" onAction="#cell2Pressed" prefHeight="191.0" prefWidth="118.0" style="-fx-background-color: transparent;" GridPane.columnIndex="2" />
+            <Button fx:id="cell3" mnemonicParsing="false" onAction="#cell3Pressed" prefHeight="191.0" prefWidth="118.0" style="-fx-background-color: transparent;" GridPane.rowIndex="1" />
+            <Button fx:id="cell4" mnemonicParsing="false" onAction="#cell4Pressed" prefHeight="191.0" prefWidth="118.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="cell5" mnemonicParsing="false" onAction="#cell5Pressed" prefHeight="191.0" prefWidth="118.0" style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="cell6" mnemonicParsing="false" onAction="#cell6Pressed" prefHeight="191.0" prefWidth="118.0" style="-fx-background-color: transparent;" GridPane.rowIndex="2" />
+            <Button fx:id="cell7" mnemonicParsing="false" onAction="#cell7Pressed" prefHeight="191.0" prefWidth="118.0" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="cell8" mnemonicParsing="false" onAction="#cell8Pressed" prefHeight="191.0" prefWidth="118.0" style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <ImageView fx:id="player1Card" fitHeight="150.0" fitWidth="154.0" layoutX="42.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/X.jpg" />
+         </image></ImageView>
+      <ImageView fx:id="player2Card" fitHeight="150.0" fitWidth="154.0" layoutX="757.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assets/O.jpg" />
+         </image></ImageView>
+      <Label layoutX="77.0" layoutY="213.0" text="Player X">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="781.0" layoutY="213.0" text="Player O">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
