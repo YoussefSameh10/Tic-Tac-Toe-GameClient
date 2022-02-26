@@ -44,12 +44,15 @@ public class FXMLDocumentController implements Initializable {
     private Button lanMultiplayerButton;
 
     @FXML
-    private void didPressSingleModeButton() {
+    private void didPressSingleModeButton() throws IOException {
         
-       System.out.println("Singleeeeeeeeeeeee");
-        
-      
-      
+        Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
+        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+        Scene scene = new Scene(onlineUsersScene);
+        stage.setScene(scene);
+        stage.setTitle("profile");
+        stage.show();
+
     }
 
     @FXML

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xogameclient.profilescreen;
+package xogameclient;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,7 +35,7 @@ public class ProfileController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         ImageView imageView = new ImageView(getClass().getResource("buttn.png").toExternalForm());
+         ImageView imageView = new ImageView(getClass().getResource("homeAssets/buttn.png").toExternalForm());
         imageView.setFitHeight(55);
        imageView.setFitWidth(250);
 
