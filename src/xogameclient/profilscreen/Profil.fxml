@@ -18,11 +18,7 @@
             <Image url="@smsm%203.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="profile" fitHeight="150.0" fitWidth="200.0" layoutX="369.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../build/classes/xogameclient/profilscreen/prof.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="profile" fitHeight="150.0" fitWidth="200.0" layoutX="369.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="name" fitHeight="67.0" fitWidth="272.0" layoutX="111.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@b11_1.png" />

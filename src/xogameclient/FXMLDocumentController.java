@@ -45,7 +45,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void didPressSingleModeButton() {
+        
        System.out.println("Singleeeeeeeeeeeee");
+        
+      
       
     }
 

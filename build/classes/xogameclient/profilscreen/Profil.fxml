@@ -18,11 +18,7 @@
             <Image url="@smsm%203.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="profile" fitHeight="150.0" fitWidth="200.0" layoutX="369.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../build/classes/xogameclient/profilscreen/prof.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="profile" fitHeight="150.0" fitWidth="200.0" layoutX="369.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="name" fitHeight="67.0" fitWidth="272.0" layoutX="111.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@b11_1.png" />
@@ -33,7 +29,7 @@
             <Image url="@b11.png" />
          </image>
       </ImageView>
-      <Button fx:id="buttn" layoutX="484.0" layoutY="601.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="238.0" style="-fx-background-color: #0b1af5;" AnchorPane.bottomAnchor="86.0" AnchorPane.rightAnchor="286.0" />
+      <Button fx:id="buttn" layoutX="484.0" layoutY="601.0" mnemonicParsing="false" onAction="#didPreesedButton" prefHeight="31.0" prefWidth="238.0" style="-fx-background-color: #0b1af5;" AnchorPane.bottomAnchor="86.0" AnchorPane.rightAnchor="286.0" />
       <Label fx:id="nameLabel" layoutX="484.0" layoutY="259.0" prefHeight="40.0" prefWidth="294.0" text="Tasneem Hatem" textFill="#f2eeee">
          <font>
             <Font name="Comic Sans MS" size="26.0" />

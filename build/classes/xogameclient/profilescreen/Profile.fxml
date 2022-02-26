@@ -25,7 +25,7 @@
       </ImageView>
       <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="200.0" layoutX="406.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../profilscreen/3.png" />
+            <Image url="@3.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="39.0" fitWidth="150.0" layoutX="288.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
