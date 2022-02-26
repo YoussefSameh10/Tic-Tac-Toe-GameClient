@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xogameclient.gameboardscreen;
+package xogameclient;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -55,9 +55,9 @@ public class GameboardController implements Initializable {
     
     
     private final int iconSize = 75;
-    private final Image background = new Image(getClass().getResourceAsStream("assets/background.jpg"));
-    private final Image imageX = new Image(getClass().getResourceAsStream("assets/X.jpg"));
-    private final Image imageO = new Image(getClass().getResourceAsStream("assets/O.jpg"));
+    private final Image background = new Image(getClass().getResourceAsStream("homeAssets/background.jpg"));
+    private final Image imageX = new Image(getClass().getResourceAsStream("homeAssets/X.jpg"));
+    private final Image imageO = new Image(getClass().getResourceAsStream("homeAssets/O.jpg"));
     
     
     

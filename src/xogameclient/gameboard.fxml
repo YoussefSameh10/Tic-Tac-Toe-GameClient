@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="950.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xogameclient.gameboardscreen.GameboardController">
+<AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="950.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xogameclient.GameboardController">
     <stylesheets>
         <URL value="@gameboard.css" />
     </stylesheets>
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="713.0" fitWidth="950.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/background.jpg" />
+            <Image url="@homeAssets/background.jpg" />
          </image></ImageView>
       <GridPane layoutX="296.0" layoutY="113.0" prefHeight="350.0" prefWidth="354.0" style="-fx-background-color: transparent;">
         <columnConstraints>
@@ -45,11 +45,11 @@
       </GridPane>
       <ImageView fx:id="player1Card" fitHeight="150.0" fitWidth="154.0" layoutX="42.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/X.jpg" />
+            <Image url="@homeAssets/X.jpg" />
          </image></ImageView>
       <ImageView fx:id="player2Card" fitHeight="150.0" fitWidth="154.0" layoutX="757.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@assets/O.jpg" />
+            <Image url="@homeAssets/O.jpg" />
          </image></ImageView>
       <Label layoutX="77.0" layoutY="213.0" text="Player X">
          <font>
