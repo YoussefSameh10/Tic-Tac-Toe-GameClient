@@ -8,6 +8,8 @@ package xogameclient;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,7 +52,14 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void didPressLanMultiplayerModeButton() {
+    private void didPressLanMultiplayerModeButton() throws IOException {
+        Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
+        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("onlineuserslist/OnlineUsersList.fxml"));
+        Scene scene = new Scene(onlineUsersScene);
+        scene.getStylesheets().add("/onlineuserslist/onlineuserslist.css");
+        stage.setScene(scene);
+        stage.setTitle("Online Users");
+        stage.show();
         System.out.println("SerVerrrrrrrrrrrrrrr");
     }
 
