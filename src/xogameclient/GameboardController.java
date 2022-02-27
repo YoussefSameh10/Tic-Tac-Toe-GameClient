@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -22,7 +24,13 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+import static sun.audio.AudioPlayer.player;
 
 /**
  * FXML Controller class
@@ -278,7 +286,7 @@ public class GameboardController implements Initializable {
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
-       textx.setText("x wins");
+      alert(textx.getText());
       
    }
     public void oWins(Button a,Button b, Button c){
@@ -286,7 +294,7 @@ public class GameboardController implements Initializable {
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
-       texto.setText("O wins");
+      alert(texto.getText());
    }
     public void buttonDisabel(){
         cell0.setDisable(true);
@@ -299,5 +307,27 @@ public class GameboardController implements Initializable {
         cell7.setDisable(true);
         cell8.setDisable(true);
     }
-        
+      public void setUesers(String p1,String p2){
+          System.out.println("p1");
+                  
+          textx.setText(p1);
+          texto.setText(p2);
+      }
+      
+      private void alert(String p1) {
+          MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
+          MediaView mediaView = new MediaView(player);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("You Win");
+        alert.setHeaderText("");
+
+        Label label = new Label("Congatrions " +p1);
+        VBox content = new VBox(10, label, mediaView);
+        content.setAlignment(Pos.CENTER);
+        alert.getDialogPane().setContent(content);
+        player.setCycleCount(MediaPlayer.INDEFINITE);
+        alert.setOnShowing(e -> player.play());
+        alert.getDialogPane().setPrefSize(600, 600);
+        alert.showAndWait();
+    }
 }

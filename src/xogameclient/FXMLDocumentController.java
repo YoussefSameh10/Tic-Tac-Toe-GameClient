@@ -60,7 +60,7 @@ public class FXMLDocumentController implements Initializable {
         //  Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
         // Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("login.fxml"));
         // Scene scene = new Scene(onlineUsersScene);
-        Parent root = FXMLLoader.load(getClass().getResource("gameboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Local.fxml"));
         Stage stage = (Stage)lanMultiplayerButton.getScene().getWindow();
         Scene scene = new Scene(root);
 
