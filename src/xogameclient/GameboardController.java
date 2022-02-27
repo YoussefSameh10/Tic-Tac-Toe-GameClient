@@ -87,10 +87,8 @@ public class GameboardController implements Initializable {
           char res = (turn == true) ? 'X':'O';
           charForBoard[0][0] = res ;
           cellPressed(cell0);
-                      System.out.println(res);
-
-
-
+          System.out.println(res);
+          check();
        }
         
     }
@@ -99,11 +97,8 @@ public class GameboardController implements Initializable {
         if(charForBoard[0][1] == ' '){
           char res = (turn == true) ? 'X':'O';
           charForBoard[0][1] = res ;
-                   cellPressed(cell1);
-                               System.out.println(res);
-
-
-
+          cellPressed(cell1);
+          check();
        }
        // cellPressed(cell1);
     }
@@ -112,9 +107,8 @@ public class GameboardController implements Initializable {
         if(charForBoard[0][2] == ' '){
           char res = (turn == true) ? 'X':'O';
           charForBoard[0][2] = res ;
-                     cellPressed(cell2);
-                                 System.out.println(res);
-
+          cellPressed(cell2);
+          check();
 
        }
        // cellPressed(cell2);
@@ -124,10 +118,8 @@ public class GameboardController implements Initializable {
         if(charForBoard[1][0] == ' '){
           char res = (turn == true) ? 'X':'O';
           charForBoard[1][0] = res ;
-                     cellPressed(cell3);
-                                 System.out.println(res);
-
-
+          cellPressed(cell3);
+          check();
        }
        // cellPressed(cell3);
     }
@@ -136,10 +128,8 @@ public class GameboardController implements Initializable {
         if(charForBoard[1][1] == ' '){
           char res = (turn == true) ? 'X':'O';
           charForBoard[1][1] = res ;
-                     cellPressed(cell4);
-                                 System.out.println(res);
-
-
+          cellPressed(cell4);
+          check();
        }
         //cellPressed(cell4);
     }
@@ -148,9 +138,8 @@ public class GameboardController implements Initializable {
         if(charForBoard[1][2] == ' '){
           char res = (turn == true) ? 'X':'O';
           charForBoard[1][2] = res ;
-                     cellPressed(cell5);
-                                 System.out.println(res);
-
+          cellPressed(cell5);
+          check();
 
        }
         //cellPressed(cell5);
@@ -160,9 +149,8 @@ public class GameboardController implements Initializable {
         if(charForBoard[2][0] == ' '){
           char res = (turn == true) ? 'X':'O';
           charForBoard[2][0] = res ;
-                     cellPressed(cell6);
-                                 System.out.println(res);
-
+          cellPressed(cell6);
+          check();
 
        }
        // cellPressed(cell6);
@@ -172,9 +160,8 @@ public class GameboardController implements Initializable {
         if(charForBoard[2][1] == ' '){
           char res = (turn == true) ? 'X':'O';
           charForBoard[2][1] = res ;
-                     cellPressed(cell7);
-                                 System.out.println(res);
-
+          cellPressed(cell7);
+          check();
 
        }
         //cellPressed(cell7);
@@ -185,9 +172,8 @@ public class GameboardController implements Initializable {
        if(charForBoard[2][2] == ' '){
           char res = (turn == true) ? 'X':'O';
           charForBoard[2][2] = res ;
-                     cellPressed(cell8);
-                                 System.out.println(res);
-
+          cellPressed(cell8);
+          check();
 
        }
     }
@@ -228,65 +214,62 @@ public class GameboardController implements Initializable {
            playerTurn = true;
            textx.setText("X Turn");
            
-          // texto.setText();
-           
        }else{
             playerTurn = false;
            texto.setText("O Turn");
-           //textx.setText(value);
        }
    } 
    
    public void check(){
         // x win
-       if(cell0.getText()=="X" && cell1.getText()=="X" && cell2.getText()=="X"){
+       if(charForBoard[0][0]=='X' && charForBoard[0][1]=='X' && charForBoard[0][2]=='X'){
            xWins(cell0,cell1,cell2);
        }
-       if(cell3.getText()=="X" && cell4.getText()=="X" && cell5.getText()=="X"){
+       if(charForBoard[1][0]=='X' && charForBoard[1][1]=='X' && charForBoard[1][2]=='X'){
            xWins(cell3,cell4,cell5);
        }
-       if(cell6.getText()=="X" && cell7.getText()=="X" && cell8.getText()=="X"){
+       if(charForBoard[2][0]=='X' && charForBoard[2][1]=='X' && charForBoard[2][2]=='X'){
            xWins(cell6,cell7,cell8);
        }
-       if(cell0.getText()=="X" && cell3.getText()=="X" && cell6.getText()=="X"){
+       if(charForBoard[0][0]=='X' && charForBoard[1][0]=='X' && charForBoard[2][0]=='X'){
            xWins(cell0,cell3,cell6);
        }
-       if(cell1.getText()=="X" && cell4.getText()=="X" && cell7.getText()=="X"){
+       if(charForBoard[0][1]=='X' && charForBoard[1][1]=='X' && charForBoard[2][1]=='X'){
            xWins(cell1,cell4,cell7);
        }
-       if(cell2.getText()=="X" && cell5.getText()=="X" && cell8.getText()=="X"){
+       if(charForBoard[0][2]=='X' && charForBoard[1][2]=='X' && charForBoard[2][2]=='X'){
            xWins(cell2,cell5,cell8);
        }
-       if(cell0.getText()=="X" && cell4.getText()=="X" && cell8.getText()=="X"){
+       if(charForBoard[0][0]=='X' && charForBoard[1][1]=='X' && charForBoard[2][2]=='X'){
            xWins(cell0,cell4,cell8);
        }
-       if(cell2.getText()=="X" && cell4.getText()=="X" && cell6.getText()=="X"){
+       if(charForBoard[0][2]=='X' && charForBoard[1][1]=='X' && charForBoard[2][0]=='X'){
            xWins(cell2,cell4,cell6);
        }
        // o win
        
-       if(cell0.getText()=="O" && cell1.getText()=="O" && cell2.getText()=="O"){
+       if(charForBoard[0][0]=='O' && charForBoard[0][1]=='O' && charForBoard[0][2]=='O'){
            oWins(cell0,cell1,cell2);
        }
-       if(cell3.getText()=="O" && cell4.getText()=="O" && cell5.getText()=="O"){
+       if(charForBoard[1][0]=='O' && charForBoard[1][1]=='O' && charForBoard[1][2]=='O'){
            oWins(cell3,cell4,cell5);
        }
-       if(cell6.getText()=="O" && cell7.getText()=="O" && cell8.getText()=="O"){
+       if(charForBoard[2][0]=='O' && charForBoard[2][1]=='O' && charForBoard[2][2]=='O'){
            oWins(cell6,cell7,cell8);
        }
-       if(cell0.getText()=="O" && cell3.getText()=="O" && cell6.getText()=="O"){
+       if(charForBoard[0][0]=='O' && charForBoard[1][0]=='O' && charForBoard[2][0]=='O'){
            oWins(cell0,cell3,cell6);
        }
-       if(cell1.getText()=="O" && cell4.getText()=="O" && cell5.getText()=="O"){
-           oWins(cell1,cell4,cell5);
+       if(charForBoard[0][1]=='O' && charForBoard[1][1]=='O' && charForBoard[2][1]=='O'){
+           oWins(cell1,cell4,cell7);
        }
-       if(cell2.getText()=="O" && cell5.getText()=="O" && cell8.getText()=="O"){
+       if(charForBoard[0][2]=='O' && charForBoard[1][2]=='O' && charForBoard[2][2]=='O'){
            oWins(cell2,cell5,cell8);
        }
-       if(cell0.getText()=="O" && cell4.getText()=="O" && cell8.getText()=="O"){
+       if(charForBoard[0][0]=='O' && charForBoard[1][1]=='O' && charForBoard[2][2]=='O'){
            oWins(cell0,cell4,cell8);
        }
-       if(cell2.getText()=="O" && cell4.getText()=="O" && cell6.getText()=="O"){
+       if(charForBoard[0][2]=='O' && charForBoard[1][1]=='O' && charForBoard[2][0]=='O'){
            oWins(cell2,cell4,cell6);
        }
    }
@@ -299,12 +282,22 @@ public class GameboardController implements Initializable {
       
    }
     public void oWins(Button a,Button b, Button c){
-         a.setStyle("-fx-background-color: #ff0000;");
+       a.setStyle("-fx-background-color: #ff0000;");
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
        texto.setText("O wins");
    }
-    public void buttonDisabel(){}
-    
+    public void buttonDisabel(){
+        cell0.setDisable(true);
+        cell1.setDisable(true);
+        cell2.setDisable(true);
+        cell3.setDisable(true);
+        cell4.setDisable(true);
+        cell5.setDisable(true);
+        cell6.setDisable(true);
+        cell7.setDisable(true);
+        cell8.setDisable(true);
+    }
+        
 }
