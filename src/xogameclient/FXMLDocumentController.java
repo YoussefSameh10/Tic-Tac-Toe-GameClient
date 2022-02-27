@@ -47,7 +47,7 @@ public class FXMLDocumentController implements Initializable {
     private void didPressSingleModeButton() throws IOException {
         
         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
-        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("AIGameboard.fxml"));
         Scene scene = new Scene(onlineUsersScene);
         stage.setScene(scene);
         stage.setTitle("profile");
