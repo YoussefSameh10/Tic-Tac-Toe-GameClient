@@ -15,9 +15,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -67,8 +69,20 @@ public class LocalController implements Initializable {
 //        }
         
         
-        if(!(player1.getText().isEmpty()) && !(player2.getText().isEmpty()) ){
-           FXMLLoader Loader = new FXMLLoader();
+        if(player1.getText().isEmpty() || player2.getText().isEmpty()){
+            Stage stg = (Stage) next.getScene().getWindow();
+        
+            Alert.AlertType type = Alert.AlertType.ERROR;
+            Alert alert = new Alert(type);
+
+            alert.initModality(Modality.WINDOW_MODAL);
+            alert.initOwner(stg);
+            alert.setTitle("Players names not added!");
+            alert.getDialogPane().setContentText("Please, Add a valid name for each player !");
+            alert.setHeaderText("Players names not added!");
+            alert.showAndWait();
+        }else{   
+            FXMLLoader Loader = new FXMLLoader();
             Loader.setLocation(getClass().getResource("gameboard.fxml"));
             Parent controller =  Loader.load();
             Scene scene = new Scene(controller);
@@ -77,13 +91,6 @@ public class LocalController implements Initializable {
             Stage windo =(Stage)((Node)event.getSource()).getScene().getWindow();
             windo.setScene(scene);
             windo.show();
-        }else{
-            if(player1.getText().isEmpty()){
-            player1.setPromptText("plese");
-            }else{
-                player2.setPromptText("plese");
-            }
-            
         }
    }
     

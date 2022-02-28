@@ -9,26 +9,30 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xogameclient.LocalController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../../Assets/Panel.PNG" />
-         </image>
-      </ImageView>
+      <AnchorPane prefHeight="600.0" prefWidth="239.0">
+         <children>
+            <ImageView fitHeight="662.0" fitWidth="278.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@homeAssets/leftImg.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="554.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../3.png" />
+            <Image url="@homeAssets/tic-tac-toe.png" />
          </image>
       </ImageView>
       <TextField fx:id="player1" layoutX="554.0" layoutY="332.0" prefHeight="26.0" prefWidth="225.0" promptText="player1" style="-fx-background-radius: 15px;" />
       <TextField fx:id="player2" layoutX="554.0" layoutY="393.0" prefHeight="26.0" prefWidth="225.0" promptText="player2" style="-fx-background-radius: 15px;" />
       <ImageView fx:id="usernameImg" fitHeight="35.0" fitWidth="35.0" layoutX="487.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Assets/user.png" />
+            <Image url="@homeAssets/user.png" />
          </image>
       </ImageView>
       <ImageView fx:id="usernameImg1" fitHeight="35.0" fitWidth="35.0" layoutX="487.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Assets/user.png" />
+            <Image url="@homeAssets/user.png" />
          </image>
       </ImageView>
       <Button fx:id="next" layoutX="600.0" layoutY="484.0" mnemonicParsing="false" onAction="#handleNextAction" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #631dd8; -fx-background-radius: 2em;" text="Next" textFill="#fcfcfc">
