@@ -5,6 +5,7 @@
  */
 package xogameclient;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -12,13 +13,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -30,6 +36,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import static sun.audio.AudioPlayer.player;
 
 /**
@@ -77,6 +84,8 @@ public class GameboardController implements Initializable {
     private Label textx;
     @FXML
     private Label texto;
+    @FXML
+    private ImageView backBtn;
     
     
     
@@ -286,7 +295,8 @@ public class GameboardController implements Initializable {
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
-      alert(textx.getText());
+       gotToAlert(textx.getText());
+      //alert(textx.getText());
       
    }
     public void oWins(Button a,Button b, Button c){
@@ -294,7 +304,8 @@ public class GameboardController implements Initializable {
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
-      alert(texto.getText());
+       gotToAlert(texto.getText());
+      //alert(texto.getText());
    }
     public void buttonDisabel(){
         cell0.setDisable(true);
@@ -313,21 +324,47 @@ public class GameboardController implements Initializable {
           textx.setText(p1);
           texto.setText(p2);
       }
-      
-      private void alert(String p1) {
-          MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
-          MediaView mediaView = new MediaView(player);
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("You Win");
-        alert.setHeaderText("");
+      private void gotToAlert(String player){
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
+          Parent root = null;
+          try {
+              root = loader.load();
+          } catch (IOException ex) {
+              Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          Scene scene = new Scene(root);
+          VideoAlertController vc = loader.getController();
+          //vc.winnerPlayers = player;
+          vc.setWinnerVideo();
+          vc.setWinnerName(player);
+          Stage windo =(Stage)backBtn.getScene().getWindow();
+          windo.setScene(scene);
+          windo.show();
+      }
+      /*private void alert(String p1) {
+            MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
+            MediaView mediaView = new MediaView(player);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("You Win");
+            alert.setHeaderText("");
 
-        Label label = new Label("Congatrions " +p1);
-        VBox content = new VBox(10, label, mediaView);
-        content.setAlignment(Pos.CENTER);
-        alert.getDialogPane().setContent(content);
-        player.setCycleCount(MediaPlayer.INDEFINITE);
-        alert.setOnShowing(e -> player.play());
-        alert.getDialogPane().setPrefSize(600, 600);
-        alert.showAndWait();
+            Label label = new Label("Congatrions " +p1);
+            label.setStyle("-fx-font: 20px \"sans-serif\";-fx-font-weight: bold;");
+            VBox content = new VBox(10, label, mediaView);
+            content.setAlignment(Pos.CENTER);
+            alert.getDialogPane().setContent(content);
+            player.setCycleCount(MediaPlayer.INDEFINITE);
+            alert.setOnShowing(e -> player.play());
+            alert.getDialogPane().setPrefSize(600, 800);
+            alert.showAndWait();
+    }*/
+
+    @FXML
+    private void didPressedBack(MouseEvent event) throws IOException {
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        Parent prevScreen = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Scene scene = new Scene(prevScreen);
+        stage.setScene(scene);
+        stage.show();
     }
 }
