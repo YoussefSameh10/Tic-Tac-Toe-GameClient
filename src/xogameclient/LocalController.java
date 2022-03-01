@@ -19,6 +19,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -39,6 +40,8 @@ public class LocalController implements Initializable {
     private ImageView usernameImg1;
     @FXML
     private Button next;
+    @FXML
+    private ImageView backBtn;
     
     /**
      * Initializes the controller class.
@@ -50,24 +53,6 @@ public class LocalController implements Initializable {
 
     @FXML
     private void handleNextAction(ActionEvent event) throws IOException {
-//        if(player1.getText().isEmpty()){
-//            if(player2.getText().isEmpty()){
-//                 player2.setPromptText("plese");
-//            }else{
-//            }
-//             player1.setPromptText("plese");
-//        }else{
-//            FXMLLoader Loader = new FXMLLoader();
-//            Loader.setLocation(getClass().getResource("gameboard.fxml"));
-//            Parent controller =  Loader.load();
-//            Scene scene = new Scene(controller);
-//            GameboardController vc = Loader.getController();
-//            vc.setUesers(player1.getText(),player2.getText());
-//            Stage windo =(Stage)((Node)event.getSource()).getScene().getWindow();
-//            windo.setScene(scene);
-//            windo.show();
-//        }
-        
         
         if(player1.getText().isEmpty() || player2.getText().isEmpty()){
             Stage stg = (Stage) next.getScene().getWindow();
@@ -93,5 +78,14 @@ public class LocalController implements Initializable {
             windo.show();
         }
    }
+
+    @FXML
+    private void didPressedBack(MouseEvent event) throws IOException {
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        Parent prevScreen = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Scene scene = new Scene(prevScreen);
+        stage.setScene(scene);
+        stage.show();
+    }
     
 }
