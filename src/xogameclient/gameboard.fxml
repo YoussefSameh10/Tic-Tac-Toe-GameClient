@@ -51,12 +51,12 @@
          <image>
             <Image url="@homeAssets/O.jpg" />
          </image></ImageView>
-      <Label fx:id="textx" layoutX="77.0" layoutY="213.0" text="Player X">
+      <Label fx:id="textx" layoutX="66.0" layoutY="178.0" text="Player X" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="texto" layoutX="781.0" layoutY="213.0" text="Player O">
+      <Label fx:id="texto" layoutX="790.0" layoutY="178.0" text="Player O" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
@@ -66,5 +66,15 @@
             <Image url="@homeAssets/previous.png" />
          </image>
       </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="368.0" prefHeight="44.0" prefWidth="54.0" text="0" textAlignment="RIGHT" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" fx:id="xScore">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="oScore" alignment="CENTER" layoutX="808.0" layoutY="368.0" prefHeight="44.0" prefWidth="54.0" text="0" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
