@@ -91,7 +91,7 @@ public class GameboardController implements Initializable {
     @FXML
     private Label oScore;
     
-    int scoreX, scoreO;
+    int scoreX , scoreO;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -100,7 +100,7 @@ public class GameboardController implements Initializable {
         player1Card.setImage(imageX);
         player2Card.setImage(imageO);
         
-        
+        initializeScores(scoreX, scoreO);
     }   
     
     @FXML
@@ -224,56 +224,64 @@ public class GameboardController implements Initializable {
         imgView.setFitWidth(iconSize);
         imgView.setFitHeight(iconSize);
     }
-       public void firstTurn(){
-        
-         try {
-             Thread.sleep(2000);
-         } catch (InterruptedException ex) {
-             Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
-       if(randam.nextInt(2)==0){
-           playerTurn = true;
-           textx.setText("X Turn");
-           
-       }else{
-            playerTurn = false;
-           texto.setText("O Turn");
-       }
-   } 
-   
+       
    public void check(){
         // x win
        checkXWin();
+       System.out.println("x from check method "+ scoreX);
        // o win
        checkOWin();
-       setScores(scoreX, scoreO);
+       System.out.println("o from check method "+ scoreO);
+       //setScores(scoreX, scoreO);
    }
    
    public boolean checkXWin(){
        
        if(charForBoard[0][0]=='X' && charForBoard[0][1]=='X' && charForBoard[0][2]=='X'){
+           
+           scoreX++;
+           System.out.println("X player score is "+scoreX);
            xWins(cell0,cell1,cell2);
        }
        if(charForBoard[1][0]=='X' && charForBoard[1][1]=='X' && charForBoard[1][2]=='X'){
+           
+           scoreX++;
+           System.out.println("X player score is "+scoreX);
            xWins(cell3,cell4,cell5);
        }
        if(charForBoard[2][0]=='X' && charForBoard[2][1]=='X' && charForBoard[2][2]=='X'){
+           
+           scoreX++;
+           System.out.println("X player score is "+scoreX);
            xWins(cell6,cell7,cell8);
        }
        if(charForBoard[0][0]=='X' && charForBoard[1][0]=='X' && charForBoard[2][0]=='X'){
+           
+           scoreX++;
+           System.out.println("X player score is "+scoreX);
            xWins(cell0,cell3,cell6);
        }
        if(charForBoard[0][1]=='X' && charForBoard[1][1]=='X' && charForBoard[2][1]=='X'){
+
+           scoreX++;
+           System.out.println("X player score is "+scoreX);
            xWins(cell1,cell4,cell7);
        }
        if(charForBoard[0][2]=='X' && charForBoard[1][2]=='X' && charForBoard[2][2]=='X'){
+           
+           scoreX++;
            xWins(cell2,cell5,cell8);
        }
        if(charForBoard[0][0]=='X' && charForBoard[1][1]=='X' && charForBoard[2][2]=='X'){
+           
+           scoreX++;
+           System.out.println("X player score is "+scoreX);
            xWins(cell0,cell4,cell8);
        }
        if(charForBoard[0][2]=='X' && charForBoard[1][1]=='X' && charForBoard[2][0]=='X'){
+           
+           scoreX++;
+           System.out.println("X player score is "+scoreX);
            xWins(cell2,cell4,cell6);
        }
        return true;
@@ -282,28 +290,50 @@ public class GameboardController implements Initializable {
    public boolean checkOWin(){
        
        if(charForBoard[0][0]=='O' && charForBoard[0][1]=='O' && charForBoard[0][2]=='O'){
+           scoreO++;
+           System.out.println("O player score is "+scoreO);
            oWins(cell0,cell1,cell2);
        }
        if(charForBoard[1][0]=='O' && charForBoard[1][1]=='O' && charForBoard[1][2]=='O'){
+           
+           scoreO++;
+           System.out.println("O player score is "+scoreO);
            oWins(cell3,cell4,cell5);
        }
        if(charForBoard[2][0]=='O' && charForBoard[2][1]=='O' && charForBoard[2][2]=='O'){
+           
+           scoreO++;
+           System.out.println("O player score is "+scoreO);
            oWins(cell6,cell7,cell8);
        }
        if(charForBoard[0][0]=='O' && charForBoard[1][0]=='O' && charForBoard[2][0]=='O'){
+           
+           scoreO++;
+           System.out.println("O player score is "+scoreO);
            oWins(cell0,cell3,cell6);
        }
        if(charForBoard[0][1]=='O' && charForBoard[1][1]=='O' && charForBoard[2][1]=='O'){
+           
+           scoreO++;
            oWins(cell1,cell4,cell7);
        }
        if(charForBoard[0][2]=='O' && charForBoard[1][2]=='O' && charForBoard[2][2]=='O'){
+           scoreO++;
+           System.out.println("O player score is "+scoreO);
            oWins(cell2,cell5,cell8);
+           
        }
        if(charForBoard[0][0]=='O' && charForBoard[1][1]=='O' && charForBoard[2][2]=='O'){
+           scoreO++;
+           System.out.println("O player score is "+scoreO);
            oWins(cell0,cell4,cell8);
+           
        }
        if(charForBoard[0][2]=='O' && charForBoard[1][1]=='O' && charForBoard[2][0]=='O'){
+           scoreO++;
+           System.out.println("O player score is "+scoreO);
            oWins(cell2,cell4,cell6);
+           
        }
        return true;
    }
@@ -315,6 +345,7 @@ public class GameboardController implements Initializable {
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
        gotToAlert(textx.getText());
+       initializeScores(scoreX, scoreO);
       //alert(textx.getText());
       
    }
@@ -324,6 +355,8 @@ public class GameboardController implements Initializable {
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
        gotToAlert(texto.getText());
+       initializeScores(scoreX, scoreO);
+       //showAlert(scoreO);
       //alert(texto.getText());
    }
     public void buttonDisabel(){
@@ -343,6 +376,25 @@ public class GameboardController implements Initializable {
           textx.setText(p1);
           texto.setText(p2);
       }
+      
+       public void setScores(int scoreXplayer, int scoreOplayer){
+          if(checkXWin()){
+              scoreXplayer = scoreX;
+              xScore.setText(String.valueOf(scoreXplayer));
+          }else if(checkOWin()){
+              scoreOplayer = scoreO;
+              oScore.setText(String.valueOf(scoreOplayer));
+          }
+      }
+    /*   public void setInitialScores(int scoreXplayer , int scoreOplayer){
+                scoreXplayer = scoreX;
+                 scoreOplayer = scoreO;
+                         setScores( scoreXplayer,  scoreOplayer);
+
+                         
+
+       }*/
+       
       private void gotToAlert(String player){
           FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
           Parent root = null;
@@ -353,9 +405,15 @@ public class GameboardController implements Initializable {
           }
           Scene scene = new Scene(root);
           VideoAlertController vc = loader.getController();
-          //vc.winnerPlayers = player;
           vc.setWinnerVideo();
           vc.setWinnerName(player);
+          System.out.println("score x before is "+ scoreX);
+          System.out.println("score o before is "+ scoreO);
+          vc.scoreO = scoreO;
+          vc.scoreX = scoreX;
+          //vc.setScores(scoreX, scoreO);
+          System.out.println("score x is "+ scoreX);
+          System.out.println("score o is "+ scoreO);
           Stage windo =(Stage)backBtn.getScene().getWindow();
           windo.setScene(scene);
           windo.show();
@@ -365,16 +423,7 @@ public class GameboardController implements Initializable {
           xScore.setText(String.valueOf(scoreX));
           oScore.setText(String.valueOf(scoreO));
       }
-     
-      public void setScores(int scoreXplayer, int scoreOplayer){
-          if(checkXWin()){
-              scoreXplayer++;
-              xScore.setText(String.valueOf(scoreXplayer));
-          }else if(checkOWin()){
-              scoreOplayer++;
-              xScore.setText(String.valueOf(scoreOplayer));
-          }
-      }
+
       /*private void alert(String p1) {
             MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
             MediaView mediaView = new MediaView(player);
