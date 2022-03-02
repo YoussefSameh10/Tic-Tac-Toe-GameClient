@@ -43,6 +43,7 @@ public class LocalController implements Initializable {
     @FXML
     private ImageView backBtn;
     
+    static int scoreX = 0, scoreO =0;
     /**
      * Initializes the controller class.
      */
@@ -73,6 +74,7 @@ public class LocalController implements Initializable {
             Scene scene = new Scene(controller);
             GameboardController vc = Loader.getController();
             vc.setUesers(player1.getText(),player2.getText());
+            vc.initializeScores(scoreX, scoreO);
             Stage windo =(Stage)((Node)event.getSource()).getScene().getWindow();
             windo.setScene(scene);
             windo.show();
@@ -83,6 +85,7 @@ public class LocalController implements Initializable {
     private void didPressedBack(MouseEvent event) throws IOException {
         Stage stage = (Stage) backBtn.getScene().getWindow();
         Parent prevScreen = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        
         Scene scene = new Scene(prevScreen);
         stage.setScene(scene);
         stage.show();

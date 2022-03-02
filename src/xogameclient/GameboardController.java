@@ -86,8 +86,12 @@ public class GameboardController implements Initializable {
     private Label texto;
     @FXML
     private ImageView backBtn;
+    @FXML
+    private Label xScore;
+    @FXML
+    private Label oScore;
     
-    
+    int scoreX, scoreO;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -95,6 +99,7 @@ public class GameboardController implements Initializable {
         backgroundImage.setImage(background);
         player1Card.setImage(imageX);
         player2Card.setImage(imageO);
+        
         
     }   
     
@@ -239,6 +244,14 @@ public class GameboardController implements Initializable {
    
    public void check(){
         // x win
+       checkXWin();
+       // o win
+       checkOWin();
+       setScores(scoreX, scoreO);
+   }
+   
+   public boolean checkXWin(){
+       
        if(charForBoard[0][0]=='X' && charForBoard[0][1]=='X' && charForBoard[0][2]=='X'){
            xWins(cell0,cell1,cell2);
        }
@@ -263,7 +276,10 @@ public class GameboardController implements Initializable {
        if(charForBoard[0][2]=='X' && charForBoard[1][1]=='X' && charForBoard[2][0]=='X'){
            xWins(cell2,cell4,cell6);
        }
-       // o win
+       return true;
+   }
+   
+   public boolean checkOWin(){
        
        if(charForBoard[0][0]=='O' && charForBoard[0][1]=='O' && charForBoard[0][2]=='O'){
            oWins(cell0,cell1,cell2);
@@ -289,7 +305,10 @@ public class GameboardController implements Initializable {
        if(charForBoard[0][2]=='O' && charForBoard[1][1]=='O' && charForBoard[2][0]=='O'){
            oWins(cell2,cell4,cell6);
        }
+       return true;
    }
+   
+   
    public void xWins(Button a,Button b, Button c){
        a.setStyle("-fx-background-color: #ff0000;");
        b.setStyle("-fx-background-color: #ff0000;");
@@ -340,6 +359,21 @@ public class GameboardController implements Initializable {
           Stage windo =(Stage)backBtn.getScene().getWindow();
           windo.setScene(scene);
           windo.show();
+      }
+      
+      public void initializeScores(int scoreX, int scoreO){
+          xScore.setText(String.valueOf(scoreX));
+          oScore.setText(String.valueOf(scoreO));
+      }
+     
+      public void setScores(int scoreXplayer, int scoreOplayer){
+          if(checkXWin()){
+              scoreXplayer++;
+              xScore.setText(String.valueOf(scoreXplayer));
+          }else if(checkOWin()){
+              scoreOplayer++;
+              xScore.setText(String.valueOf(scoreOplayer));
+          }
       }
       /*private void alert(String p1) {
             MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));

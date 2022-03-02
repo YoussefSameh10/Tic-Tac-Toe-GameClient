@@ -5,16 +5,21 @@
  */
 package xogameclient;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -61,7 +66,13 @@ public class VideoAlertController implements Initializable {
     }
 
     @FXML
-    private void didPressReload(MouseEvent event) {
+    private void didPressReload(MouseEvent event) throws IOException {
+        Stage stage = (Stage) reloadImg.getScene().getWindow();
+        Parent prevScreen = FXMLLoader.load(getClass().getResource("gameboard.fxml"));
+        mediaPlayer.stop();
+        Scene scene = new Scene(prevScreen);
+        stage.setScene(scene);
+        stage.show();
     }
     
 }
