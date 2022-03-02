@@ -8,6 +8,8 @@ package xogameclient;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,11 +17,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
 
 /**
@@ -27,7 +31,7 @@ import javafx.stage.Stage;
  *
  * @author moham
  */
-public class RegisterController implements Initializable {
+public class RegisterController implements Initializable, RegisterControllerInterface {
 
     @FXML
     private ImageView leftImage;
@@ -50,12 +54,16 @@ public class RegisterController implements Initializable {
     @FXML
     private ImageView confirmImg;
 
+    
+    private RegisterPresenterInterface registerPresenter;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //configureUI();
+        registerPresenter = new RegisterPresenter(this);
+        //registerBtn.setDisable(true);
     }    
     public void configureUI()
     {
@@ -86,13 +94,54 @@ public class RegisterController implements Initializable {
     @FXML
     public void handleLoginButtonPress(ActionEvent event) throws IOException {
         
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Login");
-        stage.show();
-        
+        registerPresenter.addNewPlayer(usernameTxt.getText(), passwordTxt.getText());
+    }
+    
+    public void gotoLogin() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+            Stage stage = (Stage)((Node)registerBtn).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Login");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+            showRegisterErrorAlert();
+        }
+    }
+    
+    public void showRegisterErrorAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Can't Register! Try Again.");
+        alert.show();
+    }
+
+    @FXML
+    private void usernameTextChanged(InputMethodEvent event) {
+        shouldEnableButton();
+    }
+
+    @FXML
+    private void passwordTextChanged(InputMethodEvent event) {
+        shouldEnableButton();
+    }
+
+    @FXML
+    private void confirmPasswordTextChanged(InputMethodEvent event) {
+        shouldEnableButton();
+    }
+    
+    private void shouldEnableButton() {
+        System.out.println("ENABLE BUTTON");
+        if(usernameTxt.getText().isEmpty() ||
+            passwordTxt.getText().isEmpty() ||
+            confirmTxt.getText().isEmpty()
+        ) {
+            registerBtn.setDisable(true);
+        }
+        else{
+            registerBtn.setDisable(false);
+        }
     }
 }

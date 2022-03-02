@@ -72,11 +72,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void didPressLanMultiplayerModeButton() throws IOException {
         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
-        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("OnlineUsersList.fxml"));
-        Scene scene = new Scene(onlineUsersScene);
-        scene.getStylesheets().add("onlineuserslist.css");
+        Parent registerScene = FXMLLoader.load(getClass().getResource("register.fxml"));
+        Scene scene = new Scene(registerScene);
+        //scene.getStylesheets().add("onlineuserslist.css");
         stage.setScene(scene);
-        stage.setTitle("Online Users");
+        stage.setTitle("Register");
         stage.show();
         System.out.println("SerVerrrrrrrrrrrrrrr");
     }
