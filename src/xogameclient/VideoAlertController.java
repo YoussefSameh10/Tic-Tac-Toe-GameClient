@@ -8,6 +8,8 @@ package xogameclient;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,12 +40,8 @@ public class VideoAlertController implements Initializable {
     private MediaView mediaViewer;
     
     MediaPlayer mediaPlayer;
-    String playerOName = "", localPlayerOName = "";
-    String playerXName = "", localPlayerXName = "";
-    
-    String loserMedia;
-    String winnerMedia;
-    String winnerPlayers;
+   
+    int scoreX, scoreO;
     
     Media media;
 
@@ -64,15 +62,38 @@ public class VideoAlertController implements Initializable {
     public void setWinnerName(String pName){
         winnerPlayer.setText(pName);
     }
+    
+    public void setScores(int scoreX,int scoreO){
+        this.scoreX = scoreX;
+        this.scoreO = scoreO;
+    }
+    public void sendScoresBack(String scoreX, String scoreY){
+        
+    }
 
     @FXML
     private void didPressReload(MouseEvent event) throws IOException {
-        Stage stage = (Stage) reloadImg.getScene().getWindow();
-        Parent prevScreen = FXMLLoader.load(getClass().getResource("gameboard.fxml"));
+        System.out.println(scoreX);
+        System.out.println(scoreO);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gameboard.fxml"));
+          Parent root = null;
+          try {
+              root = loader.load();
+          } catch (IOException ex) {
+              Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
+          }
         mediaPlayer.stop();
-        Scene scene = new Scene(prevScreen);
-        stage.setScene(scene);
-        stage.show();
+        Scene scene = new Scene(root);
+        GameboardController vc = loader.getController();
+        System.out.println("score x" + scoreX);
+        System.out.println("score o" + scoreO);
+        //vc.setScores(scoreX, scoreO);
+        vc.scoreO = scoreO;
+        vc.scoreX = scoreX;
+        vc.initializeScores(scoreX, scoreO);
+        Stage windo =(Stage)reloadImg.getScene().getWindow();
+        windo.setScene(scene);
+        windo.show();
     }
     
 }

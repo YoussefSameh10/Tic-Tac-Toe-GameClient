@@ -43,7 +43,7 @@ public class LocalController implements Initializable {
     @FXML
     private ImageView backBtn;
     
-    static int scoreX = 0, scoreO =0;
+    //int scoreX = 0, scoreO =0;
     /**
      * Initializes the controller class.
      */
@@ -74,7 +74,7 @@ public class LocalController implements Initializable {
             Scene scene = new Scene(controller);
             GameboardController vc = Loader.getController();
             vc.setUesers(player1.getText(),player2.getText());
-            vc.initializeScores(scoreX, scoreO);
+            //vc.initializeScores(scoreX, scoreO);
             Stage windo =(Stage)((Node)event.getSource()).getScene().getWindow();
             windo.setScene(scene);
             windo.show();
