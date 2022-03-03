@@ -73,9 +73,11 @@ public class LocalController implements Initializable {
             Parent controller =  Loader.load();
             Scene scene = new Scene(controller);
             GameboardController vc = Loader.getController();
+            vc.playerX = player1.getText();
+            vc.playerO = player2.getText();
             vc.setUesers(player1.getText(),player2.getText());
-            //vc.initializeScores(scoreX, scoreO);
             Stage windo =(Stage)((Node)event.getSource()).getScene().getWindow();
+            windo.setResizable(false);
             windo.setScene(scene);
             windo.show();
         }

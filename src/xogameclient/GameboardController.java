@@ -36,6 +36,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static sun.audio.AudioPlayer.player;
 
@@ -92,6 +93,7 @@ public class GameboardController implements Initializable {
     private Label oScore;
     
     int scoreX , scoreO;
+    String playerX, playerO;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -101,6 +103,7 @@ public class GameboardController implements Initializable {
         player2Card.setImage(imageO);
         
         initializeScores(scoreX, scoreO);
+        setUesers(playerX, playerO);
     }   
     
     @FXML
@@ -203,7 +206,7 @@ public class GameboardController implements Initializable {
     private void cellPressed(Button cell) {
         addXorO(cell, turn);
         turn = !turn;
-        //if()
+        
     }
 
     private void addXorO(Button cell, boolean turn) {
@@ -226,13 +229,22 @@ public class GameboardController implements Initializable {
     }
        
    public void check(){
-        // x win
-       checkXWin();
-       System.out.println("x from check method "+ scoreX);
-       // o win
-       checkOWin();
-       System.out.println("o from check method "+ scoreO);
-       //setScores(scoreX, scoreO);
+       if(tieGame()){
+           System.out.println("tieeeeeeeee");
+           showAlertforTie();
+        }else{
+            // x win
+             checkXWin();
+             System.out.println("x from check method "+ scoreX);
+             // o win
+             checkOWin();
+             System.out.println("o from check method "+ scoreO);
+
+       }
+       
+        // no one win
+        
+       
    }
    
    public boolean checkXWin(){
@@ -338,6 +350,36 @@ public class GameboardController implements Initializable {
        return true;
    }
    
+   public boolean tieGame(){
+       boolean hasEmptyCell = false ;
+       boolean isTied = false;
+       for (int i =0 ;i<3;i++){
+           for(int j =0; j<3; j++){
+               if(charForBoard[i][j] == ' '){
+                   hasEmptyCell =true ;
+                   break;
+               }
+           }
+       }
+       
+       
+       return !((checkOWin() && checkXWin()) && hasEmptyCell);
+        //return !(checkXWin() || checkOWin());
+   }
+   
+   public void showAlertforTie(){
+       Stage stg = (Stage) cell0.getScene().getWindow();
+        
+            Alert.AlertType type = Alert.AlertType.WARNING;
+            Alert alert = new Alert(type);
+
+            alert.initModality(Modality.WINDOW_MODAL);
+            alert.initOwner(stg);
+            alert.setTitle("Oopps");
+            alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
+            alert.setHeaderText("Tieee");
+            alert.showAndWait();
+   }
    
    public void xWins(Button a,Button b, Button c){
        a.setStyle("-fx-background-color: #ff0000;");
@@ -386,14 +428,6 @@ public class GameboardController implements Initializable {
               oScore.setText(String.valueOf(scoreOplayer));
           }
       }
-    /*   public void setInitialScores(int scoreXplayer , int scoreOplayer){
-                scoreXplayer = scoreX;
-                 scoreOplayer = scoreO;
-                         setScores( scoreXplayer,  scoreOplayer);
-
-                         
-
-       }*/
        
       private void gotToAlert(String player){
           FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
@@ -411,7 +445,8 @@ public class GameboardController implements Initializable {
           System.out.println("score o before is "+ scoreO);
           vc.scoreO = scoreO;
           vc.scoreX = scoreX;
-          //vc.setScores(scoreX, scoreO);
+          vc.playerX = playerX;
+          vc.playerO = playerO;
           System.out.println("score x is "+ scoreX);
           System.out.println("score o is "+ scoreO);
           Stage windo =(Stage)backBtn.getScene().getWindow();
@@ -423,7 +458,7 @@ public class GameboardController implements Initializable {
           xScore.setText(String.valueOf(scoreX));
           oScore.setText(String.valueOf(scoreO));
       }
-
+      
       /*private void alert(String p1) {
             MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
             MediaView mediaView = new MediaView(player);

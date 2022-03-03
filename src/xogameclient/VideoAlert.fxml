@@ -28,5 +28,10 @@
             <Font size="27.0" />
          </font>
       </Label>
+      <ImageView fx:id="cancelBtn" fitHeight="39.0" fitWidth="38.0" layoutX="664.0" layoutY="34.0" onMouseClicked="#didPressCancel" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@homeAssets/cancel.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
