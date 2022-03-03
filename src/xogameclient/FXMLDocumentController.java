@@ -50,6 +50,7 @@ public class FXMLDocumentController implements Initializable {
         Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("AIGameboard.fxml"));
         Scene scene = new Scene(onlineUsersScene);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("profile");
         stage.show();
 
@@ -63,7 +64,7 @@ public class FXMLDocumentController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("Local.fxml"));
         Stage stage = (Stage)lanMultiplayerButton.getScene().getWindow();
         Scene scene = new Scene(root);
-
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("X - O Game");
         stage.show();
@@ -72,10 +73,11 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void didPressLanMultiplayerModeButton() throws IOException {
         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
-        Parent registerScene = FXMLLoader.load(getClass().getResource("register.fxml"));
+        Parent registerScene = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(registerScene);
         //scene.getStylesheets().add("onlineuserslist.css");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("Register");
         stage.show();
         System.out.println("SerVerrrrrrrrrrrrrrr");

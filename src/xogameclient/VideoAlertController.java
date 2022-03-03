@@ -44,6 +44,10 @@ public class VideoAlertController implements Initializable {
     int scoreX, scoreO;
     
     Media media;
+    @FXML
+    private ImageView cancelBtn;
+    
+    String playerX, playerO;
 
     /**
      * Initializes the controller class.
@@ -75,6 +79,8 @@ public class VideoAlertController implements Initializable {
     private void didPressReload(MouseEvent event) throws IOException {
         System.out.println(scoreX);
         System.out.println(scoreO);
+        System.out.println("X is : " +playerX);
+        System.out.println("O is : " +playerO);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gameboard.fxml"));
           Parent root = null;
           try {
@@ -90,10 +96,24 @@ public class VideoAlertController implements Initializable {
         //vc.setScores(scoreX, scoreO);
         vc.scoreO = scoreO;
         vc.scoreX = scoreX;
+        vc.playerX = playerX;
+        vc.playerO = playerO;
         vc.initializeScores(scoreX, scoreO);
+        vc.setUesers(playerX, playerO);
         Stage windo =(Stage)reloadImg.getScene().getWindow();
+        windo.setResizable(false);
         windo.setScene(scene);
         windo.show();
+    }
+
+    @FXML
+    private void didPressCancel(MouseEvent event) throws IOException {
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
+        Parent prevScreen = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        mediaPlayer.stop();
+        Scene scene = new Scene(prevScreen);
+        stage.setScene(scene);
+        stage.show();
     }
     
 }
