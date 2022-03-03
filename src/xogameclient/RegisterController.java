@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -53,9 +54,11 @@ public class RegisterController implements Initializable, RegisterControllerInte
     private ImageView passwordImg;
     @FXML
     private ImageView confirmImg;
-
+    @FXML
+    private Button loginBtn;
     
     private RegisterPresenterInterface registerPresenter;
+    
     
     /**
      * Initializes the controller class.
@@ -63,18 +66,19 @@ public class RegisterController implements Initializable, RegisterControllerInte
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         registerPresenter = new RegisterPresenter(this);
-        //registerBtn.setDisable(true);
+        configureUI();
+        registerBtn.setDisable(true);
     }    
     public void configureUI()
     {
-        configureButton(registerBtn, "assets/register.png");
-        configureImage(logoImage, "assets/tic-tac-toe.png");
-        configureImage(leftImage, "assets/Panel.PNG");
-        configureImage(rightImage, "assets/Panel2.png");
-        configureImage(usernameImg, "assets/user.png");
-        configureImage(passwordImg, "assets/unlocked.png");
-        configureImage(confirmImg, "assets/lock.png");
-        
+        configureButton(registerBtn, "homeAssets/register.png");
+        configureButton(loginBtn, "homeAssets/login.png");
+        configureImage(logoImage, "homeAssets/tic-tac-toe.png");
+        configureImage(leftImage, "homeAssets/Panel.PNG");
+        configureImage(rightImage, "homeAssets/Panel2.png");
+        configureImage(usernameImg, "homeAssets/user.png");
+        configureImage(passwordImg, "homeAssets/unlocked.png");
+        configureImage(confirmImg, "homeAssets/lock.png");
     }
     
     public void configureButton(Button b, String path)
@@ -92,9 +96,14 @@ public class RegisterController implements Initializable, RegisterControllerInte
     }
     
     @FXML
-    public void handleLoginButtonPress(ActionEvent event) throws IOException {
-        
+    private void handleRegisterButtonPress(ActionEvent event) {
         registerPresenter.addNewPlayer(usernameTxt.getText(), passwordTxt.getText());
+    }
+
+    
+    @FXML
+    public void handleLoginButtonPress(ActionEvent event) throws IOException {
+        gotoLogin();
     }
     
     public void gotoLogin() {
@@ -118,25 +127,25 @@ public class RegisterController implements Initializable, RegisterControllerInte
     }
 
     @FXML
-    private void usernameTextChanged(InputMethodEvent event) {
+    private void usernameTextChanged(KeyEvent event) {
         shouldEnableButton();
     }
 
     @FXML
-    private void passwordTextChanged(InputMethodEvent event) {
+    private void passwordTextChanged(KeyEvent event) {
         shouldEnableButton();
     }
 
     @FXML
-    private void confirmPasswordTextChanged(InputMethodEvent event) {
+    private void confirmPasswordTextChanged(KeyEvent event) {
         shouldEnableButton();
     }
     
     private void shouldEnableButton() {
-        System.out.println("ENABLE BUTTON");
         if(usernameTxt.getText().isEmpty() ||
             passwordTxt.getText().isEmpty() ||
-            confirmTxt.getText().isEmpty()
+            confirmTxt.getText().isEmpty() ||
+            !(passwordTxt.getText().equals(confirmTxt.getText()))
         ) {
             registerBtn.setDisable(true);
         }
@@ -144,4 +153,10 @@ public class RegisterController implements Initializable, RegisterControllerInte
             registerBtn.setDisable(false);
         }
     }
+
+    
+    
+
+    
+    
 }
