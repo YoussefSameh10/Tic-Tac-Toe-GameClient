@@ -140,6 +140,7 @@ public class LoginController implements Initializable , LoginControllerInterface
     @FXML
     private void didPressLogin(ActionEvent event) {
         loginPresenter.loginPlayer(usernameTxt.getText(), passwordTxt.getText());
+        gotoListOfOnlineUsers();
     }
     
 }

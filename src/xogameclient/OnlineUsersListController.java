@@ -6,8 +6,15 @@
 package xogameclient;
 
 import com.sun.org.apache.xml.internal.utils.NameSpace;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,7 +45,9 @@ public class OnlineUsersListController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
+    Socket server;
+    DataInputStream dis;
+    PrintStream ps;
     ObservableList<String> names = FXCollections.observableArrayList(
           "Sandra George", "Tasnim Hatem", "Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr","Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr","Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr");
     @FXML
@@ -80,11 +89,49 @@ public class OnlineUsersListController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         System.out.println("QQQQQQQQ");
-        // TODO
+        getOnlineUserList();
         //configureUI();
         configureListView();
-    }    
+    }
     
+    public void getOnlineUserList()
+    {
+        try {
+            server = new Socket("127.0.0.1", 8080);
+            dis = new DataInputStream(server.getInputStream());
+            ps = new PrintStream(server.getOutputStream());
+            
+            new Thread() {
+                @Override
+                public void run() {
+                    ps.println("GetOnlinePlayersList");
+                    while(true) {
+                        try {
+                            String response = dis.readLine();
+                            // tmp : parsed playersList
+                            String[] tmp = parsePlayersList(response);
+                            // names = getO
+                        } catch (IOException ex) {
+                            Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            }.start();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public String[] parsePlayersList(String usernames)
+    {
+        String[] parts = usernames.split(",");
+        System.out.println("Player List: ");
+        for (int i=0 ; i<parts.length ; i++)
+        {
+            System.out.println(parts[i]);
+        }
+        return parts;
+    }
 //    private void configureUI() {
 //        Image image = new Image(getClass().getResource("listAssets/BG.jpg").toExternalForm());
 //        BGImage.setImage(image);
