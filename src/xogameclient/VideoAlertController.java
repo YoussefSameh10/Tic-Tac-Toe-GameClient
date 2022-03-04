@@ -100,10 +100,11 @@ public class VideoAlertController implements Initializable {
         vc.playerO = playerO;
         vc.initializeScores(scoreX, scoreO);
         vc.setUesers(playerX, playerO);
-        Stage windo =(Stage)reloadImg.getScene().getWindow();
-        windo.setResizable(false);
-        windo.setScene(scene);
-        windo.show();
+        Stage stage =(Stage)reloadImg.getScene().getWindow();
+        System.out.println("ihguyft" + stage);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

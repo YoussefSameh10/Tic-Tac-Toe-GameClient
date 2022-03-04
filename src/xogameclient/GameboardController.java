@@ -46,9 +46,9 @@ import static sun.audio.AudioPlayer.player;
  * @author Youssef
  */
 public class GameboardController implements Initializable {
-     Random randam = new Random();
-     boolean playerTurn; //O
-     char [][] charForBoard = {{' ', ' ', ' '},{' ', ' ',' '},{' ', ' ',' '}};
+    Random randam = new Random();
+    boolean playerTurn; //O
+    char [][] charForBoard = {{' ', ' ', ' '},{' ', ' ',' '},{' ', ' ',' '}};
     @FXML
     private ImageView backgroundImage;
     @FXML
@@ -94,6 +94,7 @@ public class GameboardController implements Initializable {
     
     int scoreX , scoreO;
     String playerX, playerO;
+    Stage stg;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -114,8 +115,7 @@ public class GameboardController implements Initializable {
           cellPressed(cell0);
           System.out.println(res);
           check();
-       }
-        
+       } 
     }
     @FXML
     private void cell1Pressed() {
@@ -229,16 +229,16 @@ public class GameboardController implements Initializable {
     }
        
    public void check(){
-       if(tieGame()){
+       if(tieGame()){ //el moo4kla hena
            System.out.println("tieeeeeeeee");
            showAlertforTie();
         }else{
-            // x win
-             checkXWin();
-             System.out.println("x from check method "+ scoreX);
-             // o win
-             checkOWin();
-             System.out.println("o from check method "+ scoreO);
+           // x win
+            checkXWin();
+            System.out.println("x from check method "+ scoreX);
+            // o win
+            checkOWin();
+            System.out.println("o from check method "+ scoreO);
 
        }
        
@@ -274,7 +274,6 @@ public class GameboardController implements Initializable {
            xWins(cell0,cell3,cell6);
        }
        if(charForBoard[0][1]=='X' && charForBoard[1][1]=='X' && charForBoard[2][1]=='X'){
-
            scoreX++;
            System.out.println("X player score is "+scoreX);
            xWins(cell1,cell4,cell7);
@@ -352,7 +351,6 @@ public class GameboardController implements Initializable {
    
    public boolean tieGame(){
        boolean hasEmptyCell = false ;
-       boolean isTied = false;
        for (int i =0 ;i<3;i++){
            for(int j =0; j<3; j++){
                if(charForBoard[i][j] == ' '){
@@ -362,23 +360,23 @@ public class GameboardController implements Initializable {
            }
        }
        
-       
+       System.out.println("hereeeeeeeee is the problem "+ !((checkOWin() && checkXWin()) && hasEmptyCell));
        return !((checkOWin() && checkXWin()) && hasEmptyCell);
         //return !(checkXWin() || checkOWin());
    }
    
    public void showAlertforTie(){
-       Stage stg = (Stage) cell0.getScene().getWindow();
+        stg = (Stage) cell0.getScene().getWindow();
         
-            Alert.AlertType type = Alert.AlertType.WARNING;
-            Alert alert = new Alert(type);
+        Alert.AlertType type = Alert.AlertType.WARNING;
+        Alert alert = new Alert(type);
 
-            alert.initModality(Modality.WINDOW_MODAL);
-            alert.initOwner(stg);
-            alert.setTitle("Oopps");
-            alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
-            alert.setHeaderText("Tieee");
-            alert.showAndWait();
+        alert.initModality(Modality.WINDOW_MODAL);
+        alert.initOwner(stg);
+        alert.setTitle("Oopps");
+        alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
+        alert.setHeaderText("Tieee");
+        alert.showAndWait();
    }
    
    public void xWins(Button a,Button b, Button c){
@@ -434,10 +432,12 @@ public class GameboardController implements Initializable {
           Parent root = null;
           try {
               root = loader.load();
+              
           } catch (IOException ex) {
-              Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
+              //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
           }
           Scene scene = new Scene(root);
+          
           VideoAlertController vc = loader.getController();
           vc.setWinnerVideo();
           vc.setWinnerName(player);
@@ -449,9 +449,11 @@ public class GameboardController implements Initializable {
           vc.playerO = playerO;
           System.out.println("score x is "+ scoreX);
           System.out.println("score o is "+ scoreO);
-          Stage windo =(Stage)backBtn.getScene().getWindow();
-          windo.setScene(scene);
-          windo.show();
+          System.out.println("buguyguguy"+scene);
+          stg = (Stage) cell0.getScene().getWindow(); // exceptions
+          System.out.println("helooooooo"+stg);
+          stg.setScene(scene);
+          stg.show();
       }
       
       public void initializeScores(int scoreX, int scoreO){

@@ -5,6 +5,7 @@
  */
 package xogameclient;
 
+import com.sun.org.apache.xml.internal.utils.NameSpace;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.*;
