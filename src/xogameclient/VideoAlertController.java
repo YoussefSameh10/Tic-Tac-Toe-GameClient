@@ -63,6 +63,12 @@ public class VideoAlertController implements Initializable {
         mediaViewer.setMediaPlayer(mediaPlayer);
         mediaPlayer.setAutoPlay(true);
     }
+     public void setLoserVideo(){
+        mediaPlayer = new MediaPlayer(new Media(getClass().getResource("viedo/loser.mp4").toExternalForm()));
+        mediaViewer.setMediaPlayer(mediaPlayer);
+        mediaPlayer.setAutoPlay(true);
+    }
+    
     public void setWinnerName(String pName){
         winnerPlayer.setText(pName);
     }
@@ -74,37 +80,69 @@ public class VideoAlertController implements Initializable {
     public void sendScoresBack(String scoreX, String scoreY){
         
     }
-
+    String fxmlName;
+    public void setFXml(String fxmlName){
+        this.fxmlName = fxmlName;
+    }
     @FXML
     private void didPressReload(MouseEvent event) throws IOException {
-        System.out.println(scoreX);
-        System.out.println(scoreO);
-        System.out.println("X is : " +playerX);
-        System.out.println("O is : " +playerO);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("gameboard.fxml"));
-          Parent root = null;
-          try {
-              root = loader.load();
-          } catch (IOException ex) {
-              Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
-          }
-        mediaPlayer.stop();
-        Scene scene = new Scene(root);
-        GameboardController vc = loader.getController();
-        System.out.println("score x" + scoreX);
-        System.out.println("score o" + scoreO);
-        //vc.setScores(scoreX, scoreO);
-        vc.scoreO = scoreO;
-        vc.scoreX = scoreX;
-        vc.playerX = playerX;
-        vc.playerO = playerO;
-        vc.initializeScores(scoreX, scoreO);
-        vc.setUesers(playerX, playerO);
-        Stage stage =(Stage)reloadImg.getScene().getWindow();
-        System.out.println("ihguyft" + stage);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+          if (fxmlName.equalsIgnoreCase("AIGameboard.fxml")) {
+               FXMLLoader loader = new FXMLLoader(getClass().getResource("AIGameboard.fxml"));
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException ex) {
+                    Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              mediaPlayer.stop();
+              Scene scene = new Scene(root);
+              AIGameboardController vc = loader.getController();
+             // System.out.println("score x" + scoreX);
+              //System.out.println("score o" + scoreO);
+              //vc.setScores(scoreX, scoreO);
+             // vc.scoreO = scoreO;
+             // vc.scoreX = scoreX;
+             // vc.playerX = playerX;
+               System.out.println("O is : " +playerO);
+              vc.texto.setText(playerO);
+             // vc.initializeScores(scoreX, scoreO);
+              vc.setUesers( playerO);
+              Stage stage =(Stage)reloadImg.getScene().getWindow();
+              stage.setResizable(false);
+              stage.setScene(scene);
+              stage.show();
+              
+        }
+        if (fxmlName.equalsIgnoreCase("gameboard.fxml")){
+            System.out.println(scoreX);
+            System.out.println(scoreO);
+            System.out.println("X is : " +playerX);
+            System.out.println("O is : " +playerO);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("gameboard.fxml"));
+              Parent root = null;
+              try {
+                  root = loader.load();
+              } catch (IOException ex) {
+                  Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
+              }
+            mediaPlayer.stop();
+            Scene scene = new Scene(root);
+            GameboardController vc = loader.getController();
+            System.out.println("score x" + scoreX);
+            System.out.println("score o" + scoreO);
+            //vc.setScores(scoreX, scoreO);
+            vc.scoreO = scoreO;
+            vc.scoreX = scoreX;
+            vc.playerX = playerX;
+            vc.playerO = playerO;
+            vc.initializeScores(scoreX, scoreO);
+            vc.setUesers(playerX, playerO);
+            Stage stage =(Stage)reloadImg.getScene().getWindow();
+            System.out.println("ihguyft" + stage);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+              }
     }
 
     @FXML

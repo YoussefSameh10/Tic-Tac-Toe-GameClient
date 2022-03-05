@@ -5,6 +5,7 @@
  */
 package xogameclient;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,13 +14,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -31,6 +36,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import static sun.audio.AudioPlayer.player;
 
 /**
@@ -42,6 +49,7 @@ public class AIGameboardController implements Initializable {
      Random randam = new Random();
      boolean playerTurn; //O
      char [][] charForBoard = {{' ', ' ', ' '},{' ', ' ',' '},{' ', ' ',' '}};
+       Stage stg;
     @FXML
     private ImageView backgroundImage;
     @FXML
@@ -77,7 +85,13 @@ public class AIGameboardController implements Initializable {
     @FXML
     private Label textx;
     @FXML
-    private Label texto;
+     Label texto;
+    @FXML
+    private ImageView backBtn;
+    @FXML
+    private Label xScore;
+    @FXML
+    private Label oScore;
     
     
     
@@ -89,6 +103,7 @@ public class AIGameboardController implements Initializable {
         player2Card.setImage(imageO);
         
     }   
+ 
     
     @FXML
     private void cell0Pressed() {
@@ -176,7 +191,7 @@ public class AIGameboardController implements Initializable {
         addXorO(cell, turn);
         if (check()) return ;
         turn = !turn;
-        int[] move = NewMiniMax.getBestMove(charForBoard, 0);
+        int[] move = NewMiniMax.getBestMove(charForBoard, 6);
         System.out.println("X= " + move[0] + ", Y= " + move[1]);
         if (turn) addAIMove(move[0], move[1]);
     }
@@ -233,91 +248,124 @@ public class AIGameboardController implements Initializable {
         imgView.setFitWidth(iconSize);
         imgView.setFitHeight(iconSize);
     }
-       public void firstTurn(){
-        
-         try {
-             Thread.sleep(2000);
-         } catch (InterruptedException ex) {
-             Logger.getLogger(AIGameboardController.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
-       if(randam.nextInt(2)==0){
-           playerTurn = true;
-           textx.setText("X Turn");
-           
-       }else{
-            playerTurn = false;
-           texto.setText("O Turn");
+//       public void firstTurn(){
+//        
+//         try {
+//             Thread.sleep(2000);
+//         } catch (InterruptedException ex) {
+//             Logger.getLogger(AIGameboardController.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+//        
+//       if(randam.nextInt(2)==0){
+//           playerTurn = true;
+//           textx.setText("X Turn");
+//           
+//       }else{
+//            playerTurn = false;
+//           texto.setText("O Turn");
+//       }
+//   } 
+    
+     boolean hasEmptyCell ;
+         public boolean tieGame(){
+          boolean hasEmptyCell = false ;
+       for (int i =0 ;i<3;i++){
+           for(int j =0; j<3; j++){
+               if(charForBoard[i][j] == ' '){
+                   hasEmptyCell =true ;
+                   break;
+               }
+           }
        }
-   } 
+       return hasEmptyCell;
+      }
    
    public boolean check(){
         // x win
-       if(charForBoard[0][0]=='X' && charForBoard[0][1]=='X' && charForBoard[0][2]=='X'){
+       if(charForBoard[0][0]=='X' && charForBoard[0][1]=='X' && charForBoard[0][2]=='X'  ){
+         
            xWins(cell0,cell1,cell2);
            return true;
        }
-       if(charForBoard[1][0]=='X' && charForBoard[1][1]=='X' && charForBoard[1][2]=='X'){
+       else if(charForBoard[1][0]=='X' && charForBoard[1][1]=='X' && charForBoard[1][2]=='X'){
+           hasEmptyCell =  tieGame();
+          if(hasEmptyCell){
            xWins(cell3,cell4,cell5);
-           return true;
+           return true;}
        }
-       if(charForBoard[2][0]=='X' && charForBoard[2][1]=='X' && charForBoard[2][2]=='X'){
+       else if(charForBoard[2][0]=='X' && charForBoard[2][1]=='X' && charForBoard[2][2]=='X'){
+           hasEmptyCell =  tieGame();
+          if(hasEmptyCell){
            xWins(cell6,cell7,cell8);
-           return true;
+           return true;}
        }
-       if(charForBoard[0][0]=='X' && charForBoard[1][0]=='X' && charForBoard[2][0]=='X'){
+       else  if(charForBoard[0][0]=='X' && charForBoard[1][0]=='X' && charForBoard[2][0]=='X' ){
            xWins(cell0,cell3,cell6);
            return true;
        }
-       if(charForBoard[0][1]=='X' && charForBoard[1][1]=='X' && charForBoard[2][1]=='X'){
+       else if(charForBoard[0][1]=='X' && charForBoard[1][1]=='X' && charForBoard[2][1]=='X'){
+           
            xWins(cell1,cell4,cell7);
            return true;
        }
-       if(charForBoard[0][2]=='X' && charForBoard[1][2]=='X' && charForBoard[2][2]=='X'){
+       else  if(charForBoard[0][2]=='X' && charForBoard[1][2]=='X' && charForBoard[2][2]=='X'){
+           
            xWins(cell2,cell5,cell8);
            return true;
        }
-       if(charForBoard[0][0]=='X' && charForBoard[1][1]=='X' && charForBoard[2][2]=='X'){
+       else if(charForBoard[0][0]=='X' && charForBoard[1][1]=='X' && charForBoard[2][2]=='X'){
+           
            xWins(cell0,cell4,cell8);
            return true;
        }
-       if(charForBoard[0][2]=='X' && charForBoard[1][1]=='X' && charForBoard[2][0]=='X'){
+       else if(charForBoard[0][2]=='X' && charForBoard[1][1]=='X' && charForBoard[2][0]=='X'){
+          
            xWins(cell2,cell4,cell6);
            return true;
        }
        // o win
        
-       if(charForBoard[0][0]=='O' && charForBoard[0][1]=='O' && charForBoard[0][2]=='O'){
+       else if(charForBoard[0][0]=='O' && charForBoard[0][1]=='O' && charForBoard[0][2]=='O' ){
+          
            oWins(cell0,cell1,cell2);
            return true;
        }
-       if(charForBoard[1][0]=='O' && charForBoard[1][1]=='O' && charForBoard[1][2]=='O'){
+       else if(charForBoard[1][0]=='O' && charForBoard[1][1]=='O' && charForBoard[1][2]=='O'){
+       
            oWins(cell3,cell4,cell5);
            return true;
        }
-       if(charForBoard[2][0]=='O' && charForBoard[2][1]=='O' && charForBoard[2][2]=='O'){
+       else if(charForBoard[2][0]=='O' && charForBoard[2][1]=='O' && charForBoard[2][2]=='O' ){
+         
            oWins(cell6,cell7,cell8);
            return true;
        }
-       if(charForBoard[0][0]=='O' && charForBoard[1][0]=='O' && charForBoard[2][0]=='O'){
+       else if(charForBoard[0][0]=='O' && charForBoard[1][0]=='O' && charForBoard[2][0]=='O'){
+          
            oWins(cell0,cell3,cell6);
            return true;
        }
-       if(charForBoard[0][1]=='O' && charForBoard[1][1]=='O' && charForBoard[2][1]=='O'){
+       else if(charForBoard[0][1]=='O' && charForBoard[1][1]=='O' && charForBoard[2][1]=='O'){
            oWins(cell1,cell4,cell7);
            return true;
        }
-       if(charForBoard[0][2]=='O' && charForBoard[1][2]=='O' && charForBoard[2][2]=='O'){
+       else if(charForBoard[0][2]=='O' && charForBoard[1][2]=='O' && charForBoard[2][2]=='O' ){
+          
            oWins(cell2,cell5,cell8);
            return true;
        }
-       if(charForBoard[0][0]=='O' && charForBoard[1][1]=='O' && charForBoard[2][2]=='O'){
-           oWins(cell0,cell4,cell8);
+       else if(charForBoard[0][0]=='O' && charForBoard[1][1]=='O' && charForBoard[2][2]=='O'){
+          oWins(cell0,cell4,cell8);
            return true;
        }
-       if(charForBoard[0][2]=='O' && charForBoard[1][1]=='O' && charForBoard[2][0]=='O'){
+       else if(charForBoard[0][2]=='O' && charForBoard[1][1]=='O' && charForBoard[2][0]=='O' ){
+          
            oWins(cell2,cell4,cell6);
            return true;
+       }
+       else{
+          // showAlertforTie();
+           
        }
        return false;
    }
@@ -326,7 +374,7 @@ public class AIGameboardController implements Initializable {
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
-       alert(textx.getText());
+       alertx(textx.getText());
       
    }
     public void oWins(Button a,Button b, Button c){
@@ -347,27 +395,102 @@ public class AIGameboardController implements Initializable {
         cell7.setDisable(true);
         cell8.setDisable(true);
     }
-      public void setUesers(String p1,String p2){
+      public void setUesers(String p1){
           System.out.println("p1");
-                  
-          textx.setText(p1);
-          texto.setText(p2);
+         
+          texto.setText(p1);
       }
-      
-      private void alert(String p1) {
-          MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
-          MediaView mediaView = new MediaView(player);
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("You Win");
-        alert.setHeaderText("");
+        private void alertx(String p1) {
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
+          Parent root = null;
+          try {
+              root = loader.load();
+              
+          } catch (IOException ex) {
+              //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          Scene scene = new Scene(root);
+          
+          VideoAlertController vc = loader.getController();
+          vc.fxmlName = "AIGameboard.fxml";
+          vc.setLoserVideo();
+          vc.setWinnerName(p1);
+          vc.playerO = texto.getText();
+          stg = (Stage) cell0.getScene().getWindow(); // exceptions
+          System.out.println("helooooooo"+stg);
+          stg.setScene(scene);
+          stg.show();
+        }
+        
+        private void alert(String p1) {
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
+          Parent root = null;
+          try {
+              root = loader.load();
+              
+          } catch (IOException ex) {
+              //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          Scene scene = new Scene(root);
+          
+          VideoAlertController vc = loader.getController();
+          vc.setWinnerVideo();
+           vc.fxmlName = "AIGameboard.fxml";
+          vc.setWinnerName(p1);
+         // System.out.println("score x before is "+ scoreX);
+          //System.out.println("score o before is "+ scoreO);
+         // vc.scoreO = scoreO;
+         // vc.scoreX = scoreX;
+         // vc.playerX = playerX;
+          vc.playerO = texto.getText();
+         // System.out.println("score x is "+ scoreX);
+         // System.out.println("score o is "+ scoreO);
+         // System.out.println("buguyguguy"+scene);
+          stg = (Stage) cell0.getScene().getWindow(); // exceptions
+          System.out.println("helooooooo"+stg);
+          stg.setScene(scene);
+          stg.show();
+//          MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
+//          MediaView mediaView = new MediaView(player);
+//        Alert alert = new Alert(Alert.AlertType.ERROR);
+//        alert.setTitle("You Win");
+//        alert.setHeaderText("");
+//
+//        Label label = new Label("Congatrions " +p1);
+//        VBox content = new VBox(10, label, mediaView);
+//        content.setAlignment(Pos.CENTER);
+//        alert.getDialogPane().setContent(content);
+//        player.setCycleCount(MediaPlayer.INDEFINITE);
+//        alert.setOnShowing(e -> player.play());
+//        alert.getDialogPane().setPrefSize(600, 600);
+//        alert.showAndWait();
+    }
+        
+//       
+//       System.out.println("hereeeeeeeee is the problem "+ !((checkOWin() && checkXWin()) && hasEmptyCell));
+//       return !((checkOWin() && checkXWin()) && hasEmptyCell);
+//        //return !(checkXWin() || checkOWin());
+//   }
 
-        Label label = new Label("Congatrions " +p1);
-        VBox content = new VBox(10, label, mediaView);
-        content.setAlignment(Pos.CENTER);
-        alert.getDialogPane().setContent(content);
-        player.setCycleCount(MediaPlayer.INDEFINITE);
-        alert.setOnShowing(e -> player.play());
-        alert.getDialogPane().setPrefSize(600, 600);
+         public void showAlertforTie(){
+        stg = (Stage) cell0.getScene().getWindow();
+        
+        Alert.AlertType type = Alert.AlertType.WARNING;
+        Alert alert = new Alert(type);
+
+        alert.initModality(Modality.WINDOW_MODAL);
+        alert.initOwner(stg);
+        alert.setTitle("Oopps");
+        alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
+        alert.setHeaderText("Tieee");
         alert.showAndWait();
+   }
+    @FXML
+    private void didPressedBack(MouseEvent event) throws IOException {
+         Stage stage = (Stage) backBtn.getScene().getWindow();
+        Parent prevScreen = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Scene scene = new Scene(prevScreen);
+        stage.setScene(scene);
+        stage.show();
     }
 }

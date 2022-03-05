@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="950.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="xogameclient.SingelPlayerController">
+   <children>
+      <TextField fx:id="player1" layoutX="517.0" layoutY="358.0" prefHeight="26.0" prefWidth="225.0" promptText="player1" style="-fx-background-radius: 15px;" AnchorPane.rightAnchor="171.0" AnchorPane.topAnchor="332.0" />
+      <Button fx:id="next" layoutX="592.0" layoutY="423.0" mnemonicParsing="false" onAction="#handleNextAction" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #631dd8; -fx-background-radius: 2em;" text="Next" textFill="#fcfcfc" AnchorPane.rightAnchor="208.0" AnchorPane.topAnchor="423.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="usernameImg" fitHeight="35.0" fitWidth="35.0" layoutX="492.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@homeAssets/user.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="backBtn" fitHeight="46.0" fitWidth="49.0" layoutX="301.0" layoutY="28.0" onMouseClicked="#didPressedBack" pickOnBounds="true" AnchorPane.rightAnchor="610.0" AnchorPane.topAnchor="18.0">
+         <image>
+            <Image url="@homeAssets/previous.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="625.0" fitWidth="293.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@homeAssets/leftImg.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="560.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="246.0" AnchorPane.topAnchor="73.0">
+         <image>
+            <Image url="@homeAssets/tic-tac-toe.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
