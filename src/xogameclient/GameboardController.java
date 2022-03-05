@@ -447,6 +447,7 @@ public class GameboardController implements Initializable {
           vc.scoreX = scoreX;
           vc.playerX = playerX;
           vc.playerO = playerO;
+           vc.fxmlName = "gameboard.fxml";
           System.out.println("score x is "+ scoreX);
           System.out.println("score o is "+ scoreO);
           System.out.println("buguyguguy"+scene);
