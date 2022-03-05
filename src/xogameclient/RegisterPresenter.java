@@ -17,6 +17,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import static xogameclient.services.AvailableActions.RegisterResponse;
+import xogameclient.services.ClientActions;
+import xogameclient.services.NetworkConnection;
+import xogameclient.services.ResponseManager;
+import xogameclient.services.responsemodels.RegisterResponse;
 
 /**
  *
@@ -24,20 +29,25 @@ import javafx.application.Platform;
  */
 public class RegisterPresenter implements RegisterPresenterInterface {
     
-    Socket server;
-    DataInputStream dis;
-    PrintStream ps;
+    
     private RegisterControllerInterface registerController;
-
+    private NetworkConnection networkConnection;
+    private Socket server;
+    private DataInputStream dis;
+    private PrintStream ps;
+    private ResponseManager responseManager;
+    
     public RegisterPresenter(RegisterControllerInterface registerController) {
         this.registerController = registerController;
     }
 
     public void addNewPlayer(String username, String password) {
         try {
-            server = new Socket("127.0.0.1", 8080);
-            dis = new DataInputStream(server.getInputStream());
-            ps = new PrintStream(server.getOutputStream());
+            responseManager = ResponseManager.getInstance();
+            networkConnection = NetworkConnection.getInstance();
+            server = networkConnection.getServer();
+            dis = networkConnection.getDataInputStream();
+            ps = networkConnection.getPrintStream();
             
             new Thread() {
                 @Override
@@ -46,10 +56,11 @@ public class RegisterPresenter implements RegisterPresenterInterface {
                     while(true) {
                         try {
                             String response = dis.readLine();
-                            if(response.equals("Success")) {
+                            ClientActions action = responseManager.parse(response);
+                            if((action instanceof RegisterResponse) && ((RegisterResponse)action).isSuccess == true) {
                                 Platform.runLater(() ->{
                                     registerController.gotoLogin();
-                                });
+                                });                                
                             }
                             else {
                                 Platform.runLater(() ->{
