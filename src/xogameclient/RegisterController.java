@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -71,7 +72,7 @@ public class RegisterController implements Initializable, RegisterControllerInte
     public void configureUI()
     {
         configureButton(registerBtn, "homeAssets/register.png");
-        configureButton(loginBtn, "homeAssets/register.png");
+        configureButton(loginBtn, "homeAssets/login.png");
         configureImage(logoImage, "homeAssets/tic-tac-toe.png");
         configureImage(leftImage, "homeAssets/Panel.PNG");
         configureImage(rightImage, "homeAssets/Panel2.png");
@@ -127,25 +128,27 @@ public class RegisterController implements Initializable, RegisterControllerInte
     }
 
     @FXML
-    private void usernameTextChanged(InputMethodEvent event) {
+    private void usernameTextChanged(KeyEvent event) {
         shouldEnableButton();
     }
 
     @FXML
-    private void passwordTextChanged(InputMethodEvent event) {
+    private void passwordTextChanged(KeyEvent event) {
         shouldEnableButton();
     }
 
     @FXML
-    private void confirmPasswordTextChanged(InputMethodEvent event) {
+    private void confirmPasswordTextChanged(KeyEvent event) {
         shouldEnableButton();
     }
+    
     
     private void shouldEnableButton() {
         System.out.println("ENABLE BUTTON");
         if(usernameTxt.getText().isEmpty() ||
             passwordTxt.getText().isEmpty() ||
-            confirmTxt.getText().isEmpty()
+            confirmTxt.getText().isEmpty() ||
+            !passwordTxt.getText().equals(confirmTxt.getText())
         ) {
             registerBtn.setDisable(true);
         }
@@ -153,6 +156,8 @@ public class RegisterController implements Initializable, RegisterControllerInte
             registerBtn.setDisable(false);
         }
     }
+
+    
 
     
 }
