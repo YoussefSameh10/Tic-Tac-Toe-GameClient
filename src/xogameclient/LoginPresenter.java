@@ -46,6 +46,15 @@ public class LoginPresenter implements LoginPresenterInterface{
                         try{
                             String response = dis.readLine();
                             System.out.println(response);
+                            if(!response.equals("Failure")){
+                                Platform.runLater(() ->{    
+                                    loginController.gotoListOfOnlineUsers();
+                                });
+                            }else{
+                                Platform.runLater(() ->{    
+                                    loginController.showLoginErrorAlert();
+                                });
+                            }
                         } catch (IOException ex) {
                             Logger.getLogger(LoginPresenter.class.getName()).log(Level.SEVERE, null, ex);
                         }
