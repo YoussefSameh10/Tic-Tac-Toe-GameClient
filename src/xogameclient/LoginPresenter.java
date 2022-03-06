@@ -12,6 +12,11 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import xogameclient.services.ClientActions;
+import xogameclient.services.NetworkConnection;
+import xogameclient.services.ResponseManager;
+import xogameclient.services.responsemodels.LoginResponse;
+import xogameclient.services.responsemodels.RegisterResponse;
 
 /**
  *
@@ -19,10 +24,12 @@ import javafx.application.Platform;
  */
 public class LoginPresenter implements LoginPresenterInterface{
 
-    Socket server;
-    DataInputStream dis;
-    PrintStream ps;
     private LoginControllerInterface loginController;
+    private NetworkConnection networkConnection;
+    private Socket server;
+    private DataInputStream dis;
+    private PrintStream ps;
+    private ResponseManager responseManager;
 
     public LoginPresenter(LoginControllerInterface loginController) {
         this.loginController = loginController;
@@ -33,10 +40,11 @@ public class LoginPresenter implements LoginPresenterInterface{
     @Override
     public int loginPlayer(String userName, String password) {
         try{
-            server = new Socket("127.0.0.1", 8080);
-            dis = new DataInputStream(server.getInputStream());
-            ps = new PrintStream(server.getOutputStream());
-            
+            responseManager = ResponseManager.getInstance();
+            networkConnection = NetworkConnection.getInstance();
+            server = networkConnection.getServer();
+            dis = networkConnection.getDataInputStream();
+            ps = networkConnection.getPrintStream();
             new Thread(){
                 @Override
                 public void run() {
@@ -46,7 +54,9 @@ public class LoginPresenter implements LoginPresenterInterface{
                         try{
                             String response = dis.readLine();
                             System.out.println(response);
-                            if(!response.equals("Failure")){
+                            ClientActions action = responseManager.parse(response);
+                            System.out.println(action);
+                            if((action instanceof LoginResponse) && ((LoginResponse)action).loginSuccess == true){
                                 Platform.runLater(() ->{    
                                     loginController.gotoListOfOnlineUsers();
                                 });

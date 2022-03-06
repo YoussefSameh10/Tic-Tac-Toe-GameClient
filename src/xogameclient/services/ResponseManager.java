@@ -5,6 +5,7 @@
  */
 package xogameclient.services;
 
+import xogameclient.services.responsemodels.LoginResponse;
 import xogameclient.services.responsemodels.RegisterResponse;
 
 /**
@@ -40,7 +41,18 @@ public class ResponseManager {
             }
             return new RegisterResponse(isSuccess);
         }
+        if(AvailableActions.LoginResponse.getString().equals(parts[0])) {
+            String result = parts[1];
+            boolean loginSuccess;
+            if(result.equals("Success")) {
+                loginSuccess = true;
+            }
+            else {
+                loginSuccess = false;
+            }
+            return new LoginResponse(loginSuccess);
+        }
         
-        return new RegisterResponse(true);
+        return new LoginResponse(true);
     }
 }
