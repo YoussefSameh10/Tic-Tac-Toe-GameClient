@@ -112,13 +112,18 @@ public class LoginController implements Initializable , LoginControllerInterface
     @Override
     public void gotoListOfOnlineUsers() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("OnlineUsersList.fxml"));
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("OnlineUsersList.fxml"));
+            Parent root = Loader.load();
             Stage stage = (Stage)((Node)loginBtn).getScene().getWindow();
             Scene scene = new Scene(root);
+            OnlineUsersListController vc = Loader.getController();
+            vc.setCurrentUsername(usernameTxt.getText());
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("List Of Online Users");
             stage.show();
+            
         } catch (IOException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
             showLoginErrorAlert();
