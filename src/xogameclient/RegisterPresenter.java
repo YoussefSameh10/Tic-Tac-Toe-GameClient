@@ -5,73 +5,56 @@
  */
 package xogameclient;
 
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.PrintStream;
-import java.net.Socket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import xogameclient.services.NetworkConnection;
+import xogameclient.services.ResponseManager;
 
 /**
  *
  * @author Youssef
  */
-public class RegisterPresenter implements RegisterPresenterInterface {
+public class RegisterPresenter implements RegisterPresenterInterface, Presenters {
     
-    Socket server;
-    DataInputStream dis;
-    PrintStream ps;
+    
     private RegisterControllerInterface registerController;
-
+    private NetworkConnection networkConnection;
+    private PrintStream ps;
+    private ResponseManager responseManager;
+    
     public RegisterPresenter(RegisterControllerInterface registerController) {
         this.registerController = registerController;
     }
 
     public void addNewPlayer(String username, String password) {
         try {
-            server = new Socket("127.0.0.1", 8080);
-            dis = new DataInputStream(server.getInputStream());
-            ps = new PrintStream(server.getOutputStream());
-            
-            new Thread() {
-                @Override
-                public void run() {
-                    ps.println("Register,"+username+","+password);
-                    while(true) {
-                        try {
-                            String response = dis.readLine();
-                            if(response.equals("Success")) {
-                                Platform.runLater(() ->{
-                                    registerController.gotoLogin();
-                                });
-                            }
-                            else {
-                                Platform.runLater(() ->{
-                                    registerController.showRegisterErrorAlert();
-                                });
-                            }
-                        } catch (IOException ex) {
-                            Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
-                            Platform.runLater(() ->{
-                                registerController.showRegisterErrorAlert();
-                            });
-                        }
-                    }
-                }
-            }.start();
+            responseManager = ResponseManager.getInstance();
+            networkConnection = NetworkConnection.getInstance();
+            ps = networkConnection.getPrintStream();
+            networkConnection.setPresenter(this);
+            ps.println("Register,"+username+","+password);
             
         } catch (IOException ex) {
             Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
-            Platform.runLater(() ->{    
-                registerController.showRegisterErrorAlert();
-            });
+            performFailureAction();
         }
+    }
+
+    @Override
+    public void performSuccessAction() {
+        Platform.runLater(() ->{
+            registerController.gotoLogin();
+        });
+    }
+
+    @Override
+    public void performFailureAction() {
+        Platform.runLater(() ->{
+            registerController.showRegisterErrorAlert();
+        });
     }
 }
 

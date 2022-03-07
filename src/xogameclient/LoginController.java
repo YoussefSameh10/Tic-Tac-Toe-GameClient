@@ -24,6 +24,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -59,6 +60,8 @@ public class LoginController implements Initializable , LoginControllerInterface
 
     
     private LoginPresenterInterface loginPresenter;
+    @FXML
+    private ImageView backBtn;
     /**
      * Initializes the controller class.
      */
@@ -97,13 +100,13 @@ public class LoginController implements Initializable , LoginControllerInterface
     public void handleRegisterButtonPress(ActionEvent event) throws IOException {
         
         
-        /*Stage stage = (Stage)registerBtn.getScene().getWindow();
+        Stage stage = (Stage)registerBtn.getScene().getWindow();
         Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("register.fxml"));
         Scene scene = new Scene(onlineUsersScene);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Online Users");
-        stage.show();*/
+        stage.show();
     }
 
     @Override
@@ -140,6 +143,15 @@ public class LoginController implements Initializable , LoginControllerInterface
     @FXML
     private void didPressLogin(ActionEvent event) {
         loginPresenter.loginPlayer(usernameTxt.getText(), passwordTxt.getText());
+    }
+
+    @FXML
+    private void didPressBack(MouseEvent event) throws IOException {
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        Parent prevScreen = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Scene scene = new Scene(prevScreen);
+        stage.setScene(scene);
+        stage.show();
     }
     
 }

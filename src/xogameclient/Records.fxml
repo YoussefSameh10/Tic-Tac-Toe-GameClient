@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="OUBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xogameclient.RecordsController">
+   <left>
+      <AnchorPane fx:id="leftAnchor" prefHeight="612.0" prefWidth="228.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="leftImg" fitHeight="697.0" fitWidth="229.0" layoutY="-49.0" pickOnBounds="true" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="-49.0">
+               <image>
+                  <Image url="@homeAssets/leftImg.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane fx:id="rightAnchor" prefHeight="690.0" prefWidth="230.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="rightImg" fitHeight="697.0" fitWidth="233.0" layoutX="-1.0" layoutY="-53.0" pickOnBounds="true" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="-53.0">
+               <image>
+                  <Image url="@homeAssets/rightImg.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </right>
+   <top>
+      <ImageView fx:id="OUTopImg" fitHeight="96.0" fitWidth="488.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@homeAssets/buttn.png" />
+         </image>
+      </ImageView>
+   </top>
+   <center>
+      <AnchorPane fx:id="centerAnchor" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="centerList" layoutX="-2.0" prefHeight="598.0" prefWidth="491.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
