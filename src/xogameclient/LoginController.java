@@ -112,18 +112,28 @@ public class LoginController implements Initializable , LoginControllerInterface
     @Override
     public void gotoListOfOnlineUsers() {
         try {
-            FXMLLoader Loader = new FXMLLoader();
-            Loader.setLocation(getClass().getResource("OnlineUsersList.fxml"));
-            Parent root = Loader.load();
-            Stage stage = (Stage)((Node)loginBtn).getScene().getWindow();
-            Scene scene = new Scene(root);
-            OnlineUsersListController vc = Loader.getController();
-            vc.setCurrentUsername(usernameTxt.getText());
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.setTitle("List Of Online Users");
-            stage.show();
-            
+//            Parent root = FXMLLoader.load(getClass().getResource("OnlineUsersList.fxml"));
+//            Stage stage = (Stage)((Node)loginBtn).getScene().getWindow();
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.setResizable(false);
+//            stage.setTitle("List Of Online Users");
+//            stage.show();
+
+        Stage stage = (Stage) ((Node)loginBtn).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiplayerGameBoard.fxml"));
+        Parent registerScene = loader.load();
+        MultiplayerGameBoardController controller = (MultiplayerGameBoardController)loader.getController();
+       MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2",1,2 , 0, 0, true);
+        controller.presenter = boardPresenter ;
+        Scene scene = new Scene(registerScene);
+        //scene.getStylesheets().add("onlineuserslist.css");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("PlayGame");
+        stage.show();
+        System.out.println("SerVerrrrrrrrrrrrrrr");
+
         } catch (IOException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
             showLoginErrorAlert();
