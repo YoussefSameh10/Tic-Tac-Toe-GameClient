@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -83,6 +84,18 @@ public class FXMLDocumentController implements Initializable {
         System.out.println("SerVerrrrrrrrrrrrrrr");
     }
 
+    @FXML
+    private void didPressProfile(MouseEvent event) throws IOException {
+        Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
+        Parent profileScene = FXMLLoader.load(getClass().getResource("Profile.fxml"));
+        Scene scene = new Scene(profileScene);
+        //scene.getStylesheets().add("onlineuserslist.css");
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Profile");
+        stage.show();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configureUI();
@@ -104,6 +117,8 @@ public class FXMLDocumentController implements Initializable {
         imageView3.setFitWidth(211);
         lanMultiplayerButton.setGraphic(imageView3);
     }
+
+    
 
 }
 

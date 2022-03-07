@@ -3,13 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/AIGameboardController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/VideoAlertController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/FXMLDocumentController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/LocalController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/GameboardController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/videoalert.css</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/SingelPlayerController.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/GameboardController.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/RegisterController.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/ServerClose.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/Move.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/ChallengeRequest.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/ChallengeResponse.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/ClientActions.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/RegisterResponse.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/GetOnlinePlayersListResponse.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/RegisterPresenter.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/GameResult.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/NewMiniMax.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/ResponseManager.java</file>
+            <file>file:/E:/Studies/ITI/Courses/13.%20Java/Project/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/LoginResponse.java</file>
         </group>
     </open-files>
 </project-private>
