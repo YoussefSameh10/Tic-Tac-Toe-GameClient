@@ -7,6 +7,7 @@ package xogameclient.services;
 
 import xogameclient.services.responsemodels.LoginResponse;
 import xogameclient.services.responsemodels.RegisterResponse;
+import xogameclient.services.responsemodels.UnsupportedAction;
 
 /**
  *
@@ -42,17 +43,19 @@ public class ResponseManager {
             return new RegisterResponse(isSuccess);
         }
         if(AvailableActions.LoginResponse.getString().equals(parts[0])) {
+            System.out.println("Did enter login response");
             String result = parts[1];
             boolean loginSuccess;
             if(result.equals("Success")) {
                 loginSuccess = true;
             }
             else {
+                
                 loginSuccess = false;
             }
             return new LoginResponse(loginSuccess);
         }
         
-        return new LoginResponse(true);
+        return new UnsupportedAction("unsupported action error");
     }
 }

@@ -53,11 +53,12 @@ public class LoginPresenter implements LoginPresenterInterface{
                     while (true) {                        
                         try{
                             String response = dis.readLine();
-                            System.out.println(response);
+                            System.out.println("The login response is: " + response);
                             ClientActions action = responseManager.parse(response);
-                            System.out.println(action);
+                            System.out.println("The login action is: " + action);
                             if((action instanceof LoginResponse) && ((LoginResponse)action).loginSuccess == true){
-                                Platform.runLater(() ->{    
+                                Platform.runLater(() ->{  
+                                    System.out.println("Going to online list");
                                     loginController.gotoListOfOnlineUsers();
                                 });
                             }else{
