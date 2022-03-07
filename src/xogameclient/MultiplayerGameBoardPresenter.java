@@ -41,15 +41,14 @@ public class MultiplayerGameBoardPresenter implements MultiPlayerGamePresenterIn
     private PrintStream ps;
     private ResponseManager responseManager;
 
-
-    public MultiplayerGameBoardPresenter(String playerOneName, String playerTwoName,int playerOneId, int playerTwoId ,int playerOneScore, int playerTwoScore, boolean isMyTurn) {
+    public MultiplayerGameBoardPresenter(String playerOneName, String playerTwoName, int playerOneId, int playerTwoId, int playerOneScore, int playerTwoScore, boolean isMyTurn) {
         try {
             this.playerOneName = playerOneName;
             this.playerTwoName = playerTwoName;
             this.playerOneScore = playerOneScore;
             this.playerTwoScore = playerTwoScore;
-            this.playerOneId      = playerOneId ;
-            this.playerTwoId      =playerTwoId;
+            this.playerOneId = playerOneId;
+            this.playerTwoId = playerTwoId;
             this.isMyTurn = isMyTurn;
 
             responseManager = ResponseManager.getInstance();
@@ -57,6 +56,24 @@ public class MultiplayerGameBoardPresenter implements MultiPlayerGamePresenterIn
             server = networkConnection.getServer();
             dis = networkConnection.getDataInputStream();
             ps = networkConnection.getPrintStream();
+
+          /*  new Thread() {
+                @Override
+                public void run() {
+                    while (true) {
+                        try {
+                            System.out.println("WE RECIEVED RESPONSE");
+
+                         String input =    dis.readUTF();
+                            System.out.println(input);
+                            //      ps.println("Move,"+2+","+1+","+cell);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MultiplayerGameBoardPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            }.start();*/
+
         } catch (IOException ex) {
             System.out.println("Cannot initialize presenter");
             Logger.getLogger(MultiplayerGameBoardPresenter.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,6 +85,7 @@ public class MultiplayerGameBoardPresenter implements MultiPlayerGamePresenterIn
 
         return "";
     }
+
     public String getPlayerOneName() {
         return playerOneName;
     }
@@ -89,10 +107,12 @@ public class MultiplayerGameBoardPresenter implements MultiPlayerGamePresenterIn
     }
 
     public boolean playMove(int cell) {//0-8
-    Platform.runLater(new Runnable() {
+        Platform.runLater(new Runnable() {
             @Override
             public void run() {
-              ps.println("Move,"+playerOneId+","+playerTwoId+","+cell);
+                //adjust IDs
+                ps.println("Move," + 1 + "," + 2 + "," + cell);
+
             }
         });
         // ps.println("playMove"+0);

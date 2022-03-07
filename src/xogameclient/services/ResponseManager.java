@@ -6,6 +6,7 @@
 package xogameclient.services;
 
 import xogameclient.services.responsemodels.LoginResponse;
+import xogameclient.services.responsemodels.Move;
 import xogameclient.services.responsemodels.RegisterResponse;
 import xogameclient.services.responsemodels.UnsupportedAction;
 
@@ -54,6 +55,13 @@ public class ResponseManager {
                 loginSuccess = false;
             }
             return new LoginResponse(loginSuccess);
+        }
+        if(AvailableActions.Move.getString().equals(parts[0])) {
+            System.out.println("Did recieve move ");
+            int playerOneId = Integer.parseInt(parts[1]) ;
+            int playerTwoId = Integer.parseInt(parts[2]) ;
+            int  cell = Integer.parseInt(parts[3]) ;
+            return new Move(playerOneId , playerTwoId, cell);
         }
         
         return new UnsupportedAction("unsupported action error");

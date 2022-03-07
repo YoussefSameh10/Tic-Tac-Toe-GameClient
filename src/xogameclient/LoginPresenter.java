@@ -60,7 +60,9 @@ public class LoginPresenter implements LoginPresenterInterface{
                                 Platform.runLater(() ->{  
                                     System.out.println("Going to online list");
                                     loginController.gotoListOfOnlineUsers();
+                                    
                                 });
+                                break;
                             }else{
                                 Platform.runLater(() ->{    
                                     loginController.showLoginErrorAlert();
