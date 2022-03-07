@@ -17,4 +17,6 @@ interface NetworkConnectionInterface {
     public Socket getServer();
     public DataInputStream getDataInputStream();
     public PrintStream getPrintStream();
+    public String getResponse();
+    public Thread getThread();
 }

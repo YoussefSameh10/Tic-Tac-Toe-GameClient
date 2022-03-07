@@ -12,21 +12,17 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import xogameclient.services.ClientActions;
 import xogameclient.services.NetworkConnection;
 import xogameclient.services.ResponseManager;
-import xogameclient.services.responsemodels.LoginResponse;
-import xogameclient.services.responsemodels.RegisterResponse;
 
 /**
  *
  * @author sandra
  */
-public class LoginPresenter implements LoginPresenterInterface{
+public class LoginPresenter implements LoginPresenterInterface, Presenters{
 
     private LoginControllerInterface loginController;
     private NetworkConnection networkConnection;
-    private Socket server;
     private DataInputStream dis;
     private PrintStream ps;
     private ResponseManager responseManager;
@@ -35,51 +31,34 @@ public class LoginPresenter implements LoginPresenterInterface{
         this.loginController = loginController;
     }
     
-    
-    
     @Override
     public int loginPlayer(String userName, String password) {
         try{
             responseManager = ResponseManager.getInstance();
             networkConnection = NetworkConnection.getInstance();
-            server = networkConnection.getServer();
             dis = networkConnection.getDataInputStream();
             ps = networkConnection.getPrintStream();
-            new Thread(){
-                @Override
-                public void run() {
-                    super.run(); //To change body of generated methods, choose Tools | Templates.
-                    ps.println("Login,"+userName+","+password);
-                    while (true) {                        
-                        try{
-                            String response = dis.readLine();
-                            System.out.println("The login response is: " + response);
-                            ClientActions action = responseManager.parse(response);
-                            System.out.println("The login action is: " + action);
-                            if((action instanceof LoginResponse) && ((LoginResponse)action).loginSuccess == true){
-                                Platform.runLater(() ->{  
-                                    System.out.println("Going to online list");
-                                    loginController.gotoListOfOnlineUsers();
-                                });
-                            }else{
-                                Platform.runLater(() ->{    
-                                    loginController.showLoginErrorAlert();
-                                });
-                            }
-                        } catch (IOException ex) {
-                            Logger.getLogger(LoginPresenter.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-                
-            }.start();
+            networkConnection.setPresenter(this);
+            ps.println("Login,"+userName+","+password);
         }catch (IOException ex) {
             Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
-            Platform.runLater(() ->{    
-                loginController.showLoginErrorAlert();
-            });
+            performFailureAction();
         }
         return 0;
     }
+    
+    public void performSuccessAction() {
+        Platform.runLater(() ->{  
+            loginController.gotoListOfOnlineUsers();
+        });
+    }
+    
+    public void performFailureAction() {
+        Platform.runLater(() ->{  
+            loginController.showLoginErrorAlert();
+        });
+    }
+    
+    
     
 }

@@ -5,11 +5,18 @@
  */
 package xogameclient;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import xogameclient.services.NetworkConnection;
 
 /**
  *
@@ -26,6 +33,14 @@ public class XOGameClient extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+    @Override
+    public void init() throws Exception {
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+        NetworkConnection networkConnection = NetworkConnection.getInstance();
+    }
+    
+    
 
     /**
      * @param args the command line arguments
