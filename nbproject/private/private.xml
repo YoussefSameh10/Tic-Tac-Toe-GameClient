@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/AIGameboardController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/VideoAlertController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/FXMLDocumentController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/LocalController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/GameboardController.java</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/videoalert.css</file>
-            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/SingelPlayerController.java</file>
+            <file>file:/C:/Users/amin/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/LoginController.java</file>
+            <file>file:/C:/Users/amin/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/LoginPresenter.java</file>
         </group>
     </open-files>
 </project-private>

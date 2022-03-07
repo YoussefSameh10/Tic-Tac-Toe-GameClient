@@ -78,9 +78,26 @@ public class FXMLDocumentController implements Initializable {
         //scene.getStylesheets().add("onlineuserslist.css");
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Register");
+        stage.setTitle("PlayGame");
         stage.show();
         System.out.println("SerVerrrrrrrrrrrrrrr");
+        
+        
+        
+//         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiplayerGameBoard.fxml"));
+//
+//        Parent registerScene = loader.load();
+//        MultiplayerGameBoardController controller = (MultiplayerGameBoardController)loader.getController();
+//       MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2",1,2 , 0, 0, true);
+//        controller.presenter = boardPresenter ;
+//        Scene scene = new Scene(registerScene);
+//        //scene.getStylesheets().add("onlineuserslist.css");
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.setTitle("PlayGame");
+//        stage.show();
+//        System.out.println("SerVerrrrrrrrrrrrrrr");
     }
 
     @Override
