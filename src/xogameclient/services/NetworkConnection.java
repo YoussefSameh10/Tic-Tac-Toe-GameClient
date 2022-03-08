@@ -13,9 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import xogameclient.LoginPresenter;
+import xogameclient.MultiplayerGameBoardPresenter;
 import xogameclient.Presenters;
 import xogameclient.RegisterPresenter;
 import xogameclient.services.responsemodels.LoginResponse;
+import xogameclient.services.responsemodels.Move;
 import xogameclient.services.responsemodels.RegisterResponse;
 
 /**
@@ -34,6 +36,7 @@ public class NetworkConnection {
     private Presenters presenter;
 
     public void setPresenter(Presenters presenter) {
+        System.out.println("presenter setted to " + presenter);
         this.presenter = presenter;
     }
 
@@ -59,10 +62,9 @@ public class NetworkConnection {
 
     public static NetworkConnection getInstance() throws IOException {
         if (instance == null) {
-            return new NetworkConnection();
-        } else {
-            return instance;
+            instance = new NetworkConnection();
         }
+        return instance;
     }
 
     private void startThread() {
@@ -83,19 +85,17 @@ public class NetworkConnection {
     }
 
     private void manage() {
-
+        System.out.println("in manage " + presenter);
         ClientActions action = responseManager.parse(response);
         if (action instanceof LoginResponse) {
             manageLogin(action);
-        }
-        else if(action instanceof RegisterResponse) {
+        } else if (action instanceof RegisterResponse) {
             manageRegister(action);
-        }
-        else if(true) {
-            
-        }
-        else if(true) {
-            
+        } else if (action instanceof Move) {
+
+            manageMove(action);
+        } else if (true) {
+
         }
     }
 
@@ -103,20 +103,34 @@ public class NetworkConnection {
         if (((LoginResponse) action).loginSuccess == true) {
             Platform.runLater(() -> {
                 System.out.println("Going to online list");
-                ((LoginPresenter) presenter).performSuccessAction();
+                presenter.performSuccessAction();
             });
         } else {
             Platform.runLater(() -> {
-                ((LoginPresenter) presenter).performFailureAction();
+                presenter.performFailureAction();
             });
         }
     }
-    
+
     private void manageRegister(ClientActions action) {
         if (((RegisterResponse) action).isSuccess == true) {
             ((RegisterPresenter) presenter).performSuccessAction();
         } else {
-            ((RegisterPresenter) presenter).performFailureAction();
+            presenter.performFailureAction();
         }
     }
+
+    private void manageMove(ClientActions action) {
+        System.out.println("TEST TEST");
+        System.out.println("in manageMove" + presenter);
+       
+        Move move = ( xogameclient.services.responsemodels.Move) action ;
+         System.out.println("Move Recieved from connection is" + move.getCellNumber());
+       MultiplayerGameBoardPresenter pres = (MultiplayerGameBoardPresenter)  presenter ;
+           Platform.runLater(() -> {
+                   pres.readMoveFromOpponent(move.getCellNumber());
+            });
+   
+    }
+
 }

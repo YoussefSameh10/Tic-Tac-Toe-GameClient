@@ -27,7 +27,7 @@ import javafx.stage.Stage;
  *
  * @author Youssef
  */
-public class MultiplayerGameBoardController implements Initializable {
+public class MultiplayerGameBoardController implements Initializable, MultiPlayerGameControllerInterface {
 
     @FXML
     private ImageView backgroundImage;
@@ -64,20 +64,24 @@ public class MultiplayerGameBoardController implements Initializable {
     @FXML
     private Label oScore;
 
-    MultiplayerGameBoardPresenter presenter ;
-    
+    MultiplayerGameBoardPresenter presenter;
+
     private final int iconSize = 75;
     private final Image background = new Image(getClass().getResourceAsStream("homeAssets/background.jpg"));
     private final Image imageX = new Image(getClass().getResourceAsStream("homeAssets/X.jpg"));
     private final Image imageO = new Image(getClass().getResourceAsStream("homeAssets/O.jpg"));
     Stage stg;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         backgroundImage.setImage(background);
         player1Card.setImage(imageX);
         player2Card.setImage(imageO);
         setButtonsEnabled(false);
+//        MultiplayerGameBoardPresenter boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2", 1, 2, 0, 0, true);
+//        presenter = boardPresenter;
+//        presenter.setPresenter();
+//        System.out.println("the multipalyer vale is" + presenter.getPlayerOneName());
 
     }
 
@@ -92,72 +96,64 @@ public class MultiplayerGameBoardController implements Initializable {
     @FXML
     private void cell1Pressed() {
         System.out.println("Pressed 1");
-                presenter.playMove(1);
-                        addXorO(cell1);
-
+        presenter.playMove(1);
+        addXorO(cell1);
 
     }
 
     @FXML
     private void cell2Pressed() {
         System.out.println("Pressed 2");
-                presenter.playMove(2);
-                                        addXorO(cell2);
-
+        presenter.playMove(2);
+        addXorO(cell2);
 
     }
 
     @FXML
     private void cell3Pressed() {
         System.out.println("Pressed 3");
-                presenter.playMove(3);
-                                        addXorO(cell3);
-
+        presenter.playMove(3);
+        addXorO(cell3);
 
     }
 
     @FXML
     private void cell4Pressed() {
         System.out.println("Pressed 4");
-                presenter.playMove(4);
-                                        addXorO(cell4);
-
+        presenter.playMove(4);
+        addXorO(cell4);
 
     }
 
     @FXML
     private void cell5Pressed() {
         System.out.println("Pressed 5");
-                presenter.playMove(5);
-                                        addXorO(cell5);
-
+        presenter.playMove(5);
+        addXorO(cell5);
 
     }
 
     @FXML
     private void cell6Pressed() {
         System.out.println("Pressed 6");
-                presenter.playMove(6);
-                                        addXorO(cell6);
-
+        presenter.playMove(6);
+        addXorO(cell6);
 
     }
 
     @FXML
     private void cell7Pressed() {
         System.out.println("Pressed 7");
-                presenter.playMove(7);
-                                        addXorO(cell7);
-
+        presenter.playMove(7);
+        addXorO(cell7);
 
     }
 
     @FXML
     private void cell8Pressed() {
         System.out.println("Pressed 8");
-                presenter.playMove(8);
-                                        addXorO(cell8);
-
+        presenter.playMove(8);
+        addXorO(cell8);
 
     }
 
@@ -274,5 +270,40 @@ public class MultiplayerGameBoardController implements Initializable {
         Scene scene = new Scene(prevScreen);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void playOpponentMoveAt(int cell) {
+        switch (cell) {
+            case 0:
+                addXorO(cell0);
+                break;
+            case 1:
+                addXorO(cell1);
+                break;
+            case 2:
+                addXorO(cell2);
+                break;
+            case 3:
+                addXorO(cell3);
+                break;
+            case 4:
+                addXorO(cell4);
+                break;
+            case 5:
+                addXorO(cell5);
+                break;
+            case 6:
+                addXorO(cell6);
+                break;
+            case 7:
+                addXorO(cell7);
+                break;
+            case 8:
+                addXorO(cell8);
+                break;
+
+        }
+
     }
 }

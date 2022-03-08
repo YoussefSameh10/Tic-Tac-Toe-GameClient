@@ -19,17 +19,13 @@ import xogameclient.services.ResponseManager;
  *
  * @author amin
  */
-interface MultiPlayerGamePresenterInterface {
-
-}
-
 interface MultiPlayerGameControllerInterface {
-
+    void playOpponentMoveAt(int cell);
 }
 
-public class MultiplayerGameBoardPresenter implements MultiPlayerGamePresenterInterface {
+public class MultiplayerGameBoardPresenter implements Presenters {
 
-    private MultiPlayerGameControllerInterface multiPlayerGameController;
+     MultiPlayerGameControllerInterface multiPlayerGameController;
     private String playerOneName, playerTwoName;
     private int playerOneScore, playerTwoScore;
     private int playerOneId, playerTwoId;
@@ -57,23 +53,6 @@ public class MultiplayerGameBoardPresenter implements MultiPlayerGamePresenterIn
             dis = networkConnection.getDataInputStream();
             ps = networkConnection.getPrintStream();
 
-          /*  new Thread() {
-                @Override
-                public void run() {
-                    while (true) {
-                        try {
-                            System.out.println("WE RECIEVED RESPONSE");
-
-                         String input =    dis.readUTF();
-                            System.out.println(input);
-                            //      ps.println("Move,"+2+","+1+","+cell);
-                        } catch (IOException ex) {
-                            Logger.getLogger(MultiplayerGameBoardPresenter.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-            }.start();*/
-
         } catch (IOException ex) {
             System.out.println("Cannot initialize presenter");
             Logger.getLogger(MultiplayerGameBoardPresenter.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,9 +60,9 @@ public class MultiplayerGameBoardPresenter implements MultiPlayerGamePresenterIn
 
     }
 
-    public String readMoveFromOpponent() {
+    public void readMoveFromOpponent(int cell) {
 
-        return "";
+        multiPlayerGameController.playOpponentMoveAt(cell);
     }
 
     public String getPlayerOneName() {
@@ -106,16 +85,24 @@ public class MultiplayerGameBoardPresenter implements MultiPlayerGamePresenterIn
         return isMyTurn;
     }
 
-    public boolean playMove(int cell) {//0-8
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                //adjust IDs
-                ps.println("Move," + 1 + "," + 2 + "," + cell);
+    public void setPresenter() {
+        System.out.println("PRESENTER SETTED TO MULTI");
+        networkConnection.setPresenter(this);
+    }
 
-            }
-        });
-        // ps.println("playMove"+0);
+    public boolean playMove(int cell) {//0-8
+        ps.println("Move," + 1 + "," + 2 + "," + cell);
+        isMyTurn = !isMyTurn;
         return true;
+    }
+
+    @Override
+    public void performSuccessAction() {
+        System.out.println("YA LEEEEEEEEEEEEEEEEEEL");
+    }
+
+    @Override
+    public void performFailureAction() {
+        System.out.println("YA LAHWYYYYYY");
     }
 }

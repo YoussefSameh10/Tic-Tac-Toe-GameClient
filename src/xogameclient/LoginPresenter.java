@@ -47,12 +47,16 @@ public class LoginPresenter implements LoginPresenterInterface, Presenters{
         return 0;
     }
     
+    @Override
     public void performSuccessAction() {
+      //  networkConnection.setPresenter(null);
         Platform.runLater(() ->{  
             loginController.gotoListOfOnlineUsers();
         });
+        
     }
     
+    @Override
     public void performFailureAction() {
         Platform.runLater(() ->{  
             loginController.showLoginErrorAlert();

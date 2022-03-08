@@ -28,13 +28,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import xogameclient.services.NetworkConnection;
 
 /**
  * FXML Controller class
  *
  * @author Youssef
  */
-public class LoginController implements Initializable , LoginControllerInterface{
+public class LoginController implements Initializable, LoginControllerInterface {
 
     @FXML
     private Button loginBtn;
@@ -58,10 +59,10 @@ public class LoginController implements Initializable , LoginControllerInterface
     @FXML
     private ImageView rightImage;
 
-    
     private LoginPresenterInterface loginPresenter;
     @FXML
     private ImageView backBtn;
+
     /**
      * Initializes the controller class.
      */
@@ -69,9 +70,9 @@ public class LoginController implements Initializable , LoginControllerInterface
     public void initialize(URL url, ResourceBundle rb) {
         loginPresenter = new LoginPresenter(this);
         //configureUI();
-    }    
-    public void configureUI()
-    {
+    }
+
+    public void configureUI() {
         configureButton(loginBtn, "assets/login.png");
         configureButton(registerBtn, "assets/register.png");
         configureImage(logoImg, "assets/tic-tac-toe.png");
@@ -79,28 +80,25 @@ public class LoginController implements Initializable , LoginControllerInterface
         configureImage(rightImage, "assets/Panel2.png");
         configureImage(usernameImg, "assets/user.png");
         configureImage(passwordImage, "assets/lock.png");
-        
+
     }
-    
-    public void configureButton(Button b, String path)
-    {
+
+    public void configureButton(Button b, String path) {
         ImageView imageView = new ImageView(getClass().getResource(path).toExternalForm());
         imageView.setFitHeight(70);
         imageView.setFitWidth(225);
         b.setGraphic(imageView);
     }
-    
-    public void configureImage(ImageView img, String path)
-    {
-        Image myImage = new Image (getClass().getResourceAsStream(path));
+
+    public void configureImage(ImageView img, String path) {
+        Image myImage = new Image(getClass().getResourceAsStream(path));
         img.setImage(myImage);
     }
-    
+
     @FXML
     public void handleRegisterButtonPress(ActionEvent event) throws IOException {
-        
-        
-        Stage stage = (Stage)registerBtn.getScene().getWindow();
+
+        Stage stage = (Stage) registerBtn.getScene().getWindow();
         Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("register.fxml"));
         Scene scene = new Scene(onlineUsersScene);
         stage.setResizable(false);
@@ -120,12 +118,14 @@ public class LoginController implements Initializable , LoginControllerInterface
 //            stage.setTitle("List Of Online Users");
 //            stage.show();
 
-        Stage stage = (Stage) ((Node)loginBtn).getScene().getWindow();
+       Stage stage = (Stage) ((Node)loginBtn).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiplayerGameBoard.fxml"));
         Parent registerScene = loader.load();
         MultiplayerGameBoardController controller = (MultiplayerGameBoardController)loader.getController();
        MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2",1,2 , 0, 0, true);
         controller.presenter = boardPresenter ;
+        boardPresenter.multiPlayerGameController = controller;
+        NetworkConnection.getInstance().setPresenter(boardPresenter);
         Scene scene = new Scene(registerScene);
         //scene.getStylesheets().add("onlineuserslist.css");
         stage.setScene(scene);
@@ -134,8 +134,18 @@ public class LoginController implements Initializable , LoginControllerInterface
         stage.show();
         System.out.println("SerVerrrrrrrrrrrrrrr");
 
+//
+//            Stage stage = (Stage) ((Node) loginBtn).getScene().getWindow();
+//            Parent root = FXMLLoader.load(getClass().getResource("MultiplayerGameBoard.fxml"));
+//
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.setResizable(false);
+//            stage.setTitle("Online Game");
+//            stage.show();
+
         } catch (IOException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
             showLoginErrorAlert();
         }
     }
@@ -143,7 +153,7 @@ public class LoginController implements Initializable , LoginControllerInterface
     @Override
     public void showLoginErrorAlert() {
         Stage stg = (Stage) loginBtn.getScene().getWindow();
-        
+
         Alert.AlertType type = Alert.AlertType.ERROR;
         Alert alert = new Alert(type);
 
@@ -168,5 +178,5 @@ public class LoginController implements Initializable , LoginControllerInterface
         stage.setScene(scene);
         stage.show();
     }
-    
+
 }
