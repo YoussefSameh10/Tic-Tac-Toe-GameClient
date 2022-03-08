@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,13 +31,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
+import javafx.util.Pair;
+import xogameclient.services.NetworkConnection;
+import xogameclient.services.ResponseManager;
 
 /**
  * FXML Controller class
  *
  * @author sandra
  */
-public class OnlineUsersListController implements Initializable {
+public class OnlineUsersListController implements Initializable, Presenters {
 
 //    private ImageView BGImage;
 //    private ListView<String> onlineuserLV;
@@ -65,11 +69,14 @@ public class OnlineUsersListController implements Initializable {
     @FXML
     private ImageView rightImg;
     
-    private String currentUsername;
+    private ArrayList<Pair<String, Integer> > onlinePlayers = new ArrayList<Pair<String, Integer> >();
     
-    Socket server;
-    DataInputStream dis;
-    PrintStream ps;
+    private String currentUsername;
+    private NetworkConnection networkConnection;
+    private DataInputStream dis;
+    private PrintStream ps;
+    private ResponseManager responseManager;
+
     
     public class UsersCustomCell extends ListCell<String>{
         public UsersCustomCell(){
@@ -91,45 +98,18 @@ public class OnlineUsersListController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("OnlineUsersList Initializer");
-        System.out.println("Current Username: " + currentUsername);
-        try{
-            server = new Socket("127.0.0.1", 8080);
-            dis = new DataInputStream(server.getInputStream());
-            ps = new PrintStream(server.getOutputStream());
+        try {
+            System.out.println("This is OnlineUsersList Initializer");
+            responseManager = ResponseManager.getInstance();
+            networkConnection = NetworkConnection.getInstance();
+            dis = networkConnection.getDataInputStream();
+            ps = networkConnection.getPrintStream();
+            networkConnection.setPresenter(this);
+            ps.println("GetOnlinePlayersList");
             
-            new Thread(){
-                @Override
-                public void run() {
-                    super.run(); //To change body of generated methods, choose Tools | Templates.
-                    ps.println("GetOnlinePlayersList");
-                    while (true) {                        
-                        try{
-                            System.out.println("I am in the init");
-                            String response = dis.readLine();
-                            System.out.println(response);
-                            if(!response.equals("Failure")){
-                                System.out.println(response);
-                                String[] names = parseServerResponse(response);
-                                System.out.println("Names: " + names.length);
-                                for (int i=0 ; i<names.length ; i++)
-                                {
-                                    System.out.println(names[i]);
-                                }
-                                configureListView(names);
-                            }else{
-                                System.out.println("I am in the else in the init ");
-                                // Show alert
-                            }
-                        } catch (IOException ex) {
-                            Logger.getLogger(LoginPresenter.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-                
-            }.start();
-        }catch (IOException ex) {
-            Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        catch (IOException ex) {
+            ex.printStackTrace();
         }
     }    
     
@@ -137,15 +117,13 @@ public class OnlineUsersListController implements Initializable {
 //        Image image = new Image(getClass().getResource("listAssets/BG.jpg").toExternalForm());
 //        BGImage.setImage(image);
 //    }
-    private void configureListView(String[] names){
+    private void configureListView(){
        
-        //centerList.getItems().addAll(names);
         System.out.println("Configure List View Function !!!");
-        System.out.println(currentUsername);
-        for (int i=0 ; i<names.length ; i++)
+        for (int i=0 ; i<onlinePlayers.size() ; i++)
         {
-            if (!names[i].equals(currentUsername))
-                centerList.getItems().add(names[i]);
+            if (!onlinePlayers.get(i).getKey().equals(currentUsername))
+                centerList.getItems().add(onlinePlayers.get(i).getKey());
         }
         centerList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //onlineuserLV.setStyle("-fx-background-color: transparent;");
@@ -167,6 +145,34 @@ public class OnlineUsersListController implements Initializable {
     {
         System.out.println("Player username sent: " + _username);
         currentUsername = _username;
+    }
+    
+    
+    @Override
+    public void performSuccessAction() {
+        String serverResponse = networkConnection.getResponse();
+        System.out.println("This is the server response from getting online players " + serverResponse);
+        String[] parsedResponse = serverResponse.split(",");
+        String[] allUsers = parsedResponse[1].split(" ");
+        for (int i=0 ; i<allUsers.length ; i++)
+        {
+            
+            String[] parsedPlayer = allUsers[i].split(":");
+            String currentPlayerUsername = parsedPlayer[0];
+            Integer currentPlayerID = Integer.parseInt(parsedPlayer[1]);
+            if (!currentUsername.equals(currentPlayerUsername))
+            {
+                onlinePlayers.add(new Pair<String, Integer>(currentPlayerUsername, currentPlayerID) );
+            }
+        }
+        
+        configureListView();
+        System.out.println("There are " + onlinePlayers.size() + " online players in the server...");
+    }
+
+    @Override
+    public void performFailureAction() {
+        System.out.println("Failed to get online players list !!");
     }
     
 }
