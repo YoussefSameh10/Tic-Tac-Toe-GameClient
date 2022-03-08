@@ -45,5 +45,11 @@ public class Move implements ClientActions {
         this.cellNumber = cellNumber;
         this.senderId = senderId;
         this.recieverId = recieverId;
+        System.out.println("cell id  = "+ this.cellNumber);
+        System.out.println("sender = " + this.senderId);
+         System.out.println("reciever = " + this.recieverId);
+
+
+        
     }
 }

@@ -61,7 +61,8 @@ public class ResponseManager {
             int playerOneId = Integer.parseInt(parts[1]) ;
             int playerTwoId = Integer.parseInt(parts[2]) ;
             int  cell = Integer.parseInt(parts[3]) ;
-            return new Move(playerOneId , playerTwoId, cell);
+            System.out.println("the dequed cell number is " + cell);
+            return new Move(cell , playerTwoId, playerOneId);
         }
         
         return new UnsupportedAction("unsupported action error");

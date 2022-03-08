@@ -21,6 +21,7 @@ import xogameclient.services.ResponseManager;
  */
 interface MultiPlayerGameControllerInterface {
     void playOpponentMoveAt(int cell);
+    void setViewButtonsDisabled(boolean isDisabled);
 }
 
 public class MultiplayerGameBoardPresenter implements Presenters {
@@ -61,8 +62,11 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     }
 
     public void readMoveFromOpponent(int cell) {
-
         multiPlayerGameController.playOpponentMoveAt(cell);
+        isMyTurn =!isMyTurn;
+        multiPlayerGameController.setViewButtonsDisabled(isThatMyTurn());
+
+        
     }
 
     public String getPlayerOneName() {
@@ -91,8 +95,10 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     }
 
     public boolean playMove(int cell) {//0-8
-        ps.println("Move," + 1 + "," + 2 + "," + cell);
+        
+        ps.println("Move," + playerOneId + "," + playerTwoId + "," + cell);
         isMyTurn = !isMyTurn;
+        multiPlayerGameController.setViewButtonsDisabled(isThatMyTurn());
         return true;
     }
 

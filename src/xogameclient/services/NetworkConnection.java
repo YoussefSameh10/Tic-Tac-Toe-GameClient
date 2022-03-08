@@ -121,14 +121,12 @@ public class NetworkConnection {
     }
 
     private void manageMove(ClientActions action) {
-        System.out.println("TEST TEST");
         System.out.println("in manageMove" + presenter);
        
-        Move move = ( xogameclient.services.responsemodels.Move) action ;
-         System.out.println("Move Recieved from connection is" + move.getCellNumber());
+         System.out.println("Move Recieved from connection is" +        ((Move) action).getCellNumber());
        MultiplayerGameBoardPresenter pres = (MultiplayerGameBoardPresenter)  presenter ;
            Platform.runLater(() -> {
-                   pres.readMoveFromOpponent(move.getCellNumber());
+                   pres.readMoveFromOpponent( ((Move) action).getCellNumber());
             });
    
     }

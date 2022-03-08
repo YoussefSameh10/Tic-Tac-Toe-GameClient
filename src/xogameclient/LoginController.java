@@ -122,7 +122,12 @@ public class LoginController implements Initializable, LoginControllerInterface 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiplayerGameBoard.fxml"));
         Parent registerScene = loader.load();
         MultiplayerGameBoardController controller = (MultiplayerGameBoardController)loader.getController();
-       MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2",1,2 , 0, 0, true);
+//       MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2",1,2 , 0, 0, true);
+//        controller.setButtonsDisabled(true);
+
+        MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh2", "Sameh1",2,1 , 0, 0, false);
+        controller.setButtonsDisabled(false);
+
         controller.presenter = boardPresenter ;
         boardPresenter.multiPlayerGameController = controller;
         NetworkConnection.getInstance().setPresenter(boardPresenter);

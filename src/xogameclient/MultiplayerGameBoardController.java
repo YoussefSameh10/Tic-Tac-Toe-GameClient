@@ -77,12 +77,6 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         backgroundImage.setImage(background);
         player1Card.setImage(imageX);
         player2Card.setImage(imageO);
-        setButtonsEnabled(false);
-//        MultiplayerGameBoardPresenter boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2", 1, 2, 0, 0, true);
-//        presenter = boardPresenter;
-//        presenter.setPresenter();
-//        System.out.println("the multipalyer vale is" + presenter.getPlayerOneName());
-
     }
 
     @FXML
@@ -181,7 +175,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         alertx(winnerName);
     }
 
-    public void setButtonsEnabled(boolean isEnabled) {
+    public void setButtonsDisabled(boolean isEnabled) {
         cell0.setDisable(isEnabled);
         cell1.setDisable(isEnabled);
         cell2.setDisable(isEnabled);
@@ -306,4 +300,11 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         }
 
     }
+
+    @Override
+    public void setViewButtonsDisabled(boolean isDisabled) {
+        setButtonsDisabled(isDisabled);
+    }
+
+   
 }
