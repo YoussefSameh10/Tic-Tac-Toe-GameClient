@@ -5,6 +5,7 @@
  */
 package xogameclient.services;
 
+import xogameclient.services.responsemodels.GetOnlinePlayersListResponse;
 import xogameclient.services.responsemodels.LoginResponse;
 import xogameclient.services.responsemodels.Move;
 import xogameclient.services.responsemodels.RegisterResponse;
@@ -62,6 +63,16 @@ public class ResponseManager {
             int playerTwoId = Integer.parseInt(parts[2]) ;
             int  cell = Integer.parseInt(parts[3]) ;
             return new Move(playerOneId , playerTwoId, cell);
+        }
+        
+        if(AvailableActions.GetOnlinePlayersListResponse.getString().equals(parts[0])) {
+            System.out.println("Did enter get online players response");
+            String result = parts[1];
+            boolean gotOnlinePlayersList = false;
+            if(!result.equals("")) {
+                gotOnlinePlayersList = true;
+            }
+            return new GetOnlinePlayersListResponse(gotOnlinePlayersList);
         }
         
         return new UnsupportedAction("unsupported action error");

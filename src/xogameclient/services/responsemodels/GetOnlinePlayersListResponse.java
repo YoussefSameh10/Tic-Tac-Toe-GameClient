@@ -12,5 +12,9 @@ import xogameclient.services.ClientActions;
  * @author Youssef
  */
 public class GetOnlinePlayersListResponse implements ClientActions {
-    
+    public boolean isSuccess;
+    public GetOnlinePlayersListResponse(boolean _isSuccess)
+    {
+        this.isSuccess = _isSuccess;
+    }
 }

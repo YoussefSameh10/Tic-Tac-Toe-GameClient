@@ -13,8 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import xogameclient.LoginPresenter;
+import xogameclient.OnlineUsersListController;
 import xogameclient.Presenters;
 import xogameclient.RegisterPresenter;
+import xogameclient.services.responsemodels.GetOnlinePlayersListResponse;
 import xogameclient.services.responsemodels.LoginResponse;
 import xogameclient.services.responsemodels.RegisterResponse;
 
@@ -49,6 +51,10 @@ public class NetworkConnection {
         return ps;
     }
 
+    public String getResponse(){
+        return response;
+    }
+    
     private NetworkConnection() throws IOException {
         server = new Socket("127.0.0.1", 8080);
         dis = new DataInputStream(server.getInputStream());
@@ -59,10 +65,9 @@ public class NetworkConnection {
 
     public static NetworkConnection getInstance() throws IOException {
         if (instance == null) {
-            return new NetworkConnection();
-        } else {
-            return instance;
+            instance = new NetworkConnection();
         }
+        return instance;
     }
 
     private void startThread() {
@@ -76,7 +81,7 @@ public class NetworkConnection {
                         manage();
                     }
                 } catch (IOException ex) {
-                    Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
         }.start();
@@ -91,8 +96,8 @@ public class NetworkConnection {
         else if(action instanceof RegisterResponse) {
             manageRegister(action);
         }
-        else if(true) {
-            
+        else if(action instanceof GetOnlinePlayersListResponse) {
+            manageGettingOnlinePlayersList(action);
         }
         else if(true) {
             
@@ -119,4 +124,16 @@ public class NetworkConnection {
             ((RegisterPresenter) presenter).performFailureAction();
         }
     }
+    
+    private void manageGettingOnlinePlayersList(ClientActions action) {
+        System.out.println("Managing getting online players list");
+        if (((GetOnlinePlayersListResponse) action).isSuccess == true) {
+            System.out.println("True");
+            ((OnlineUsersListController) presenter).performSuccessAction();
+        } else {
+            System.out.println("False");
+            ((OnlineUsersListController) presenter).performFailureAction();
+        }
+    }
+    
 }
