@@ -15,8 +15,10 @@ import javafx.application.Platform;
 import xogameclient.LoginPresenter;
 import xogameclient.Presenters;
 import xogameclient.RegisterPresenter;
+import xogameclient.XOGameClient;
 import xogameclient.services.responsemodels.LoginResponse;
 import xogameclient.services.responsemodels.RegisterResponse;
+import xogameclient.services.responsemodels.ServerClose;
 
 /**
  *
@@ -28,10 +30,11 @@ public class NetworkConnection {
     private Socket server;
     private DataInputStream dis;
     private PrintStream ps;
-    private Thread t1;
+    //private Thread t1;
     private String response;
     ResponseManager responseManager;
     private Presenters presenter;
+    ClientActions action;
 
     public void setPresenter(Presenters presenter) {
         this.presenter = presenter;
@@ -59,10 +62,9 @@ public class NetworkConnection {
 
     public static NetworkConnection getInstance() throws IOException {
         if (instance == null) {
-            return new NetworkConnection();
-        } else {
-            return instance;
+            instance = new NetworkConnection();
         }
+        return instance;
     }
 
     private void startThread() {
@@ -72,11 +74,31 @@ public class NetworkConnection {
             public void run() {
                 try {
                     while ((server.isConnected())) {
-                        response = dis.readLine();
-                        manage();
+                        if(server.isConnected()){
+                            response = dis.readLine();
+                            manage();
+                        }else{
+                            System.out.println("CAN'T READ ANYTHING FROM SERVER! IT'S CLOSED");
+                            try {
+                                server.close();
+                                dis.close();
+                                ps.close();
+                                stop();
+                            } catch (IOException ex1) {
+                                Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex1);
+                            }
+                        }
                     }
                 } catch (IOException ex) {
-                    Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        server.close();
+                        dis.close();
+                        ps.close();
+                        stop();
+                        Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex1) {
+                        Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
                 }
             }
         }.start();
@@ -84,15 +106,15 @@ public class NetworkConnection {
 
     private void manage() {
 
-        ClientActions action = responseManager.parse(response);
+        action = responseManager.parse(response);
         if (action instanceof LoginResponse) {
             manageLogin(action);
         }
         else if(action instanceof RegisterResponse) {
             manageRegister(action);
         }
-        else if(true) {
-            
+        else if(action instanceof ServerClose) {
+            manageClose(action);
         }
         else if(true) {
             
@@ -117,6 +139,15 @@ public class NetworkConnection {
             ((RegisterPresenter) presenter).performSuccessAction();
         } else {
             ((RegisterPresenter) presenter).performFailureAction();
+        }
+    }
+
+    private void manageClose(ClientActions action) {
+        if (((ServerClose) action).isClose == true) {
+            ((XOGameClient) presenter).performSuccessAction();
+        } else {
+            System.out.println("Did not close server successfully");
+            ((XOGameClient) presenter).performFailureAction();
         }
     }
 }

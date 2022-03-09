@@ -12,9 +12,11 @@ import xogameclient.services.ClientActions;
  * @author Youssef
  */
 public class LoginResponse implements ClientActions {
+    public int userId;
     public boolean loginSuccess;
 
-    public LoginResponse(boolean loginSuccess) {
+    public LoginResponse(boolean loginSuccess, int userId) {
         this.loginSuccess = loginSuccess;
+        this.userId = userId;
     }
 }

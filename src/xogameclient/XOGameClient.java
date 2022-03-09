@@ -17,17 +17,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import xogameclient.services.NetworkConnection;
+import xogameclient.services.ResponseManager;
 
 /**
  *
  * @author Youssef
  */
-public class XOGameClient extends Application {
+public class XOGameClient extends Application implements Presenters{
+    NetworkConnection networkConnection;
+    ResponseManager responseManager;
+    DataInputStream dis;
+    PrintStream ps;
     
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
+        stage.setOnCloseRequest((event) -> {
+            performSuccessAction();
+            
+        });
         Scene scene = new Scene(root);
         stage.setResizable(false);
         stage.setScene(scene);
@@ -37,7 +46,7 @@ public class XOGameClient extends Application {
     @Override
     public void init() throws Exception {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        NetworkConnection networkConnection = NetworkConnection.getInstance();
+        networkConnection = NetworkConnection.getInstance();
     }
     
     
@@ -47,6 +56,33 @@ public class XOGameClient extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public void closePlayerConnection(){
+        try {
+            responseManager = ResponseManager.getInstance();
+            networkConnection = NetworkConnection.getInstance();
+            dis = networkConnection.getDataInputStream();
+            ps = networkConnection.getPrintStream();
+            networkConnection.setPresenter(this);
+            ps.println("ClientClose");
+            dis.close();
+            ps.close();
+            networkConnection.getServer().close();
+        } catch (IOException ex) {
+            Logger.getLogger(XOGameClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void performSuccessAction() {
+        System.out.println("SUCCESSFULY CLIENT CLOSED CONNECTION");
+        closePlayerConnection();
+    }
+
+    @Override
+    public void performFailureAction() {
+        System.out.println("SERVER CAN'T CLOSE CONNECTION");
     }
     
 }
