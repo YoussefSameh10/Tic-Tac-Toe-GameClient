@@ -81,77 +81,75 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 
     @FXML
     private void cell0Pressed() {
-        System.out.println("Pressed 0");
-        presenter.playMove(0);
-        addXorO(cell0);
+        System.out.println(presenter.isThatMyTurn());
+         addXorO(cell0);
 
     }
 
     @FXML
     private void cell1Pressed() {
-        System.out.println("Pressed 1");
-        presenter.playMove(1);
         addXorO(cell1);
+                presenter.playMove(1);
+
 
     }
 
     @FXML
     private void cell2Pressed() {
-        System.out.println("Pressed 2");
-        presenter.playMove(2);
         addXorO(cell2);
+        presenter.playMove(2);
 
     }
 
     @FXML
     private void cell3Pressed() {
-        System.out.println("Pressed 3");
-        presenter.playMove(3);
         addXorO(cell3);
+        presenter.playMove(3);
 
     }
 
     @FXML
     private void cell4Pressed() {
-        System.out.println("Pressed 4");
-        presenter.playMove(4);
         addXorO(cell4);
+        presenter.playMove(4);
 
     }
 
     @FXML
     private void cell5Pressed() {
-        System.out.println("Pressed 5");
-        presenter.playMove(5);
         addXorO(cell5);
+        presenter.playMove(5);
 
     }
 
     @FXML
     private void cell6Pressed() {
         System.out.println("Pressed 6");
+                addXorO(cell6);
+
         presenter.playMove(6);
-        addXorO(cell6);
 
     }
 
     @FXML
     private void cell7Pressed() {
         System.out.println("Pressed 7");
-        presenter.playMove(7);
         addXorO(cell7);
+        presenter.playMove(7);
 
     }
 
     @FXML
     private void cell8Pressed() {
-        System.out.println("Pressed 8");
+                addXorO(cell8);
+
         presenter.playMove(8);
-        addXorO(cell8);
 
     }
 
     private void addXorO(Button cell) {
+        System.out.println("PRESSED");
+        System.out.println( "My turn = "+ presenter.isThatMyTurn());
         if (presenter.isThatMyTurn()) {
             ImageView imageviewX = new ImageView(imageX);
             resize(imageviewX);

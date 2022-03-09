@@ -30,7 +30,8 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     private String playerOneName, playerTwoName;
     private int playerOneScore, playerTwoScore;
     private int playerOneId, playerTwoId;
-    private boolean isMyTurn;
+    private boolean isMyTurn = true;
+    private boolean isUiDisabled;
 
     private NetworkConnection networkConnection;
     private Socket server;
@@ -38,7 +39,7 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     private PrintStream ps;
     private ResponseManager responseManager;
 
-    public MultiplayerGameBoardPresenter(String playerOneName, String playerTwoName, int playerOneId, int playerTwoId, int playerOneScore, int playerTwoScore, boolean isMyTurn) {
+    public MultiplayerGameBoardPresenter(String playerOneName, String playerTwoName, int playerOneId, int playerTwoId, int playerOneScore, int playerTwoScore, boolean isUIdiabled ){
         try {
             this.playerOneName = playerOneName;
             this.playerTwoName = playerTwoName;
@@ -46,7 +47,7 @@ public class MultiplayerGameBoardPresenter implements Presenters {
             this.playerTwoScore = playerTwoScore;
             this.playerOneId = playerOneId;
             this.playerTwoId = playerTwoId;
-            this.isMyTurn = isMyTurn;
+            this.isUiDisabled = isUIdiabled;
 
             responseManager = ResponseManager.getInstance();
             networkConnection = NetworkConnection.getInstance();
@@ -63,10 +64,9 @@ public class MultiplayerGameBoardPresenter implements Presenters {
 
     public void readMoveFromOpponent(int cell) {
         multiPlayerGameController.playOpponentMoveAt(cell);
-        isMyTurn =!isMyTurn;
-        multiPlayerGameController.setViewButtonsDisabled(isThatMyTurn());
-
-        
+         isMyTurn =!isMyTurn;
+        isUiDisabled = !isUiDisabled;
+        multiPlayerGameController.setViewButtonsDisabled(isUiDisabled);
     }
 
     public String getPlayerOneName() {
@@ -97,8 +97,9 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     public boolean playMove(int cell) {//0-8
         
         ps.println("Move," + playerOneId + "," + playerTwoId + "," + cell);
-        isMyTurn = !isMyTurn;
-        multiPlayerGameController.setViewButtonsDisabled(isThatMyTurn());
+        isUiDisabled = !isUiDisabled;
+        multiPlayerGameController.setViewButtonsDisabled(isUiDisabled);
+        isMyTurn=!isMyTurn;
         return true;
     }
 
