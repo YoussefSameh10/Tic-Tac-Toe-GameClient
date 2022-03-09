@@ -81,8 +81,8 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 
     @FXML
     private void cell0Pressed() {
-        System.out.println(presenter.isThatMyTurn());
          addXorO(cell0);
+                presenter.playMove(1);
 
     }
 
