@@ -14,19 +14,22 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import xogameclient.services.NetworkConnection;
 import xogameclient.services.ResponseManager;
+import xogameclient.services.responsemodels.BoardStatus;
 
 /**
  *
  * @author amin
  */
 interface MultiPlayerGameControllerInterface {
+
     void playOpponentMoveAt(int cell);
+
     void setViewButtonsDisabled(boolean isDisabled);
 }
 
 public class MultiplayerGameBoardPresenter implements Presenters {
 
-     MultiPlayerGameControllerInterface multiPlayerGameController;
+    MultiPlayerGameControllerInterface multiPlayerGameController;
     private String playerOneName, playerTwoName;
     private int playerOneScore, playerTwoScore;
     private int playerOneId, playerTwoId;
@@ -39,7 +42,7 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     private PrintStream ps;
     private ResponseManager responseManager;
 
-    public MultiplayerGameBoardPresenter(String playerOneName, String playerTwoName, int playerOneId, int playerTwoId, int playerOneScore, int playerTwoScore, boolean isUIdiabled ){
+    public MultiplayerGameBoardPresenter(String playerOneName, String playerTwoName, int playerOneId, int playerTwoId, int playerOneScore, int playerTwoScore, boolean isUIdiabled) {
         try {
             this.playerOneName = playerOneName;
             this.playerTwoName = playerTwoName;
@@ -64,7 +67,7 @@ public class MultiplayerGameBoardPresenter implements Presenters {
 
     public void readMoveFromOpponent(int cell) {
         multiPlayerGameController.playOpponentMoveAt(cell);
-         isMyTurn =!isMyTurn;
+        isMyTurn = !isMyTurn;
         isUiDisabled = !isUiDisabled;
         multiPlayerGameController.setViewButtonsDisabled(isUiDisabled);
     }
@@ -95,12 +98,25 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     }
 
     public boolean playMove(int cell) {//0-8
-        
         ps.println("Move," + playerOneId + "," + playerTwoId + "," + cell);
         isUiDisabled = !isUiDisabled;
         multiPlayerGameController.setViewButtonsDisabled(isUiDisabled);
-        isMyTurn=!isMyTurn;
+        isMyTurn = !isMyTurn;
         return true;
+    }
+
+    public void manageGameResult(String status, BoardStatus position) {
+        switch (status) {
+            case "Win":
+                System.out.println("Controller will show celebration at" + position );
+                break;
+            case "Lose":
+                System.out.println("Controller will show saddness at" + position );
+                break;
+            default:
+                System.out.println("Controller will show n2deha mofawdat ya msel7y" + position);
+                break;
+        }
     }
 
     @Override

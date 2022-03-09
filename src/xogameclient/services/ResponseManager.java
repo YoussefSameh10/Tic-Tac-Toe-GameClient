@@ -9,6 +9,9 @@ import xogameclient.services.responsemodels.LoginResponse;
 import xogameclient.services.responsemodels.Move;
 import xogameclient.services.responsemodels.RegisterResponse;
 import xogameclient.services.responsemodels.UnsupportedAction;
+import xogameclient.services.responsemodels.BoardStatus;
+import xogameclient.services.responsemodels.GameResult;
+import xogameclient.services.responsemodels.GameStatusResponse;
 
 /**
  *
@@ -63,6 +66,13 @@ public class ResponseManager {
             int  cell = Integer.parseInt(parts[3]) ;
             System.out.println("the dequed cell number is " + cell);
             return new Move(cell , playerTwoId, playerOneId);
+        }
+        
+            if(AvailableActions.GameResult.getString().equals(parts[0])) {
+            System.out.println("Did recieve Result ");
+            String status = parts[1] ;
+            BoardStatus position = BoardStatus.valueOf(parts[2]) ;
+            return new GameStatusResponse(position, status);
         }
         
         return new UnsupportedAction("unsupported action error");

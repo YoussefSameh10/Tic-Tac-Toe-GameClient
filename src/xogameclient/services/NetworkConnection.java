@@ -16,6 +16,8 @@ import xogameclient.LoginPresenter;
 import xogameclient.MultiplayerGameBoardPresenter;
 import xogameclient.Presenters;
 import xogameclient.RegisterPresenter;
+import xogameclient.services.responsemodels.BoardStatus;
+import xogameclient.services.responsemodels.GameStatusResponse;
 import xogameclient.services.responsemodels.LoginResponse;
 import xogameclient.services.responsemodels.Move;
 import xogameclient.services.responsemodels.RegisterResponse;
@@ -75,6 +77,8 @@ public class NetworkConnection {
                 try {
                     while ((server.isConnected())) {
                         response = dis.readLine();
+                        
+                        System.out.println("RESPONSE" + response);
                         manage();
                     }
                 } catch (IOException ex) {
@@ -85,7 +89,6 @@ public class NetworkConnection {
     }
 
     private void manage() {
-        System.out.println("in manage " + presenter);
         ClientActions action = responseManager.parse(response);
         if (action instanceof LoginResponse) {
             manageLogin(action);
@@ -94,8 +97,8 @@ public class NetworkConnection {
         } else if (action instanceof Move) {
 
             manageMove(action);
-        } else if (true) {
-
+        } else if (action instanceof GameStatusResponse) {
+            manageGameResponse(action);
         }
     }
 
@@ -130,5 +133,18 @@ public class NetworkConnection {
             });
    
     }
+    private void manageGameResponse(ClientActions action){
+        
+          System.out.println("in manageGameResponse" + presenter);
+       
+         System.out.println("Game Result Recieved  from connection is" +        ((GameStatusResponse) action).getStatus());
+         
+       MultiplayerGameBoardPresenter pres = (MultiplayerGameBoardPresenter)  presenter ;
+           Platform.runLater(() -> {
+               pres.manageGameResult(((GameStatusResponse) action).getStatus(), ((GameStatusResponse) action).getPosition());
+           });
+    }
+    
+    
 
 }
