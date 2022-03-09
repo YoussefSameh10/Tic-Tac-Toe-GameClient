@@ -34,10 +34,16 @@ public class NetworkConnection {
     private String response;
     ResponseManager responseManager;
     private Presenters presenter;
+    private Presenters presenter2;
     ClientActions action;
 
     public void setPresenter(Presenters presenter) {
+        System.out.println("Presenter set to: " +presenter );
         this.presenter = presenter;
+    }
+    
+    public void setPresenter2(Presenters presenter2){
+        this.presenter2 = presenter2;
     }
 
     public Socket getServer() {
@@ -76,6 +82,7 @@ public class NetworkConnection {
                     while ((server.isConnected())) {
                         if(server.isConnected()){
                             response = dis.readLine();
+                            System.out.println("the response from close is: "+response);
                             manage();
                         }else{
                             System.out.println("CAN'T READ ANYTHING FROM SERVER! IT'S CLOSED");
@@ -114,7 +121,7 @@ public class NetworkConnection {
             manageRegister(action);
         }
         else if(action instanceof ServerClose) {
-            manageClose(action);
+            manageServerClose(action);
         }
         else if(true) {
             
@@ -142,12 +149,13 @@ public class NetworkConnection {
         }
     }
 
-    private void manageClose(ClientActions action) {
+    private void manageServerClose(ClientActions action) {
         if (((ServerClose) action).isClose == true) {
-            ((XOGameClient) presenter).performSuccessAction();
+            
+            ((XOGameClient) presenter2).performSuccessAction();
         } else {
             System.out.println("Did not close server successfully");
-            ((XOGameClient) presenter).performFailureAction();
+            ((XOGameClient) presenter2).performFailureAction();
         }
     }
 }

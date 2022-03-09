@@ -31,6 +31,7 @@ public class ResponseManager {
     
     public ClientActions parse(String msg) { 
         String[] parts;
+        System.out.println("FROM CLOSE PARSE"+msg);
         parts = msg.split(",");
         
         if(AvailableActions.RegisterResponse.getString().equals(parts[0])) {
@@ -48,6 +49,8 @@ public class ResponseManager {
             System.out.println("Did enter login response");
             String result = parts[1];
             int userId = Integer.parseInt(parts[2]);
+            String userName = parts[3];
+            int score = Integer.parseInt(parts[4]);
             boolean loginSuccess;
             if(result.equals("Success")) {
                 loginSuccess = true;
@@ -56,7 +59,7 @@ public class ResponseManager {
                 
                 loginSuccess = false;
             }
-            return new LoginResponse(loginSuccess, userId);
+            return new LoginResponse(userId , userName , score , loginSuccess);
         }
         if(AvailableActions.Move.getString().equals(parts[0])) {
             System.out.println("Did recieve move ");

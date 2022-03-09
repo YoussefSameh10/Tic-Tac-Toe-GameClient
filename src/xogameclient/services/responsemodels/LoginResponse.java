@@ -13,10 +13,14 @@ import xogameclient.services.ClientActions;
  */
 public class LoginResponse implements ClientActions {
     public int userId;
+    public String userName;
+    public int score;
     public boolean loginSuccess;
 
-    public LoginResponse(boolean loginSuccess, int userId) {
-        this.loginSuccess = loginSuccess;
+    public LoginResponse(int userId, String userName, int score, boolean loginSuccess) {
         this.userId = userId;
+        this.userName = userName;
+        this.score = score;
+        this.loginSuccess = loginSuccess;
     }
 }

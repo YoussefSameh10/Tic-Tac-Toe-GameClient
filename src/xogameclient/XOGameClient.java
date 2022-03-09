@@ -12,9 +12,12 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import xogameclient.services.NetworkConnection;
 import xogameclient.services.ResponseManager;
@@ -28,11 +31,13 @@ public class XOGameClient extends Application implements Presenters{
     ResponseManager responseManager;
     DataInputStream dis;
     PrintStream ps;
-    
+    Stage stg;
+            
     @Override
     public void start(Stage stage) throws Exception {
+        stg = stage;
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
+        networkConnection.setPresenter2(this);
         stage.setOnCloseRequest((event) -> {
             performSuccessAction();
             
@@ -64,8 +69,8 @@ public class XOGameClient extends Application implements Presenters{
             networkConnection = NetworkConnection.getInstance();
             dis = networkConnection.getDataInputStream();
             ps = networkConnection.getPrintStream();
-            networkConnection.setPresenter(this);
-            ps.println("ClientClose");
+            //networkConnection.setPresenter(this);
+            //ps.println("ClientClose");
             dis.close();
             ps.close();
             networkConnection.getServer().close();
@@ -76,13 +81,26 @@ public class XOGameClient extends Application implements Presenters{
 
     @Override
     public void performSuccessAction() {
-        System.out.println("SUCCESSFULY CLIENT CLOSED CONNECTION");
         closePlayerConnection();
+        Platform.runLater(() ->{  
+            serverClosedConnectionAlert();
+        });
     }
 
     @Override
     public void performFailureAction() {
         System.out.println("SERVER CAN'T CLOSE CONNECTION");
+    }
+    
+    public void serverClosedConnectionAlert() {
+        Alert.AlertType type = Alert.AlertType.INFORMATION;
+        Alert alert = new Alert(type);
+        alert.initModality(Modality.WINDOW_MODAL);
+        alert.initOwner(stg);
+        alert.setTitle("Connection Closed");
+        alert.getDialogPane().setContentText("Server Closed Connection !!");
+        alert.setHeaderText("Connection Closed!!");
+        alert.showAndWait();
     }
     
 }
