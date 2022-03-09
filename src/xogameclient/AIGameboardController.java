@@ -49,6 +49,7 @@ public class AIGameboardController implements Initializable {
      Random randam = new Random();
      boolean playerTurn; //O
      char [][] charForBoard = {{' ', ' ', ' '},{' ', ' ',' '},{' ', ' ',' '}};
+     boolean flag = false;
        Stage stg;
     @FXML
     private ImageView backgroundImage;
@@ -362,9 +363,11 @@ public class AIGameboardController implements Initializable {
           
            oWins(cell2,cell4,cell6);
            return true;
+       }else if(!tieGame() && !flag){
+           showAlertforTie();
        }
        else{
-          // showAlertforTie();
+          
            
        }
        return false;
@@ -374,6 +377,7 @@ public class AIGameboardController implements Initializable {
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
+       flag = true;
        alertx(textx.getText());
       
    }
@@ -382,6 +386,7 @@ public class AIGameboardController implements Initializable {
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
+       flag = true;
        alert(texto.getText());
    }
     public void buttonDisabel(){
