@@ -13,13 +13,43 @@ import xogameclient.services.ClientActions;
  */
 public class Move implements ClientActions {
 
-    int cellNumber;
-    int senderId;
-    int recieverId;
+   private int cellNumber;
+    private int senderId;
+    private int recieverId;
+
+    public int getCellNumber() {
+        return cellNumber;
+    }
+
+    public void setCellNumber(int cellNumber) {
+        this.cellNumber = cellNumber;
+    }
+
+    public int getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
+    }
+
+    public int getRecieverId() {
+        return recieverId;
+    }
+
+    public void setRecieverId(int recieverId) {
+        this.recieverId = recieverId;
+    }
 
     public Move(int cellNumber, int senderId, int recieverId) {
         this.cellNumber = cellNumber;
         this.senderId = senderId;
         this.recieverId = recieverId;
+        System.out.println("cell id  = "+ this.cellNumber);
+        System.out.println("sender = " + this.senderId);
+         System.out.println("reciever = " + this.recieverId);
+
+
+        
     }
 }

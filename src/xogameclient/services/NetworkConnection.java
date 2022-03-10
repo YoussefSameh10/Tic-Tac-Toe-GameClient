@@ -18,7 +18,13 @@ import xogameclient.Presenters;
 import xogameclient.RegisterPresenter;
 import xogameclient.services.responsemodels.GetOnlinePlayersListResponse;
 import xogameclient.XOGameClient;
+import xogameclient.MultiplayerGameBoardPresenter;
+import xogameclient.Presenters;
+import xogameclient.RegisterPresenter;
+import xogameclient.services.responsemodels.BoardStatus;
+import xogameclient.services.responsemodels.GameStatusResponse;
 import xogameclient.services.responsemodels.LoginResponse;
+import xogameclient.services.responsemodels.Move;
 import xogameclient.services.responsemodels.RegisterResponse;
 import xogameclient.services.responsemodels.ServerClose;
 
@@ -40,7 +46,6 @@ public class NetworkConnection {
     ClientActions action;
 
     public void setPresenter(Presenters presenter) {
-        System.out.println("Presenter set to: " +presenter );
         this.presenter = presenter;
     }
     
@@ -87,7 +92,7 @@ public class NetworkConnection {
                 try {
                     while ((server.isConnected())) {
                         response = dis.readLine();
-                        System.out.println("the response from close is: "+response);
+                        
                         manage();
                     }try {
                         server.close();
@@ -117,8 +122,7 @@ public class NetworkConnection {
         action = responseManager.parse(response);
         if (action instanceof LoginResponse) {
             manageLogin(action);
-        }
-        else if(action instanceof RegisterResponse) {
+        } else if (action instanceof RegisterResponse) {
             manageRegister(action);
         }
         else if(action instanceof GetOnlinePlayersListResponse) {
@@ -127,8 +131,11 @@ public class NetworkConnection {
         else if(action instanceof ServerClose) {
             manageServerClose(action);
         }
-        else if(true) {
-            
+         else if (action instanceof Move) {
+
+            manageMove(action);
+        } else if (action instanceof GameStatusResponse) {
+            manageGameResponse(action);
         }
     }
 
@@ -136,20 +143,20 @@ public class NetworkConnection {
         if (((LoginResponse) action).loginSuccess == true) {
             Platform.runLater(() -> {
                 System.out.println("Going to online list");
-                ((LoginPresenter) presenter).performSuccessAction();
+                presenter.performSuccessAction();
             });
         } else {
             Platform.runLater(() -> {
-                ((LoginPresenter) presenter).performFailureAction();
+                presenter.performFailureAction();
             });
         }
     }
-    
+
     private void manageRegister(ClientActions action) {
         if (((RegisterResponse) action).isSuccess == true) {
             ((RegisterPresenter) presenter).performSuccessAction();
         } else {
-            ((RegisterPresenter) presenter).performFailureAction();
+            presenter.performFailureAction();
         }
     }
     
@@ -174,4 +181,30 @@ public class NetworkConnection {
             (presenter2).performFailureAction();
         }
     }
+
+    private void manageMove(ClientActions action) {
+        System.out.println("in manageMove" + presenter);
+       
+         System.out.println("Move Recieved from connection is" +        ((Move) action).getCellNumber());
+       MultiplayerGameBoardPresenter pres = (MultiplayerGameBoardPresenter)  presenter ;
+           Platform.runLater(() -> {
+                   pres.readMoveFromOpponent( ((Move) action).getCellNumber());
+            });
+   
+    }
+    
+    private void manageGameResponse(ClientActions action){
+        
+          System.out.println("in manageGameResponse" + presenter);
+       
+         System.out.println("Game Result Recieved  from connection is" +        ((GameStatusResponse) action).getStatus());
+         
+       MultiplayerGameBoardPresenter pres = (MultiplayerGameBoardPresenter)  presenter ;
+           Platform.runLater(() -> {
+               pres.manageGameResult(((GameStatusResponse) action).getStatus(), ((GameStatusResponse) action).getPosition());
+           });
+    }
+    
+    
+
 }

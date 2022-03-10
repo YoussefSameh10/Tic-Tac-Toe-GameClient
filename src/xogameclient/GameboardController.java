@@ -48,11 +48,12 @@ import static sun.audio.AudioPlayer.player;
  * @author Youssef
  */
 public class GameboardController implements Initializable {
+
     Random randam = new Random();
     boolean playerTurn; //O
-    char [][] charForBoard = {{' ', ' ', ' '},{' ', ' ',' '},{' ', ' ',' '}};
+    char[][] charForBoard = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
     String gameRecord = "";
-    
+
     @FXML
     private ImageView backgroundImage;
     @FXML
@@ -73,14 +74,13 @@ public class GameboardController implements Initializable {
     private Button cell7;
     @FXML
     private Button cell8;
-    
+
     private boolean turn;
     @FXML
     private ImageView player1Card;
     @FXML
     private ImageView player2Card;
-    
-    
+
     private final int iconSize = 75;
     private final Image background = new Image(getClass().getResourceAsStream("homeAssets/background.jpg"));
     private final Image imageX = new Image(getClass().getResourceAsStream("homeAssets/X.jpg"));
@@ -95,296 +95,287 @@ public class GameboardController implements Initializable {
     private Label xScore;
     @FXML
     private Label oScore;
-    
-    int scoreX , scoreO;
+
+    int scoreX, scoreO;
     String playerX, playerO;
     Stage stg;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         turn = false;
         backgroundImage.setImage(background);
         player1Card.setImage(imageX);
         player2Card.setImage(imageO);
-        
+
         initializeScores(scoreX, scoreO);
         setUesers(playerX, playerO);
-    }   
-    
+    }
+
     @FXML
     private void cell0Pressed() {
-       if(charForBoard[0][0] == ' '){
-          char res = (turn == true) ? 'X':'O';
-          charForBoard[0][0] = res ;
-          gameRecord += res + "0";
-          cellPressed(cell0);
-          System.out.println(res);
-          check();
-       } 
+        if (charForBoard[0][0] == ' ') {
+            char res = (turn == true) ? 'X' : 'O';
+            charForBoard[0][0] = res;
+            gameRecord += res + "0";
+            cellPressed(cell0);
+            System.out.println(res);
+            check();
+        }
     }
+
     @FXML
     private void cell1Pressed() {
-        if(charForBoard[0][1] == ' '){
-          char res = (turn == true) ? 'X':'O';
-          charForBoard[0][1] = res ;
-          gameRecord += res + "1";
-          cellPressed(cell1);
-          check();
-       }
-       // cellPressed(cell1);
+        if (charForBoard[0][1] == ' ') {
+            char res = (turn == true) ? 'X' : 'O';
+            charForBoard[0][1] = res;
+            gameRecord += res + "1";
+            cellPressed(cell1);
+            check();
+        }
+        // cellPressed(cell1);
     }
+
     @FXML
     private void cell2Pressed() {
-        if(charForBoard[0][2] == ' '){
-          char res = (turn == true) ? 'X':'O';
-          charForBoard[0][2] = res ;
-          gameRecord += res + "2";
-          cellPressed(cell2);
-          check();
+        if (charForBoard[0][2] == ' ') {
+            char res = (turn == true) ? 'X' : 'O';
+            charForBoard[0][2] = res;
+            gameRecord += res + "2";
+            cellPressed(cell2);
+            check();
 
-       }
-       // cellPressed(cell2);
+        }
+        // cellPressed(cell2);
     }
+
     @FXML
     private void cell3Pressed() {
-        if(charForBoard[1][0] == ' '){
-          char res = (turn == true) ? 'X':'O';
-          charForBoard[1][0] = res ;
-          gameRecord += res + "3";
-          cellPressed(cell3);
-          check();
-       }
-       // cellPressed(cell3);
+        if (charForBoard[1][0] == ' ') {
+            char res = (turn == true) ? 'X' : 'O';
+            charForBoard[1][0] = res;
+            gameRecord += res + "3";
+            cellPressed(cell3);
+            check();
+        }
+        // cellPressed(cell3);
     }
+
     @FXML
     private void cell4Pressed() {
-        if(charForBoard[1][1] == ' '){
-          char res = (turn == true) ? 'X':'O';
-          charForBoard[1][1] = res ;
-          gameRecord += res + "4";
-          cellPressed(cell4);
-          check();
-       }
+        if (charForBoard[1][1] == ' ') {
+            char res = (turn == true) ? 'X' : 'O';
+            charForBoard[1][1] = res;
+            gameRecord += res + "4";
+            cellPressed(cell4);
+            check();
+        }
         //cellPressed(cell4);
     }
+
     @FXML
     private void cell5Pressed() {
-        if(charForBoard[1][2] == ' '){
-          char res = (turn == true) ? 'X':'O';
-          charForBoard[1][2] = res ;
-          gameRecord += res + "5";
-          cellPressed(cell5);
-          check();
+        if (charForBoard[1][2] == ' ') {
+            char res = (turn == true) ? 'X' : 'O';
+            charForBoard[1][2] = res;
+            gameRecord += res + "5";
+            cellPressed(cell5);
+            check();
 
-       }
+        }
         //cellPressed(cell5);
     }
+
     @FXML
     private void cell6Pressed() {
-        if(charForBoard[2][0] == ' '){
-          char res = (turn == true) ? 'X':'O';
-          charForBoard[2][0] = res ;
-          gameRecord += res + "6";
-          cellPressed(cell6);
-          check();
+        if (charForBoard[2][0] == ' ') {
+            char res = (turn == true) ? 'X' : 'O';
+            charForBoard[2][0] = res;
+            gameRecord += res + "6";
+            cellPressed(cell6);
+            check();
 
-       }
-       // cellPressed(cell6);
+        }
+        // cellPressed(cell6);
     }
+
     @FXML
     private void cell7Pressed() {
-        if(charForBoard[2][1] == ' '){
-          char res = (turn == true) ? 'X':'O';
-          charForBoard[2][1] = res ;
-          gameRecord += res + "7";
-          cellPressed(cell7);
-          check();
+        if (charForBoard[2][1] == ' ') {
+            char res = (turn == true) ? 'X' : 'O';
+            charForBoard[2][1] = res;
+            gameRecord += res + "7";
+            cellPressed(cell7);
+            check();
 
-       }
+        }
         //cellPressed(cell7);
     }
+
     @FXML
     private void cell8Pressed() {
-       // cellPressed(cell8);
-       if(charForBoard[2][2] == ' '){
-          char res = (turn == true) ? 'X':'O';
-          charForBoard[2][2] = res ;
-          gameRecord += res + "8";
-          cellPressed(cell8);
-          check();
+        // cellPressed(cell8);
+        if (charForBoard[2][2] == ' ') {
+            char res = (turn == true) ? 'X' : 'O';
+            charForBoard[2][2] = res;
+            gameRecord += res + "8";
+            cellPressed(cell8);
+            check();
 
-       }
+        }
     }
-    
+
     private void cellPressed(Button cell) {
         addXorO(cell, turn);
         turn = !turn;
-        
+
     }
 
     private void addXorO(Button cell, boolean turn) {
-        
-        if(turn) {
+
+        if (turn) {
             ImageView imageviewX = new ImageView(imageX);
             resize(imageviewX);
             cell.setGraphic(imageviewX);
-        }
-        else {
+        } else {
             ImageView imageviewO = new ImageView(imageO);
             resize(imageviewO);
             cell.setGraphic(imageviewO);
         }
     }
-    
+
     private void resize(ImageView imgView) {
         imgView.setFitWidth(iconSize);
         imgView.setFitHeight(iconSize);
     }
-       
-   public void check(){
-       if(tieGame()){ //el moo4kla hena
-           System.out.println("tieeeeeeeee");
-           System.out.println("GAME RECORD: " + gameRecord);
-           showAlertforTie();
-        }else{
-           // x win
-           System.out.println("GAME RECORD: " + gameRecord);
+
+    public void check() {
+        if (tieGame()) { //el moo4kla hena
+            System.out.println("tieeeeeeeee");
+            System.out.println("GAME RECORD: " + gameRecord);
+            showAlertforTie();
+        } else {
+            // x win
+            System.out.println("GAME RECORD: " + gameRecord);
             checkXWin();
-            System.out.println("x from check method "+ scoreX);
-            
+            System.out.println("x from check method " + scoreX);
+
             // o win
             checkOWin();
-            System.out.println("o from check method "+ scoreO);
+            System.out.println("o from check method " + scoreO);
 
-       }
-       
+        }
+
         // no one win
-        
-       
-   }
-   
-   public boolean checkXWin(){
-       
-       if(charForBoard[0][0]=='X' && charForBoard[0][1]=='X' && charForBoard[0][2]=='X'){
-           
-           scoreX++;
-           System.out.println("X player score is "+scoreX);
-           xWins(cell0,cell1,cell2);
-       }
-       else if(charForBoard[1][0]=='X' && charForBoard[1][1]=='X' && charForBoard[1][2]=='X'){
-           
-           scoreX++;
-           System.out.println("X player score is "+scoreX);
-           xWins(cell3,cell4,cell5);
-       }
-       else if(charForBoard[2][0]=='X' && charForBoard[2][1]=='X' && charForBoard[2][2]=='X'){
-           
-           scoreX++;
-           System.out.println("X player score is "+scoreX);
-           xWins(cell6,cell7,cell8);
-       }
-       else if(charForBoard[0][0]=='X' && charForBoard[1][0]=='X' && charForBoard[2][0]=='X'){
-           
-           scoreX++;
-           System.out.println("X player score is "+scoreX);
-           xWins(cell0,cell3,cell6);
-       }
-       else if(charForBoard[0][1]=='X' && charForBoard[1][1]=='X' && charForBoard[2][1]=='X'){
-           scoreX++;
-           System.out.println("X player score is "+scoreX);
-           xWins(cell1,cell4,cell7);
-       }
-       else if(charForBoard[0][2]=='X' && charForBoard[1][2]=='X' && charForBoard[2][2]=='X'){
-           
-           scoreX++;
-           xWins(cell2,cell5,cell8);
-       }
-       else if(charForBoard[0][0]=='X' && charForBoard[1][1]=='X' && charForBoard[2][2]=='X'){
-           
-           scoreX++;
-           System.out.println("X player score is "+scoreX);
-           xWins(cell0,cell4,cell8);
-       }
-       else if(charForBoard[0][2]=='X' && charForBoard[1][1]=='X' && charForBoard[2][0]=='X'){
-           
-           scoreX++;
-           System.out.println("X player score is "+scoreX);
-           xWins(cell2,cell4,cell6);
-       }
-       return true;
-   }
-   
-   public boolean checkOWin(){
-       
-       if(charForBoard[0][0]=='O' && charForBoard[0][1]=='O' && charForBoard[0][2]=='O'){
-           scoreO++;
-           System.out.println("O player score is "+scoreO);
-           oWins(cell0,cell1,cell2);
-       }
-       else if(charForBoard[1][0]=='O' && charForBoard[1][1]=='O' && charForBoard[1][2]=='O'){
-           
-           scoreO++;
-           System.out.println("O player score is "+scoreO);
-           oWins(cell3,cell4,cell5);
-       }
-       else if(charForBoard[2][0]=='O' && charForBoard[2][1]=='O' && charForBoard[2][2]=='O'){
-           
-           scoreO++;
-           System.out.println("O player score is "+scoreO);
-           oWins(cell6,cell7,cell8);
-       }
-       else if(charForBoard[0][0]=='O' && charForBoard[1][0]=='O' && charForBoard[2][0]=='O'){
-           
-           scoreO++;
-           System.out.println("O player score is "+scoreO);
-           oWins(cell0,cell3,cell6);
-       }
-       else if(charForBoard[0][1]=='O' && charForBoard[1][1]=='O' && charForBoard[2][1]=='O'){
-           
-           scoreO++;
-           oWins(cell1,cell4,cell7);
-       }
-       else if(charForBoard[0][2]=='O' && charForBoard[1][2]=='O' && charForBoard[2][2]=='O'){
-           scoreO++;
-           System.out.println("O player score is "+scoreO);
-           oWins(cell2,cell5,cell8);
-           
-       }
-       else if(charForBoard[0][0]=='O' && charForBoard[1][1]=='O' && charForBoard[2][2]=='O'){
-           scoreO++;
-           System.out.println("O player score is "+scoreO);
-           System.out.println("DIAGONAAAAAAAAAAAAAAL");
-           oWins(cell0,cell4,cell8);
-           
-       }
-       else if(charForBoard[0][2]=='O' && charForBoard[1][1]=='O' && charForBoard[2][0]=='O'){
-           scoreO++;
-           System.out.println("O player score is "+scoreO);
-           oWins(cell2,cell4,cell6);
-           
-       }
-       return true;
-   }
-   
-   public boolean tieGame(){
-       boolean hasEmptyCell = false ;
-       for (int i =0 ;i<3;i++){
-           for(int j =0; j<3; j++){
-               if(charForBoard[i][j] == ' '){
-                   hasEmptyCell =true ;
-                   break;
-               }
-           }
-       }
-       
-       return !(hasEmptyCell);
+    }
+
+    public boolean checkXWin() {
+
+        if (charForBoard[0][0] == 'X' && charForBoard[0][1] == 'X' && charForBoard[0][2] == 'X') {
+
+            scoreX++;
+            System.out.println("X player score is " + scoreX);
+            xWins(cell0, cell1, cell2);
+        } else if (charForBoard[1][0] == 'X' && charForBoard[1][1] == 'X' && charForBoard[1][2] == 'X') {
+
+            scoreX++;
+            System.out.println("X player score is " + scoreX);
+            xWins(cell3, cell4, cell5);
+        } else if (charForBoard[2][0] == 'X' && charForBoard[2][1] == 'X' && charForBoard[2][2] == 'X') {
+
+            scoreX++;
+            System.out.println("X player score is " + scoreX);
+            xWins(cell6, cell7, cell8);
+        } else if (charForBoard[0][0] == 'X' && charForBoard[1][0] == 'X' && charForBoard[2][0] == 'X') {
+
+            scoreX++;
+            System.out.println("X player score is " + scoreX);
+            xWins(cell0, cell3, cell6);
+        } else if (charForBoard[0][1] == 'X' && charForBoard[1][1] == 'X' && charForBoard[2][1] == 'X') {
+            scoreX++;
+            System.out.println("X player score is " + scoreX);
+            xWins(cell1, cell4, cell7);
+        } else if (charForBoard[0][2] == 'X' && charForBoard[1][2] == 'X' && charForBoard[2][2] == 'X') {
+
+            scoreX++;
+            xWins(cell2, cell5, cell8);
+        } else if (charForBoard[0][0] == 'X' && charForBoard[1][1] == 'X' && charForBoard[2][2] == 'X') {
+
+            scoreX++;
+            System.out.println("X player score is " + scoreX);
+            xWins(cell0, cell4, cell8);
+        } else if (charForBoard[0][2] == 'X' && charForBoard[1][1] == 'X' && charForBoard[2][0] == 'X') {
+
+            scoreX++;
+            System.out.println("X player score is " + scoreX);
+            xWins(cell2, cell4, cell6);
+        }
+        return true;
+    }
+
+    public boolean checkOWin() {
+
+        if (charForBoard[0][0] == 'O' && charForBoard[0][1] == 'O' && charForBoard[0][2] == 'O') {
+            scoreO++;
+            System.out.println("O player score is " + scoreO);
+            oWins(cell0, cell1, cell2);
+        } else if (charForBoard[1][0] == 'O' && charForBoard[1][1] == 'O' && charForBoard[1][2] == 'O') {
+
+            scoreO++;
+            System.out.println("O player score is " + scoreO);
+            oWins(cell3, cell4, cell5);
+        } else if (charForBoard[2][0] == 'O' && charForBoard[2][1] == 'O' && charForBoard[2][2] == 'O') {
+
+            scoreO++;
+            System.out.println("O player score is " + scoreO);
+            oWins(cell6, cell7, cell8);
+        } else if (charForBoard[0][0] == 'O' && charForBoard[1][0] == 'O' && charForBoard[2][0] == 'O') {
+
+            scoreO++;
+            System.out.println("O player score is " + scoreO);
+            oWins(cell0, cell3, cell6);
+        } else if (charForBoard[0][1] == 'O' && charForBoard[1][1] == 'O' && charForBoard[2][1] == 'O') {
+
+            scoreO++;
+            oWins(cell1, cell4, cell7);
+        } else if (charForBoard[0][2] == 'O' && charForBoard[1][2] == 'O' && charForBoard[2][2] == 'O') {
+            scoreO++;
+            System.out.println("O player score is " + scoreO);
+            oWins(cell2, cell5, cell8);
+
+        } else if (charForBoard[0][0] == 'O' && charForBoard[1][1] == 'O' && charForBoard[2][2] == 'O') {
+            scoreO++;
+            System.out.println("O player score is " + scoreO);
+            System.out.println("DIAGONAAAAAAAAAAAAAAL");
+            oWins(cell0, cell4, cell8);
+
+        } else if (charForBoard[0][2] == 'O' && charForBoard[1][1] == 'O' && charForBoard[2][0] == 'O') {
+            scoreO++;
+            System.out.println("O player score is " + scoreO);
+            oWins(cell2, cell4, cell6);
+
+        }
+        return true;
+    }
+
+    public boolean tieGame() {
+        boolean hasEmptyCell = false;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (charForBoard[i][j] == ' ') {
+                    hasEmptyCell = true;
+                    break;
+                }
+            }
+        }
+
+        return !(hasEmptyCell);
         //return !(checkXWin() || checkOWin());
-   }
-   
-   public void showAlertforTie(){
-       writeGameRecordToFile();
+    }
+
+    public void showAlertforTie() {
+        writeGameRecordToFile();
         stg = (Stage) cell0.getScene().getWindow();
-        
+
         Alert.AlertType type = Alert.AlertType.WARNING;
         Alert alert = new Alert(type);
 
@@ -394,30 +385,32 @@ public class GameboardController implements Initializable {
         alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
         alert.setHeaderText("Tieee");
         alert.showAndWait();
-   }
-   
-   public void xWins(Button a,Button b, Button c){
-       a.setStyle("-fx-background-color: #ff0000;");
-       b.setStyle("-fx-background-color: #ff0000;");
-       c.setStyle("-fx-background-color: #ff0000;");
-       buttonDisabel();
-       gotToAlert(textx.getText());
-       initializeScores(scoreX, scoreO);
-      //alert(textx.getText());
-      
-   }
-    public void oWins(Button a,Button b, Button c){
+    }
+
+    public void xWins(Button a, Button b, Button c) {
+        a.setStyle("-fx-background-color: #ff0000;");
+        b.setStyle("-fx-background-color: #ff0000;");
+        c.setStyle("-fx-background-color: #ff0000;");
+        buttonDisabel();
+        gotToAlert(textx.getText());
+        initializeScores(scoreX, scoreO);
+        //alert(textx.getText());
+
+    }
+
+    public void oWins(Button a, Button b, Button c) {
         System.out.println("OWINSSSSSSSSSSSSSSSSS");
-       a.setStyle("-fx-background-color: #ff0000;");
-       b.setStyle("-fx-background-color: #ff0000;");
-       c.setStyle("-fx-background-color: #ff0000;");
-       buttonDisabel();
-       gotToAlert(texto.getText());
-       initializeScores(scoreX, scoreO);
-       //showAlert(scoreO);
-      //alert(texto.getText());
-   }
-    public void buttonDisabel(){
+        a.setStyle("-fx-background-color: #ff0000;");
+        b.setStyle("-fx-background-color: #ff0000;");
+        c.setStyle("-fx-background-color: #ff0000;");
+        buttonDisabel();
+        gotToAlert(texto.getText());
+        initializeScores(scoreX, scoreO);
+        //showAlert(scoreO);
+        //alert(texto.getText());
+    }
+
+    public void buttonDisabel() {
         cell0.setDisable(true);
         cell1.setDisable(true);
         cell2.setDisable(true);
@@ -428,61 +421,62 @@ public class GameboardController implements Initializable {
         cell7.setDisable(true);
         cell8.setDisable(true);
     }
-      public void setUesers(String p1,String p2){
-          System.out.println("p1");
-                  
-          textx.setText(p1);
-          texto.setText(p2);
-      }
-      
-       public void setScores(int scoreXplayer, int scoreOplayer){
-          if(checkXWin()){
-              scoreXplayer = scoreX;
-              xScore.setText(String.valueOf(scoreXplayer));
-          }else if(checkOWin()){
-              scoreOplayer = scoreO;
-              oScore.setText(String.valueOf(scoreOplayer));
-          }
-      }
-       
-      private void gotToAlert(String player){
-          System.out.println("ALERTTTTTTTTTTTTT");
-          writeGameRecordToFile();
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
-          Parent root = null;
-          try {
-              root = loader.load();
-              
-          } catch (IOException ex) {
-              //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
-          }
-          Scene scene = new Scene(root);
-          
-          VideoAlertController vc = loader.getController();
-          vc.setWinnerVideo();
-          vc.setWinnerName(player);
-          System.out.println("score x before is "+ scoreX);
-          System.out.println("score o before is "+ scoreO);
-          vc.scoreO = scoreO;
-          vc.scoreX = scoreX;
-          vc.playerX = playerX;
-          vc.playerO = playerO;
-           vc.fxmlName = "gameboard.fxml";
-          System.out.println("score x is "+ scoreX);
-          System.out.println("score o is "+ scoreO);
-          System.out.println("buguyguguy"+scene);
-          stg = (Stage) cell0.getScene().getWindow(); // exceptions
-          System.out.println("helooooooo"+stg);
-          stg.setScene(scene);
-          stg.show();
-      }
-      
-      public void initializeScores(int scoreX, int scoreO){
-          xScore.setText(String.valueOf(scoreX));
-          oScore.setText(String.valueOf(scoreO));
-      }
-      
-      /*private void alert(String p1) {
+
+    public void setUesers(String p1, String p2) {
+        System.out.println("p1");
+
+        textx.setText(p1);
+        texto.setText(p2);
+    }
+
+    public void setScores(int scoreXplayer, int scoreOplayer) {
+        if (checkXWin()) {
+            scoreXplayer = scoreX;
+            xScore.setText(String.valueOf(scoreXplayer));
+        } else if (checkOWin()) {
+            scoreOplayer = scoreO;
+            oScore.setText(String.valueOf(scoreOplayer));
+        }
+    }
+
+    private void gotToAlert(String player) {
+        System.out.println("ALERTTTTTTTTTTTTT");
+        writeGameRecordToFile();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+
+        } catch (IOException ex) {
+            //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene scene = new Scene(root);
+
+        VideoAlertController vc = loader.getController();
+        vc.setWinnerVideo();
+        vc.setWinnerName(player);
+        System.out.println("score x before is " + scoreX);
+        System.out.println("score o before is " + scoreO);
+        vc.scoreO = scoreO;
+        vc.scoreX = scoreX;
+        vc.playerX = playerX;
+        vc.playerO = playerO;
+        vc.fxmlName = "gameboard.fxml";
+        System.out.println("score x is " + scoreX);
+        System.out.println("score o is " + scoreO);
+        System.out.println("buguyguguy" + scene);
+        stg = (Stage) cell0.getScene().getWindow(); // exceptions
+        System.out.println("helooooooo" + stg);
+        stg.setScene(scene);
+        stg.show();
+    }
+
+    public void initializeScores(int scoreX, int scoreO) {
+        xScore.setText(String.valueOf(scoreX));
+        oScore.setText(String.valueOf(scoreO));
+    }
+
+    /*private void alert(String p1) {
             MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
             MediaView mediaView = new MediaView(player);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -499,7 +493,6 @@ public class GameboardController implements Initializable {
             alert.getDialogPane().setPrefSize(600, 800);
             alert.showAndWait();
     }*/
-
     @FXML
     private void didPressedBack(MouseEvent event) throws IOException {
         Stage stage = (Stage) backBtn.getScene().getWindow();
@@ -508,12 +501,12 @@ public class GameboardController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
+
     private void writeGameRecordToFile() {
         File records = new File("Records.txt");
         try {
             FileWriter writer = new FileWriter("Records.txt", true);
-            writer.append(gameRecord + "," + playerX+ " vs " + playerO + "\n");
+            writer.append(gameRecord + "," + playerX + " vs " + playerO + "\n");
             writer.close();
         } catch (IOException ex) {
             Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
