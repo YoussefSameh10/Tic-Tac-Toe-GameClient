@@ -5,6 +5,8 @@
  */
 package xogameclient.services;
 
+import xogameclient.services.responsemodels.ChallengeRequest;
+import xogameclient.services.responsemodels.ChallengeResponse;
 import xogameclient.services.responsemodels.GetOnlinePlayersListResponse;
 import xogameclient.services.responsemodels.LoginResponse;
 import xogameclient.services.responsemodels.Move;
@@ -101,6 +103,29 @@ public class ResponseManager {
                 gotOnlinePlayersList = true;
             }
             return new GetOnlinePlayersListResponse(gotOnlinePlayersList);
+        }
+        
+        if(AvailableActions.ChallengeRequest.getString().equals(parts[0])) {
+            String id1 = parts[1];
+            String id2 = parts[2];
+            String name1 = parts[3];
+            String name2 = parts[4];
+            String score1 = parts[5];
+            String score2 = parts[6];
+            String first = parts[7];
+            return new ChallengeRequest(id1,id2,name1,name2,score1,score2,first);
+        }
+        
+         if(AvailableActions.ChallengeResponse.getString().equals(parts[0])) {
+             String respons = parts[1];
+            String id1 = parts[2];
+            String id2 = parts[3];
+            String name1 = parts[4];
+            String name2 = parts[5];
+            String score1 = parts[6];
+            String score2 = parts[7];
+            String first = parts[8];
+            return new ChallengeResponse(respons,id1,id2,name1,name2,score1,score2,first);
         }
         
         return new UnsupportedAction("unsupported action error");
