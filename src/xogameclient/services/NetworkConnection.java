@@ -141,11 +141,9 @@ public class NetworkConnection {
         } else if (action instanceof GameStatusResponse) {
             manageGameResponse(action);
         } else if(action instanceof ChallengeRequest) {
-            System.out.println("instance of challangeRequestttttttttt");
         
             manageChallengeRequest( action);
         }else if(action instanceof ChallengeResponse) {
-            System.out.println("finalllyyyyyyyyyyyyyyyyyyyyyyyyyyyooooooooooo");
         
             manageChallengeRsponse( action);
         }
@@ -154,7 +152,6 @@ public class NetworkConnection {
     private void manageLogin(ClientActions action) {
         if (((LoginResponse) action).loginSuccess == true) {
             Platform.runLater(() -> {
-                System.out.println("Going to online list");
                 presenter.performSuccessAction();
             });
         } else {
@@ -173,12 +170,9 @@ public class NetworkConnection {
     }
     
     private void manageGettingOnlinePlayersList(ClientActions action) {
-        System.out.println("Managing getting online players list");
         if (((GetOnlinePlayersListResponse) action).isSuccess == true) {
-            System.out.println("True");
             ((OnlineUsersListController) presenter).performSuccessAction();
         } else {
-            System.out.println("False");
            //((OnlineUsersListController) presenter).performFailureAction();
         }
     }
@@ -189,15 +183,12 @@ public class NetworkConnection {
             
             (presenter2).performSuccessAction();
         } else {
-            System.out.println("Did not close server successfully");
             (presenter2).performFailureAction();
         }
     }
 
     private void manageMove(ClientActions action) {
-        System.out.println("in manageMove" + presenter);
        
-         System.out.println("Move Recieved from connection is" +        ((Move) action).getCellNumber());
        MultiplayerGameBoardPresenter pres = (MultiplayerGameBoardPresenter)  presenter ;
            Platform.runLater(() -> {
                    pres.readMoveFromOpponent( ((Move) action).getCellNumber());
@@ -207,9 +198,7 @@ public class NetworkConnection {
     
     private void manageGameResponse(ClientActions action){
         
-          System.out.println("in manageGameResponse" + presenter);
        
-         System.out.println("Game Result Recieved  from connection is" +        ((GameStatusResponse) action).getStatus());
          
        MultiplayerGameBoardPresenter pres = (MultiplayerGameBoardPresenter)  presenter ;
            Platform.runLater(() -> {
@@ -220,7 +209,6 @@ public class NetworkConnection {
     
 
      private void manageChallengeRequest(ClientActions action) {
-         System.out.println("in managrequest functionnnnnnnnnn");
          String id1 = ((ChallengeRequest)action).getId1();
          String id2 = ((ChallengeRequest)action).getId2();
          String name1 = ((ChallengeRequest)action).getName1();
@@ -233,7 +221,6 @@ public class NetworkConnection {
     }
      
       private void manageChallengeRsponse(ClientActions action) {
-         System.out.println("in managrequest finallyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyypppppppjjjjjjjjjjjjjppl");
          String d = ((ChallengeResponse)action).getRespons();
          String name2 = ((ChallengeResponse)action).getName2();
 
@@ -244,10 +231,8 @@ public class NetworkConnection {
          String score1 = ((ChallengeResponse)action).getScore1();
          String score2 = ((ChallengeResponse)action).getScore2();
          String first =  ((ChallengeResponse)action).getFirst();
-             System.out.println("accepttttttttttttttttttt"+id1+id2+name1+score1+first);
          ((OnlineUsersListController) presenter). gotoGamme(id1,  id2,  name1,  name2,score1,score2,first);}
          else{
-             System.out.println("Nottttttttttttttttttaccepttttttttttttttttttttttttttttttt");
               ((OnlineUsersListController) presenter).showrefuseAleart(name2);
               
          }

@@ -81,7 +81,6 @@ public class FXMLDocumentController implements Initializable {
         stage.setResizable(false);
         stage.setTitle("PlayGame");
         stage.show();
-        System.out.println("SerVerrrrrrrrrrrrrrr");
         
         
         
@@ -98,7 +97,6 @@ public class FXMLDocumentController implements Initializable {
 //        stage.setResizable(false);
 //        stage.setTitle("PlayGame");
 //        stage.show();
-//        System.out.println("SerVerrrrrrrrrrrrrrr");
     }
 
     @FXML
