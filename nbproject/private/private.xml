@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/ChallengeResponse.java</file>
+            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/services/NetworkConnection.java</file>
+            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/OnlineUsersListController.java</file>
+            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/services/ResponseManager.java</file>
+            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/OnlineUsersListControllerInterface.java</file>
+            <file>file:/C:/Users/dell/Desktop/java/Tic-Tac-Toe-GameClient/src/xogameclient/services/responsemodels/ChallengeRequest.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -412,7 +412,6 @@ public class AIGameboardController implements Initializable {
               root = loader.load();
               
           } catch (IOException ex) {
-              //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
           }
           Scene scene = new Scene(root);
           
@@ -434,7 +433,6 @@ public class AIGameboardController implements Initializable {
               root = loader.load();
               
           } catch (IOException ex) {
-              //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
           }
           Scene scene = new Scene(root);
           
@@ -455,27 +453,8 @@ public class AIGameboardController implements Initializable {
           System.out.println("helooooooo"+stg);
           stg.setScene(scene);
           stg.show();
-//          MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
-//          MediaView mediaView = new MediaView(player);
-//        Alert alert = new Alert(Alert.AlertType.ERROR);
-//        alert.setTitle("You Win");
-//        alert.setHeaderText("");
-//
-//        Label label = new Label("Congatrions " +p1);
-//        VBox content = new VBox(10, label, mediaView);
-//        content.setAlignment(Pos.CENTER);
-//        alert.getDialogPane().setContent(content);
-//        player.setCycleCount(MediaPlayer.INDEFINITE);
-//        alert.setOnShowing(e -> player.play());
-//        alert.getDialogPane().setPrefSize(600, 600);
-//        alert.showAndWait();
+
     }
-        
-//       
-//       System.out.println("hereeeeeeeee is the problem "+ !((checkOWin() && checkXWin()) && hasEmptyCell));
-//       return !((checkOWin() && checkXWin()) && hasEmptyCell);
-//        //return !(checkXWin() || checkOWin());
-//   }
 
          public void showAlertforTie(){
         stg = (Stage) cell0.getScene().getWindow();
