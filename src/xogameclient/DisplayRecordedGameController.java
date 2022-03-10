@@ -100,7 +100,6 @@ public class DisplayRecordedGameController implements Initializable {
             charForBoard[0][0] = res;
             gameRecord += res + "0";
             cellPressed(cell0);
-            System.out.println(res);
         }
     }
 
@@ -187,7 +186,6 @@ public class DisplayRecordedGameController implements Initializable {
     }
 
     private void parseGameRecord() {
-        System.out.println("Here: " + gameRecord);
 
         Thread th = new Thread() {
             @Override
@@ -197,7 +195,6 @@ public class DisplayRecordedGameController implements Initializable {
                 while (gameRecord.equals("")) {
 
                 }
-                System.out.println("After: " + gameRecord);
                 playerNames = gameRecord.split(",")[1];
                 playerX = playerNames.split("vs")[0];
                 playerO = playerNames.split("vs")[1];
@@ -277,7 +274,6 @@ public class DisplayRecordedGameController implements Initializable {
     }
 
     public void setUesers(String p1, String p2) {
-        System.out.println("p1");
 
         textx.setText(p1);
         texto.setText(p2);

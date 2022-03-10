@@ -96,11 +96,9 @@ public class RecordsController implements Initializable {
       while (myReader.hasNextLine()) {
         String record = myReader.nextLine();
         records.add(record.split(",")[1]);
-        System.out.println(record);
       }
       myReader.close();
     } catch (FileNotFoundException e) {
-      System.out.println("An error occurred.");
       e.printStackTrace();
     }
         configureListView();
@@ -108,7 +106,6 @@ public class RecordsController implements Initializable {
     
     private void configureListView(){
         centerList.setItems(records);
-        System.out.println("RRRRRRRRRRR");
         centerList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //onlineuserLV.setStyle("-fx-background-color: transparent;");
         centerList.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
@@ -125,14 +122,12 @@ public class RecordsController implements Initializable {
                     int requiredLineNumber = centerList.getSelectionModel().getSelectedIndex();
                     int counter = 0;
                     
-                    System.out.println("clicked on " + centerList.getSelectionModel().getSelectedIndex());
                     File recordsFile = new File("Records.txt");
                     Scanner myReader = new Scanner(recordsFile);
                     while (myReader.hasNextLine() && counter <= requiredLineNumber) {
                         record = myReader.nextLine();
                         counter++;
                     }
-                    System.out.println("The record: "+record);
                     gotoDisplayGameScreen();
                     myReader.close();
                 } catch (FileNotFoundException ex) {
@@ -144,7 +139,6 @@ public class RecordsController implements Initializable {
     
     private void gotoDisplayGameScreen() {
         try {
-            System.out.println("Sent Record is: "+record);
             FXMLLoader Loader = new FXMLLoader();
             Loader.setLocation(getClass().getResource("DisplayRecordedGame.fxml"));
             Parent controller =  Loader.load();

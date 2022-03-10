@@ -144,7 +144,6 @@ public class RegisterController implements Initializable, RegisterControllerInte
     
     
     private void shouldEnableButton() {
-        System.out.println("ENABLE BUTTON");
         if(usernameTxt.getText().isEmpty() ||
             passwordTxt.getText().isEmpty() ||
             confirmTxt.getText().isEmpty() ||

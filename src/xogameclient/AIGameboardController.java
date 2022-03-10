@@ -114,7 +114,6 @@ public class AIGameboardController implements Initializable {
             charForBoard[0][0] = res;
             gameRecord += res + "0";
             cellPressed(cell0);
-            System.out.println(res);
         }
 
     }
@@ -211,7 +210,6 @@ public class AIGameboardController implements Initializable {
         }
         turn = !turn;
         int[] move = NewMiniMax.getBestMove(charForBoard, 6);
-        System.out.println("X= " + move[0] + ", Y= " + move[1]);
         if (turn) {
             addAIMove(move[0], move[1]);
         }
@@ -420,7 +418,6 @@ public class AIGameboardController implements Initializable {
         cell8.setDisable(true);
     }
       public void setUesers(String p1){
-          System.out.println("p1");
          
           texto.setText(p1);
       }
@@ -441,7 +438,6 @@ public class AIGameboardController implements Initializable {
           vc.setWinnerName(p1);
           vc.playerO = texto.getText();
           stg = (Stage) cell0.getScene().getWindow(); // exceptions
-          System.out.println("helooooooo"+stg);
           stg.setScene(scene);
           stg.show();
         }
@@ -471,7 +467,6 @@ public class AIGameboardController implements Initializable {
          // System.out.println("score o is "+ scoreO);
          // System.out.println("buguyguguy"+scene);
           stg = (Stage) cell0.getScene().getWindow(); // exceptions
-          System.out.println("helooooooo"+stg);
           stg.setScene(scene);
           stg.show();
 
@@ -503,7 +498,6 @@ public class AIGameboardController implements Initializable {
 
     private void writeGameRecordToFile() {
         if (permitRecord) {
-            System.out.println("Entered recording method");
             File records = new File("Records.txt");
             try {
                 FileWriter writer = new FileWriter("Records.txt", true);

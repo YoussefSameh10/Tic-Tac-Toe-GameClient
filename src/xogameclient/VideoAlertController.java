@@ -97,13 +97,11 @@ public class VideoAlertController implements Initializable {
               mediaPlayer.stop();
               Scene scene = new Scene(root);
               AIGameboardController vc = loader.getController();
-             // System.out.println("score x" + scoreX);
-              //System.out.println("score o" + scoreO);
+    
               //vc.setScores(scoreX, scoreO);
              // vc.scoreO = scoreO;
              // vc.scoreX = scoreX;
              // vc.playerX = playerX;
-               System.out.println("O is : " +playerO);
               vc.texto.setText(playerO);
              // vc.initializeScores(scoreX, scoreO);
               vc.setUesers( playerO);
@@ -114,10 +112,6 @@ public class VideoAlertController implements Initializable {
               
         }
         if (fxmlName.equalsIgnoreCase("gameboard.fxml")){
-            System.out.println(scoreX);
-            System.out.println(scoreO);
-            System.out.println("X is : " +playerX);
-            System.out.println("O is : " +playerO);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gameboard.fxml"));
               Parent root = null;
               try {
@@ -128,8 +122,6 @@ public class VideoAlertController implements Initializable {
             mediaPlayer.stop();
             Scene scene = new Scene(root);
             GameboardController vc = loader.getController();
-            System.out.println("score x" + scoreX);
-            System.out.println("score o" + scoreO);
             //vc.setScores(scoreX, scoreO);
             vc.scoreO = scoreO;
             vc.scoreX = scoreX;
@@ -138,7 +130,6 @@ public class VideoAlertController implements Initializable {
             vc.initializeScores(scoreX, scoreO);
             vc.setUesers(playerX, playerO);
             Stage stage =(Stage)reloadImg.getScene().getWindow();
-            System.out.println("ihguyft" + stage);
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();

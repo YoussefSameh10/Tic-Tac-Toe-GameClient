@@ -37,7 +37,6 @@ public class ResponseManager {
     
     public ClientActions parse(String msg) { 
         String[] parts;
-        System.out.println("FROM CLOSE PARSE"+msg);
         parts = msg.split(",");
         
         if(AvailableActions.RegisterResponse.getString().equals(parts[0])) {
@@ -52,7 +51,6 @@ public class ResponseManager {
             return new RegisterResponse(isSuccess);
         }
         if(AvailableActions.LoginResponse.getString().equals(parts[0])) {
-            System.out.println("Did enter login response");
             String result = parts[1];
             int userId = Integer.parseInt(parts[2]);
             String userName = parts[3];
@@ -68,22 +66,18 @@ public class ResponseManager {
             return new LoginResponse(userId , userName , score , loginSuccess);
         }
         if(AvailableActions.Move.getString().equals(parts[0])) {
-            System.out.println("Did recieve move ");
             int playerOneId = Integer.parseInt(parts[1]) ;
             int playerTwoId = Integer.parseInt(parts[2]) ;
             int  cell = Integer.parseInt(parts[3]) ;
-            System.out.println("the dequed cell number is " + cell);
             return new Move(cell , playerTwoId, playerOneId);
         }
         
             if(AvailableActions.GameResult.getString().equals(parts[0])) {
-            System.out.println("Did recieve Result ");
             String status = parts[1] ;
             BoardStatus position = BoardStatus.valueOf(parts[2]) ;
             return new GameStatusResponse(position, status);
         }
         if(AvailableActions.ServerClose.getString().equals(parts[0])) {
-            System.out.println("Did close server");
             String result = parts[1];
             boolean isClose;
             if(result.equals("Success")) {
@@ -96,7 +90,6 @@ public class ResponseManager {
         }
         
         if(AvailableActions.GetOnlinePlayersListResponse.getString().equals(parts[0])) {
-            System.out.println("Did enter get online players response");
             String result = parts[1];
             boolean gotOnlinePlayersList = false;
             if(!result.equals("")) {

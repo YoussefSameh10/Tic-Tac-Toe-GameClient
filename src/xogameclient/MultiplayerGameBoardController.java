@@ -124,7 +124,6 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 
     @FXML
     private void cell6Pressed() {
-        System.out.println("Pressed 6");
         addXorO(cell6);
 
         presenter.playMove(6);
@@ -133,7 +132,6 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 
     @FXML
     private void cell7Pressed() {
-        System.out.println("Pressed 7");
         addXorO(cell7);
         presenter.playMove(7);
 
@@ -148,8 +146,6 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
     }
 
     private void addXorO(Button cell) {
-        System.out.println("PRESSED");
-        System.out.println("My turn = " + presenter.isThatMyTurn());
         if (presenter.isThatMyTurn()) {
             ImageView imageviewX = new ImageView(imageX);
             resize(imageviewX);
@@ -237,7 +233,6 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         // System.out.println("score o is "+ scoreO);
         // System.out.println("buguyguguy"+scene);
         stg = (Stage) cell0.getScene().getWindow(); // exceptions
-        System.out.println("helooooooo" + stg);
         stg.setScene(scene);
         stg.show();
 
@@ -337,14 +332,11 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 
         switch (status) {
             case "Win":
-                System.out.println("Controller will show celebration at" + position);
 
                 break;
             case "Lose":
-                System.out.println("Controller will show saddness at" + position);
                 break;
             default:
-                System.out.println("Controller will show n2deha mofawdat ya msel7y" + position);
                 break;
         }
 

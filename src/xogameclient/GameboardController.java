@@ -119,7 +119,6 @@ public class GameboardController implements Initializable {
             charForBoard[0][0] = res;
             gameRecord += res + "0";
             cellPressed(cell0);
-            System.out.println(res);
             check();
         }
     }
@@ -251,18 +250,13 @@ public class GameboardController implements Initializable {
 
     public void check() {
         if (tieGame()) { //el moo4kla hena
-            System.out.println("tieeeeeeeee");
-            System.out.println("GAME RECORD: " + gameRecord);
             showAlertforTie();
         } else {
             // x win
-            System.out.println("GAME RECORD: " + gameRecord);
             checkXWin();
-            System.out.println("x from check method " + scoreX);
 
             // o win
             checkOWin();
-            System.out.println("o from check method " + scoreO);
 
         }
 
@@ -274,26 +268,21 @@ public class GameboardController implements Initializable {
         if (charForBoard[0][0] == 'X' && charForBoard[0][1] == 'X' && charForBoard[0][2] == 'X') {
 
             scoreX++;
-            System.out.println("X player score is " + scoreX);
             xWins(cell0, cell1, cell2);
         } else if (charForBoard[1][0] == 'X' && charForBoard[1][1] == 'X' && charForBoard[1][2] == 'X') {
 
             scoreX++;
-            System.out.println("X player score is " + scoreX);
             xWins(cell3, cell4, cell5);
         } else if (charForBoard[2][0] == 'X' && charForBoard[2][1] == 'X' && charForBoard[2][2] == 'X') {
 
             scoreX++;
-            System.out.println("X player score is " + scoreX);
             xWins(cell6, cell7, cell8);
         } else if (charForBoard[0][0] == 'X' && charForBoard[1][0] == 'X' && charForBoard[2][0] == 'X') {
 
             scoreX++;
-            System.out.println("X player score is " + scoreX);
             xWins(cell0, cell3, cell6);
         } else if (charForBoard[0][1] == 'X' && charForBoard[1][1] == 'X' && charForBoard[2][1] == 'X') {
             scoreX++;
-            System.out.println("X player score is " + scoreX);
             xWins(cell1, cell4, cell7);
         } else if (charForBoard[0][2] == 'X' && charForBoard[1][2] == 'X' && charForBoard[2][2] == 'X') {
 
@@ -302,12 +291,10 @@ public class GameboardController implements Initializable {
         } else if (charForBoard[0][0] == 'X' && charForBoard[1][1] == 'X' && charForBoard[2][2] == 'X') {
 
             scoreX++;
-            System.out.println("X player score is " + scoreX);
             xWins(cell0, cell4, cell8);
         } else if (charForBoard[0][2] == 'X' && charForBoard[1][1] == 'X' && charForBoard[2][0] == 'X') {
 
             scoreX++;
-            System.out.println("X player score is " + scoreX);
             xWins(cell2, cell4, cell6);
         }
         return true;
@@ -317,22 +304,18 @@ public class GameboardController implements Initializable {
 
         if (charForBoard[0][0] == 'O' && charForBoard[0][1] == 'O' && charForBoard[0][2] == 'O') {
             scoreO++;
-            System.out.println("O player score is " + scoreO);
             oWins(cell0, cell1, cell2);
         } else if (charForBoard[1][0] == 'O' && charForBoard[1][1] == 'O' && charForBoard[1][2] == 'O') {
 
             scoreO++;
-            System.out.println("O player score is " + scoreO);
             oWins(cell3, cell4, cell5);
         } else if (charForBoard[2][0] == 'O' && charForBoard[2][1] == 'O' && charForBoard[2][2] == 'O') {
 
             scoreO++;
-            System.out.println("O player score is " + scoreO);
             oWins(cell6, cell7, cell8);
         } else if (charForBoard[0][0] == 'O' && charForBoard[1][0] == 'O' && charForBoard[2][0] == 'O') {
 
             scoreO++;
-            System.out.println("O player score is " + scoreO);
             oWins(cell0, cell3, cell6);
         } else if (charForBoard[0][1] == 'O' && charForBoard[1][1] == 'O' && charForBoard[2][1] == 'O') {
 
@@ -340,18 +323,14 @@ public class GameboardController implements Initializable {
             oWins(cell1, cell4, cell7);
         } else if (charForBoard[0][2] == 'O' && charForBoard[1][2] == 'O' && charForBoard[2][2] == 'O') {
             scoreO++;
-            System.out.println("O player score is " + scoreO);
             oWins(cell2, cell5, cell8);
 
         } else if (charForBoard[0][0] == 'O' && charForBoard[1][1] == 'O' && charForBoard[2][2] == 'O') {
             scoreO++;
-            System.out.println("O player score is " + scoreO);
-            System.out.println("DIAGONAAAAAAAAAAAAAAL");
             oWins(cell0, cell4, cell8);
 
         } else if (charForBoard[0][2] == 'O' && charForBoard[1][1] == 'O' && charForBoard[2][0] == 'O') {
             scoreO++;
-            System.out.println("O player score is " + scoreO);
             oWins(cell2, cell4, cell6);
 
         }
@@ -400,7 +379,6 @@ public class GameboardController implements Initializable {
     }
 
     public void oWins(Button a, Button b, Button c) {
-        System.out.println("OWINSSSSSSSSSSSSSSSSS");
         a.setStyle("-fx-background-color: #ff0000;");
         b.setStyle("-fx-background-color: #ff0000;");
         c.setStyle("-fx-background-color: #ff0000;");
@@ -424,7 +402,6 @@ public class GameboardController implements Initializable {
     }
 
     public void setUesers(String p1, String p2) {
-        System.out.println("p1");
 
         textx.setText(p1);
         texto.setText(p2);
@@ -441,7 +418,6 @@ public class GameboardController implements Initializable {
     }
 
     private void gotToAlert(String player) {
-        System.out.println("ALERTTTTTTTTTTTTT");
         writeGameRecordToFile();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
         Parent root = null;
@@ -456,18 +432,12 @@ public class GameboardController implements Initializable {
         VideoAlertController vc = loader.getController();
         vc.setWinnerVideo();
         vc.setWinnerName(player);
-        System.out.println("score x before is " + scoreX);
-        System.out.println("score o before is " + scoreO);
         vc.scoreO = scoreO;
         vc.scoreX = scoreX;
         vc.playerX = playerX;
         vc.playerO = playerO;
         vc.fxmlName = "gameboard.fxml";
-        System.out.println("score x is " + scoreX);
-        System.out.println("score o is " + scoreO);
-        System.out.println("buguyguguy" + scene);
         stg = (Stage) cell0.getScene().getWindow(); // exceptions
-        System.out.println("helooooooo" + stg);
         stg.setScene(scene);
         stg.show();
     }

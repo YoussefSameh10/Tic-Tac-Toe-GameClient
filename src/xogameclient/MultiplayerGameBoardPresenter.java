@@ -61,7 +61,6 @@ public class MultiplayerGameBoardPresenter implements Presenters {
             ps = networkConnection.getPrintStream();
             
         } catch (IOException ex) {
-            System.out.println("Cannot initialize presenter");
             Logger.getLogger(MultiplayerGameBoardPresenter.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -95,7 +94,6 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     }
     
     public void setPresenter() {
-        System.out.println("PRESENTER SETTED TO MULTI");
         networkConnection.setPresenter(this);
     }
     
@@ -113,11 +111,9 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     
     @Override
     public void performSuccessAction() {
-        System.out.println("YA LEEEEEEEEEEEEEEEEEEL");
     }
     
     @Override
     public void performFailureAction() {
-        System.out.println("YA LAHWYYYYYY");
     }
 }
