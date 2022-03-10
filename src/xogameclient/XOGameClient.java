@@ -37,7 +37,7 @@ public class XOGameClient extends Application {
     @Override
     public void init() throws Exception {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        NetworkConnection networkConnection = NetworkConnection.getInstance();
+        //NetworkConnection networkConnection = NetworkConnection.getInstance();
     }
     
     

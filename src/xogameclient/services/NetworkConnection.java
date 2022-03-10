@@ -59,10 +59,9 @@ public class NetworkConnection {
 
     public static NetworkConnection getInstance() throws IOException {
         if (instance == null) {
-            return new NetworkConnection();
-        } else {
-            return instance;
-        }
+            instance = new NetworkConnection();
+        } 
+        return instance;
     }
 
     private void startThread() {
@@ -76,7 +75,7 @@ public class NetworkConnection {
                         manage();
                     }
                 } catch (IOException ex) {
-                    Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
         }.start();
