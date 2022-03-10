@@ -93,7 +93,11 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     @Override
     public void gotoGamme(String id1, String id2, String name1, String name2, String score1, String score2, String first) {
         Platform.runLater(() -> {
-            navigateToGameScreen(id1, id2, name1, name2, score1, score2, "false");
+            int idd1 = Integer.parseInt(id1);
+            int idd2 = Integer.parseInt(id2);
+            boolean b1 = Boolean.parseBoolean(first);
+            System.out.println("@go to Game id1 = "  + idd1 +" id2 " + idd2 + " is UI Disabled = "+ b1);
+            navigateToGameScreen(name1, name2, idd1, idd2, 0, 0, b1);
         });
     }
     
@@ -231,13 +235,17 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             ps.println("ChallengeResponse,accept," + id1 + "," + id2);
-            navigateToGameScreen(id1, id2, name1, name2, score1, score2, "true");
+            
+          int idd1 = Integer.parseInt(id1);
+            int idd2 = Integer.parseInt(id2);
+            System.out.println("@Confirm  id1 = "  + idd1 +" id2 " + idd2 + " is UI Disabled = "+ true);
+            navigateToGameScreen(name1, name2, idd2, idd1, 0, 0, true);
         } else {
             ps.println("ChallengeResponse,notAccept," + id1 + "," + id2);
         }
     }
     
-    public void navigateToGameScreen(String id1, String id2, String name1, String name2, String score1, String score2, String first) {
+    public void navigateToGameScreen( String name1, String name2,int id1, int id2, int score1, int score2, boolean isUiDisabled) {
         
         try {
             Stage stage = (Stage) ((Node) rightImg).getScene().getWindow();
@@ -245,8 +253,8 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             Parent gameScene = loader.load();
             MultiplayerGameBoardController controller = (MultiplayerGameBoardController) loader.getController();
             
-            MultiplayerGameBoardPresenter boardPresenter = new MultiplayerGameBoardPresenter(name1, name2, Integer.parseInt(id1), Integer.parseInt(id2), Integer.parseInt(score1), Integer.parseInt(id2), Boolean.getBoolean(first));
-            controller.setButtonsDisabled(Boolean.getBoolean(first));//false if you are the game initiative
+            MultiplayerGameBoardPresenter boardPresenter = new MultiplayerGameBoardPresenter(name1, name2, id1, id2,score1, score2, isUiDisabled);
+            controller.setButtonsDisabled(isUiDisabled);//false if you are the game initiative
             controller.presenter = boardPresenter;
             boardPresenter.multiPlayerGameController = controller;
             NetworkConnection.getInstance().setPresenter(boardPresenter);
