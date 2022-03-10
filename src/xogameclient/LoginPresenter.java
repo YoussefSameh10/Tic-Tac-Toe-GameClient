@@ -60,5 +60,4 @@ public class LoginPresenter implements LoginPresenterInterface, Presenters{
     }
     
     
-    
 }
