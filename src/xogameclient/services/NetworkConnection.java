@@ -80,7 +80,7 @@ public class NetworkConnection {
     public static NetworkConnection getInstance() throws IOException {
         if (instance == null) {
             instance = new NetworkConnection();
-        }
+        } 
         return instance;
     }
 

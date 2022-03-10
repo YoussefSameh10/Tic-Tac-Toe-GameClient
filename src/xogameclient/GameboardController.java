@@ -99,6 +99,7 @@ public class GameboardController implements Initializable {
     int scoreX, scoreO;
     String playerX, playerO;
     Stage stg;
+    boolean permitRecord;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -503,13 +504,16 @@ public class GameboardController implements Initializable {
     }
 
     private void writeGameRecordToFile() {
-        File records = new File("Records.txt");
-        try {
-            FileWriter writer = new FileWriter("Records.txt", true);
-            writer.append(gameRecord + "," + playerX + " vs " + playerO + "\n");
-            writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
+        if (permitRecord) {
+            File records = new File("Records.txt");
+            try {
+                FileWriter writer = new FileWriter("Records.txt", true);
+                writer.append(gameRecord + "," + playerX + " vs " + playerO + "\n");
+                writer.close();
+            } catch (IOException ex) {
+                Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }
 }
