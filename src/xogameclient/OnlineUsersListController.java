@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -56,15 +57,14 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
 
 //    private ImageView BGImage;
 //    private ListView<String> onlineuserLV;
-
     /**
      * Initializes the controller class.
      */
     /*
     ObservableList<String> names = FXCollections.observableArrayList(
           "Sandra George", "Tasnim Hatem", "Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr","Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr","Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr");
-    */ 
-      Stage stg;
+     */
+    Stage stg;
     @FXML
     private BorderPane OUBorderPane;
     @FXML
@@ -81,9 +81,9 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     private AnchorPane rightAnchor;
     @FXML
     private ImageView rightImg;
-    
-    private ArrayList<Pair<String, Integer> > onlinePlayers = new ArrayList<Pair<String, Integer> >();
-    
+
+    private ArrayList<Pair<String, Integer>> onlinePlayers = new ArrayList<Pair<String, Integer>>();
+
     private String currentUsername;
     private NetworkConnection networkConnection;
     private DataInputStream dis;
@@ -91,60 +91,71 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     private ResponseManager responseManager;
 
     @Override
-    public void gotoGamme(String id1, String id2, String name1, String name2,String score1,String score2,String first) {
-        
-         // try {
-              System.out.println("gotoGammmmmmmmmmmmmmmmmmmmmmmmmm");
-//              Stage stage = (Stage)OUTopImg.getScene().getWindow();
-//              Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("MultiplayerGameBoard.fxml"));
-//              Scene scene = new Scene(onlineUsersScene);
-//              stage.setResizable(false);
-//              stage.setScene(scene);
-//              stage.setTitle("Online Users");
-//              stage.show();
-      //    } catch (IOException ex) {
-           //   Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
-         // }
+    public void gotoGamme(String id1, String id2, String name1, String name2, String score1, String score2, String first) {
+
+        Platform.runLater(() -> {
+            try {
+                Stage stage = (Stage) ((Node) rightImg).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiplayerGameBoard.fxml"));
+                Parent gameScene = loader.load();
+                MultiplayerGameBoardController controller = (MultiplayerGameBoardController) loader.getController();
+                
+                
+                MultiplayerGameBoardPresenter boardPresenter = new MultiplayerGameBoardPresenter(name1, name2, Integer.parseInt(id1), Integer.parseInt(id2), Integer.parseInt(score1), Integer.parseInt(id2), Boolean.getBoolean(first));
+                controller.setButtonsDisabled(Boolean.getBoolean(first));//false if you are the game initiative
+                System.out.println("THE PRESENTER VALUE CREATED = "+ boardPresenter.getPlayerOneName());
+                controller.presenter = boardPresenter;
+                boardPresenter.multiPlayerGameController = controller;
+                NetworkConnection.getInstance().setPresenter(boardPresenter);
+                Scene scene = new Scene(gameScene);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.setTitle("PlayGame");
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
+
     }
 
     @Override
     public void showrefuseAleart(String name) {
-        Platform.runLater(() ->{  
+        Platform.runLater(() -> {
             stg = (Stage) leftImg.getScene().getWindow();
-        
-        Alert.AlertType type = Alert.AlertType.WARNING;
-        Alert alert = new Alert(type);
 
-        alert.initModality(Modality.WINDOW_MODAL);
-        alert.initOwner(stg);
-        alert.setTitle("Oopps");
-        alert.getDialogPane().setContentText("player "+name+" did not accept your Request");
-        alert.showAndWait();
+            Alert.AlertType type = Alert.AlertType.WARNING;
+            Alert alert = new Alert(type);
+
+            alert.initModality(Modality.WINDOW_MODAL);
+            alert.initOwner(stg);
+            alert.setTitle("Oopps");
+            alert.getDialogPane().setContentText("player " + name + " did not accept your Request");
+            alert.showAndWait();
         });
-        
+
     }
 
-  
+    public class UsersCustomCell extends ListCell<String> {
 
-    
-    public class UsersCustomCell extends ListCell<String>{
-        public UsersCustomCell(){
-            
+        public UsersCustomCell() {
+
         }
 
         @Override
         protected void updateItem(String item, boolean empty) {
             super.updateItem(item, empty); //To change body of generated methods, choose Tools | Templates.
-            
-            if(item != null){
+
+            if (item != null) {
                 setText(item);
                 setFont(new Font("Gaegu", 25));
                 setTextFill(Color.BLACK);
             }
         }
-        
-        
+
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
@@ -155,36 +166,35 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             ps = networkConnection.getPrintStream();
             networkConnection.setPresenter(this);
             ps.println("GetOnlinePlayersList");
-            
-        } 
-        catch (IOException ex) {
+
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
-         centerList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        centerList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-        @Override
-        public void handle(MouseEvent event) {
-           String  name = centerList.getSelectionModel().getSelectedItem();
-            System.out.println("clicked on " +name );
-            int index = centerList.getSelectionModel().getSelectedIndex();
-            int id = onlinePlayers.get(index).getValue();
-            // need  my name 
-            ps.println("ChallengeRequest,"+"1,"+id);
-        }
-    });
-    }    
-    
+            @Override
+            public void handle(MouseEvent event) {
+                String name = centerList.getSelectionModel().getSelectedItem();
+                System.out.println("clicked on " + name);
+                int index = centerList.getSelectionModel().getSelectedIndex();
+                int id = onlinePlayers.get(index).getValue();
+                // need  my name 
+                ps.println("ChallengeRequest," + "1," + id);
+            }
+        });
+    }
+
 //    private void configureUI() {
 //        Image image = new Image(getClass().getResource("listAssets/BG.jpg").toExternalForm());
 //        BGImage.setImage(image);
 //    }
-    private void configureListView(){
-       
+    private void configureListView() {
+
         System.out.println("Configure List View Function !!!");
-        for (int i=0 ; i<onlinePlayers.size() ; i++)
-        {
-            if (!onlinePlayers.get(i).getKey().equals(currentUsername))
+        for (int i = 0; i < onlinePlayers.size(); i++) {
+            if (!onlinePlayers.get(i).getKey().equals(currentUsername)) {
                 centerList.getItems().add(onlinePlayers.get(i).getKey());
+            }
         }
         centerList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         //onlineuserLV.setStyle("-fx-background-color: transparent;");
@@ -195,72 +205,67 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             }
         });
     }
-    
-    public String[] parseServerResponse(String msg)
-    {
+
+    public String[] parseServerResponse(String msg) {
         String[] parts = msg.split(",");
         return parts;
     }
-    
-    public void setCurrentUsername(String _username)
-    {
+
+    public void setCurrentUsername(String _username) {
         System.out.println("Player username sent: " + _username);
         currentUsername = _username;
     }
-    
-    
+
     @Override
     public void performSuccessAction() {
         String serverResponse = networkConnection.getResponse();
         System.out.println("This is the server response from getting online players " + serverResponse);
         String[] parsedResponse = serverResponse.split(",");
         String[] allUsers = parsedResponse[1].split(" ");
-        for (int i=0 ; i<allUsers.length ; i++)
-        {
-            
+        for (int i = 0; i < allUsers.length; i++) {
+
             String[] parsedPlayer = allUsers[i].split(":");
             String currentPlayerUsername = parsedPlayer[0];
             Integer currentPlayerID = Integer.parseInt(parsedPlayer[1]);
-            System.out.println("men null"+currentUsername+currentPlayerUsername);
+            System.out.println("men null" + currentUsername + currentPlayerUsername);
             // currentUsername sahat null
-            if (!currentUsername.equals(currentPlayerUsername))
-            {
-                onlinePlayers.add(new Pair<String, Integer>(currentPlayerUsername, currentPlayerID) );
+            if (!currentUsername.equals(currentPlayerUsername)) {
+                onlinePlayers.add(new Pair<String, Integer>(currentPlayerUsername, currentPlayerID));
             }
         }
-        
+
         configureListView();
         System.out.println("There are " + onlinePlayers.size() + " online players in the server...");
     }
-      @Override
-    public void showAleart(String id1, String id2, String name1, String name2 ,String score1,String score2,String first) {
-         System.out.println("shoalerttttttttttttttrrrrrrrrrrrrrrrrrrrrrrkkkkkkkkkkkkk");
-        Platform.runLater(() ->{  
-             Confirem(id1,  id2,  name1,  name2,score1,score2);
+
+    @Override
+    public void showAleart(String id1, String id2, String name1, String name2, String score1, String score2, String first) {
+        System.out.println("shoalerttttttttttttttrrrrrrrrrrrrrrrrrrrrrrkkkkkkkkkkkkk");
+        Platform.runLater(() -> {
+            Confirem(id1, id2, name1, name2, score1, score2);
         });
     }
 
     @Override
     public void performFailureAction() {
-       // System.out.println("Failed to get online players list !!");
-       
-       
+        // System.out.println("Failed to get online players list !!");
+
     }
-    
-    public void Confirem(String id1, String id2, String name1, String name2,String score1,String score2) {
+
+    public void Confirem(String id1, String id2, String name1, String name2, String score1, String score2) {
         System.out.println("Alllllllllllllltrrrwwwwwwwwwwwwwwwwwwwww");
-        System.out.println("data of two playerrs is: "+id1+id2+name1+name2);
-       
+        System.out.println("data of two playerrs is: " + id1 + id2 + name1 + name2);
+
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("CONFIRMATION");
         alert.setHeaderText("CONFIRMATION");
-        alert.setContentText(" Would you Play with "+name1);
-     
+        alert.setContentText(" Would you Play with " + name1);
+
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             try {
-                ps.println("ChallengeResponse,accept,"+id1+","+id2);
-                Stage stage = (Stage)rightImg.getScene().getWindow();
+                ps.println("ChallengeResponse,accept," + id1 + "," + id2);
+                Stage stage = (Stage) rightImg.getScene().getWindow();
                 Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("MultiplayerGameBoard.fxml"));
                 Scene scene = new Scene(onlineUsersScene);
                 stage.setResizable(false);
@@ -271,8 +276,8 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
                 Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-             ps.println("ChallengeResponse,notAccept,"+id1+","+id2);
+            ps.println("ChallengeResponse,notAccept," + id1 + "," + id2);
         }
     }
-    
+
 }

@@ -122,29 +122,6 @@ public class LoginController implements Initializable, LoginControllerInterface 
             stage.setResizable(false);
             stage.setTitle("List Of Online Users");
             stage.show();
-
-
-    /*   Stage stage = (Stage) ((Node)loginBtn).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiplayerGameBoard.fxml"));
-        Parent registerScene = loader.load();
-        MultiplayerGameBoardController controller = (MultiplayerGameBoardController)loader.getController();
-        
-       MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2",1,2 , 0, 0, false);
-        controller.setButtonsDisabled(false);//false if you are the game initiative
-        
-//        MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2",1,2 , 0, 0, true);
-//        controller.setButtonsDisabled(true);//false if you are the game initiative
-        controller.presenter = boardPresenter ;
-        boardPresenter.multiPlayerGameController = controller;
-        NetworkConnection.getInstance().setPresenter(boardPresenter);
-        Scene scene = new Scene(registerScene);
-        //scene.getStylesheets().add("onlineuserslist.css");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("PlayGame");
-        stage.show();
-        System.out.println("SerVerrrrrrrrrrrrrrr");*/
-
         } catch (IOException ex) {
             ex.printStackTrace();
             showLoginErrorAlert();
