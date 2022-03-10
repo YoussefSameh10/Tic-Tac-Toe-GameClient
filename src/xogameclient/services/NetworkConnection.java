@@ -34,7 +34,7 @@ public class NetworkConnection {
     private String response;
     ResponseManager responseManager;
     private Presenters presenter;
-    private Presenters presenter2;
+    private XOGameClient presenter2;
     ClientActions action;
 
     public void setPresenter(Presenters presenter) {
@@ -42,7 +42,7 @@ public class NetworkConnection {
         this.presenter = presenter;
     }
     
-    public void setPresenter2(Presenters presenter2){
+    public void setPresenter2(XOGameClient presenter2){
         this.presenter2 = presenter2;
     }
 
@@ -80,21 +80,16 @@ public class NetworkConnection {
             public void run() {
                 try {
                     while ((server.isConnected())) {
-                        if(server.isConnected()){
-                            response = dis.readLine();
-                            System.out.println("the response from close is: "+response);
-                            manage();
-                        }else{
-                            System.out.println("CAN'T READ ANYTHING FROM SERVER! IT'S CLOSED");
-                            try {
-                                server.close();
-                                dis.close();
-                                ps.close();
-                                stop();
-                            } catch (IOException ex1) {
-                                Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex1);
-                            }
-                        }
+                        response = dis.readLine();
+                        System.out.println("the response from close is: "+response);
+                        manage();
+                    }try {
+                        server.close();
+                        dis.close();
+                        ps.close();
+                        stop();
+                    } catch (IOException ex1) {
+                        Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex1);
                     }
                 } catch (IOException ex) {
                     try {
@@ -152,10 +147,10 @@ public class NetworkConnection {
     private void manageServerClose(ClientActions action) {
         if (((ServerClose) action).isClose == true) {
             
-            ((XOGameClient) presenter2).performSuccessAction();
+            (presenter2).performSuccessAction();
         } else {
             System.out.println("Did not close server successfully");
-            ((XOGameClient) presenter2).performFailureAction();
+            (presenter2).performFailureAction();
         }
     }
 }

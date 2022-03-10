@@ -26,7 +26,7 @@ import xogameclient.services.ResponseManager;
  *
  * @author Youssef
  */
-public class XOGameClient extends Application implements Presenters{
+public class XOGameClient extends Application{
     NetworkConnection networkConnection;
     ResponseManager responseManager;
     DataInputStream dis;
@@ -39,8 +39,7 @@ public class XOGameClient extends Application implements Presenters{
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         networkConnection.setPresenter2(this);
         stage.setOnCloseRequest((event) -> {
-            performSuccessAction();
-            
+            performClientCloseConnection();
         });
         Scene scene = new Scene(root);
         stage.setResizable(false);
@@ -70,7 +69,7 @@ public class XOGameClient extends Application implements Presenters{
             dis = networkConnection.getDataInputStream();
             ps = networkConnection.getPrintStream();
             //networkConnection.setPresenter(this);
-            //ps.println("ClientClose");
+            ps.println("ClientClose");
             dis.close();
             ps.close();
             networkConnection.getServer().close();
@@ -79,17 +78,21 @@ public class XOGameClient extends Application implements Presenters{
         }
     }
 
-    @Override
     public void performSuccessAction() {
-        closePlayerConnection();
         Platform.runLater(() ->{  
             serverClosedConnectionAlert();
         });
     }
 
-    @Override
     public void performFailureAction() {
         System.out.println("SERVER CAN'T CLOSE CONNECTION");
+    }
+    
+    public void performClientCloseConnection(){
+        closePlayerConnection();
+        Platform.runLater(() ->{  
+            serverClosedConnectionAlert();
+        });
     }
     
     public void serverClosedConnectionAlert() {
