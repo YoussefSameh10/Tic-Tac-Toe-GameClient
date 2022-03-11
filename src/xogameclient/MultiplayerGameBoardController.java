@@ -211,7 +211,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 
         VideoAlertController vc = loader.getController();
         vc.fxmlName = "AIGameboard.fxml";
-        vc.setLoserVideo();
+        vc.setLoserVideo(false);
         vc.setWinnerName(p1);
         vc.playerO = texto.getText();
         stg = (Stage) cell0.getScene().getWindow(); // exceptions
@@ -232,7 +232,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         Scene scene = new Scene(root);
 
         VideoAlertController vc = loader.getController();
-        vc.setWinnerVideo();
+        vc.setWinnerVideo(false);
         vc.fxmlName = "AIGameboard.fxml";
         vc.setWinnerName(p1);
         // System.out.println("score x before is "+ scoreX);
@@ -341,25 +341,24 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
             cell4.setStyle("-fx-background-color: #ff0000;");
             cell6.setStyle("-fx-background-color: #ff0000;");
         }
-
+        setButtonsDisabled(true);
+  setButtonsDisabled(true);
         switch (status) {
             case "Win":
-
+                gotToAlert(texto.getText(), true);
                 break;
             case "Lose":
+                gotToAlert(texto.getText(), false);
                 break;
             default:
                 break;
         }
-
-        setButtonsDisabled(true);
-        gotToAlert(texto.getText());
         initializeScores(8, 8);
         //showAlert(scoreO);
         //alert(texto.getText());
     }
 
-    private void gotToAlert(String player) {
+   private void gotToAlert(String player, boolean isWinner) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
         Parent root = null;
         try {
@@ -372,7 +371,13 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         Scene scene = new Scene(root);
 
         VideoAlertController vc = loader.getController();
-        vc.setWinnerVideo();
+        if(isWinner) {
+           vc.setWinnerVideo(false); 
+        }
+        else {
+            vc.setLoserVideo(false);
+        }
+        
         vc.setWinnerName(player);
 //          vc.scoreO = scoreO;
 //          vc.scoreX = scoreX;

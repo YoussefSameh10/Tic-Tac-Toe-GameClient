@@ -60,9 +60,7 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     /**
      * Initializes the controller class.
      */
-    Socket server;
-    DataInputStream dis;
-    PrintStream ps;
+
     /*
     ObservableList<String> names = FXCollections.observableArrayList(
           "Sandra George", "Tasnim Hatem", "Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr","Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr","Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr");
@@ -279,7 +277,7 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
           int idd1 = Integer.parseInt(id1);
             int idd2 = Integer.parseInt(id2);
             System.out.println("@Confirm  id1 = "  + idd1 +" id2 " + idd2 + " is UI Disabled = "+ true);
-            navigateToGameScreen(name1, name2, idd2, idd1, 0, 0, true);
+            navigateToGameScreen(name2, name1, idd2, idd1, 0, 0, true);
         } else {
             ps.println("ChallengeResponse,notAccept," + id1 + "," + id2);
         }

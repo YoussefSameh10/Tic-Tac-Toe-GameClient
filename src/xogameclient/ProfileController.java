@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -59,19 +60,39 @@ public class ProfileController implements Initializable {
     @FXML
     private void didPressBack(MouseEvent event) {
         try {
-            System.out.println("Name in Profile when back clicked: "+username);
-            System.out.println("Score in Profile when back clicked: "+score);
-            Stage stage = (Stage) nameLabel.getScene().getWindow();
-            Parent mainScene = FXMLLoader.load(getClass().getResource("OnlineUsersList.fxml"));
-            Scene scene = new Scene(mainScene);
-            //scene.getStylesheets().add("onlineuserslist.css");
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("OnlineUsersList.fxml"));
+            Parent root = Loader.load();
+            Stage stage = (Stage)((Node)nameLabel).getScene().getWindow();
+            Scene scene = new Scene(root);
+            OnlineUsersListController vc = Loader.getController();
+            vc.setCurrentUsername(username);
+            vc.setCurrentID(0);//yousef
+            vc.setCurrentScore(score);
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("Main");
+            stage.setTitle("List Of Online Users");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     @FXML
