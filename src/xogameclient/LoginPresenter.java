@@ -12,54 +12,58 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import xogameclient.services.NetworkConnection;
+import xogameclient.services.ResponseManager;
 
 /**
  *
  * @author sandra
  */
-public class LoginPresenter implements LoginPresenterInterface{
+public class LoginPresenter implements LoginPresenterInterface, Presenters{
 
-    Socket server;
-    DataInputStream dis;
-    PrintStream ps;
     private LoginControllerInterface loginController;
+    private NetworkConnection networkConnection;
+    private DataInputStream dis;
+    private PrintStream ps;
+    private ResponseManager responseManager;
 
     public LoginPresenter(LoginControllerInterface loginController) {
         this.loginController = loginController;
     }
     
-    
-    
     @Override
     public int loginPlayer(String userName, String password) {
         try{
-            server = new Socket("127.0.0.1", 8080);
-            dis = new DataInputStream(server.getInputStream());
-            ps = new PrintStream(server.getOutputStream());
-            
-            new Thread(){
-                @Override
-                public void run() {
-                    super.run(); //To change body of generated methods, choose Tools | Templates.
-                    ps.println("Login,"+userName+","+password);
-                    while (true) {                        
-                        try{
-                            String response = dis.readLine();
-                            System.out.println(response);
-                        } catch (IOException ex) {
-                            Logger.getLogger(LoginPresenter.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                }
-                
-            }.start();
+            responseManager = ResponseManager.getInstance();
+            networkConnection = NetworkConnection.getInstance();
+            dis = networkConnection.getDataInputStream();
+            ps = networkConnection.getPrintStream();
+            networkConnection.setPresenter(this);
+            ps.println("Login,"+userName+","+password);
         }catch (IOException ex) {
-            Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
-            Platform.runLater(() ->{    
-                loginController.showLoginErrorAlert();
-            });
+            ex.printStackTrace();
+            performFailureAction();
         }
         return 0;
     }
+    
+    public void performSuccessActionWithParams(String username, int id, int score) {
+        Platform.runLater(() ->{  
+            loginController.gotoListOfOnlineUsers(username, id, score);
+        });
+    }
+    
+    @Override
+    public void performSuccessAction() {
+        
+    }
+    
+    @Override
+    public void performFailureAction() {
+        Platform.runLater(() ->{  
+            loginController.showLoginErrorAlert();
+        });
+    }
+    
     
 }

@@ -17,9 +17,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Stop;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -42,6 +44,8 @@ public class LocalController implements Initializable {
     private Button next;
     @FXML
     private ImageView backBtn;
+    @FXML
+    private CheckBox recordCheckbox;
     
     //int scoreX = 0, scoreO =0;
     /**
@@ -75,6 +79,7 @@ public class LocalController implements Initializable {
             GameboardController vc = Loader.getController();
             vc.playerX = player1.getText();
             vc.playerO = player2.getText();
+            vc.permitRecord = recordCheckbox.isSelected();
             vc.setUesers(player1.getText(),player2.getText());
             Stage windo =(Stage)((Node)event.getSource()).getScene().getWindow();
             windo.setResizable(false);
@@ -92,5 +97,6 @@ public class LocalController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
     
 }

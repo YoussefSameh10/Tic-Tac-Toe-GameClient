@@ -8,8 +8,6 @@ package xogameclient;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,16 +22,18 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import xogameclient.services.NetworkConnection;
 
 /**
  * FXML Controller class
  *
  * @author Youssef
  */
-public class LoginController implements Initializable , LoginControllerInterface{
+public class LoginController implements Initializable, LoginControllerInterface {
 
     @FXML
     private Button loginBtn;
@@ -57,67 +57,72 @@ public class LoginController implements Initializable , LoginControllerInterface
     @FXML
     private ImageView rightImage;
 
-    
     private LoginPresenterInterface loginPresenter;
+    @FXML
+    private ImageView backBtn;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loginPresenter = new LoginPresenter(this);
-        //configureUI();
-    }    
-    public void configureUI()
-    {
-        configureButton(loginBtn, "assets/login.png");
-        configureButton(registerBtn, "assets/register.png");
-        configureImage(logoImg, "assets/tic-tac-toe.png");
-        configureImage(leftImage, "assets/Panel.PNG");
-        configureImage(rightImage, "assets/Panel2.png");
-        configureImage(usernameImg, "assets/user.png");
-        configureImage(passwordImage, "assets/lock.png");
-        
+        configureUI();
     }
-    
-    public void configureButton(Button b, String path)
-    {
+
+    public void configureUI() {
+        configureButton(loginBtn, "homeAssets/login.png");
+        configureButton(registerBtn, "homeAssets/register.png");
+        configureImage(logoImg, "homeAssets/tic-tac-toe.png");
+        configureImage(leftImage, "homeAssets/Panel.PNG");
+        configureImage(rightImage, "homeAssets/Panel2.png");
+        configureImage(usernameImg, "homeAssets/user.png");
+        configureImage(passwordImage, "homeAssets/lock.png");
+    }
+
+    public void configureButton(Button b, String path) {
         ImageView imageView = new ImageView(getClass().getResource(path).toExternalForm());
         imageView.setFitHeight(70);
         imageView.setFitWidth(225);
         b.setGraphic(imageView);
     }
-    
-    public void configureImage(ImageView img, String path)
-    {
-        Image myImage = new Image (getClass().getResourceAsStream(path));
+
+    public void configureImage(ImageView img, String path) {
+        Image myImage = new Image(getClass().getResourceAsStream(path));
         img.setImage(myImage);
     }
-    
+
     @FXML
     public void handleRegisterButtonPress(ActionEvent event) throws IOException {
-        
-        
-        /*Stage stage = (Stage)registerBtn.getScene().getWindow();
+
+        Stage stage = (Stage) registerBtn.getScene().getWindow();
         Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("register.fxml"));
         Scene scene = new Scene(onlineUsersScene);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Online Users");
-        stage.show();*/
+        stage.show();
     }
 
     @Override
-    public void gotoListOfOnlineUsers() {
+    public void gotoListOfOnlineUsers(String username, int id, int score) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("OnlineUsersList.fxml"));
+            
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("OnlineUsersList.fxml"));
+            Parent root = Loader.load();
             Stage stage = (Stage)((Node)loginBtn).getScene().getWindow();
             Scene scene = new Scene(root);
+            OnlineUsersListController vc = Loader.getController();
+            vc.setCurrentUsername(username);
+            vc.setCurrentID(id);
+            vc.setCurrentScore(score);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("List Of Online Users");
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
             showLoginErrorAlert();
         }
     }
@@ -125,7 +130,7 @@ public class LoginController implements Initializable , LoginControllerInterface
     @Override
     public void showLoginErrorAlert() {
         Stage stg = (Stage) loginBtn.getScene().getWindow();
-        
+
         Alert.AlertType type = Alert.AlertType.ERROR;
         Alert alert = new Alert(type);
 
@@ -142,5 +147,14 @@ public class LoginController implements Initializable , LoginControllerInterface
         loginPresenter.loginPlayer(usernameTxt.getText(), passwordTxt.getText());
         gotoListOfOnlineUsers();
     }
-    
+
+    @FXML
+    private void didPressBack(MouseEvent event) throws IOException {
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        Parent prevScreen = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Scene scene = new Scene(prevScreen);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

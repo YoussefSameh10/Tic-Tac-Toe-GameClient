@@ -51,12 +51,27 @@
          <image>
             <Image url="@homeAssets/O.jpg" />
          </image></ImageView>
-      <Label fx:id="textx" layoutX="77.0" layoutY="213.0" text="Player X">
+      <Label fx:id="textx" layoutX="85.0" layoutY="186.0" text="Player X" textFill="#f8f6f6">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="texto" layoutX="781.0" layoutY="213.0" text="Player O">
+      <Label fx:id="texto" layoutX="781.0" layoutY="186.0" text="Player O" textFill="#fffdfd">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="backBtn" fitHeight="44.0" fitWidth="48.0" layoutX="43.0" layoutY="37.0" onMouseClicked="#didPressedBack" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="873.0" AnchorPane.topAnchor="27.0">
+         <image>
+            <Image url="@homeAssets/previous.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="101.0" layoutY="360.0" prefHeight="44.0" prefWidth="54.0" text="0" textAlignment="RIGHT" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" fx:id="xScore">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="oScore" alignment="CENTER" layoutX="816.0" layoutY="360.0" prefHeight="44.0" prefWidth="54.0" text="0" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>

@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -47,7 +48,7 @@ public class FXMLDocumentController implements Initializable {
     private void didPressSingleModeButton() throws IOException {
         
         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
-        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("AIGameboard.fxml"));
+        Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("SingelPlayer.fxml"));
         Scene scene = new Scene(onlineUsersScene);
         stage.setScene(scene);
         stage.setResizable(false);
@@ -78,11 +79,26 @@ public class FXMLDocumentController implements Initializable {
         //scene.getStylesheets().add("onlineuserslist.css");
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Register");
+        stage.setTitle("PlayGame");
         stage.show();
-        System.out.println("SerVerrrrrrrrrrrrrrr");
+        
+        
+        
+//         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiplayerGameBoard.fxml"));
+//
+//        Parent registerScene = loader.load();
+//        MultiplayerGameBoardController controller = (MultiplayerGameBoardController)loader.getController();
+//       MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2",1,2 , 0, 0, true);
+//        controller.presenter = boardPresenter ;
+//        Scene scene = new Scene(registerScene);
+//        //scene.getStylesheets().add("onlineuserslist.css");
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.setTitle("PlayGame");
+//        stage.show();
     }
-
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configureUI();
@@ -104,6 +120,23 @@ public class FXMLDocumentController implements Initializable {
         imageView3.setFitWidth(211);
         lanMultiplayerButton.setGraphic(imageView3);
     }
+
+    @FXML
+    private void didPressRecords(MouseEvent event) {
+        try {
+            Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
+            Parent recordsScene = FXMLLoader.load(getClass().getResource("Records.fxml"));
+            Scene scene = new Scene(recordsScene);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Records");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
 
 }
 
