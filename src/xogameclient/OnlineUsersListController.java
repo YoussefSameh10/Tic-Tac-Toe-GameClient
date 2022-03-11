@@ -174,7 +174,7 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
                 System.out.println("MY USERNAME IS: "+currentUsername);
                 System.out.println("MY SCORE IS: "+currentScore);
                 // need  my name 
-                ps.println("ChallengeRequest," + currentID + id);
+                ps.println("ChallengeRequest," + currentID + "," + id);
             }
         });
     }
