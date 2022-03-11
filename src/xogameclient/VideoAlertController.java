@@ -58,12 +58,14 @@ public class VideoAlertController implements Initializable {
        
     }    
     
-    public void setWinnerVideo(){
+    public void setWinnerVideo(boolean isReplayAllowed){
+        reloadImg.setVisible(isReplayAllowed);
         mediaPlayer = new MediaPlayer(new Media(getClass().getResource("viedo/winner.mp4").toExternalForm()));
         mediaViewer.setMediaPlayer(mediaPlayer);
         mediaPlayer.setAutoPlay(true);
     }
-     public void setLoserVideo(){
+     public void setLoserVideo(boolean isReplayAllowed){
+        reloadImg.setVisible(isReplayAllowed);
         mediaPlayer = new MediaPlayer(new Media(getClass().getResource("viedo/loser.mp4").toExternalForm()));
         mediaViewer.setMediaPlayer(mediaPlayer);
         mediaPlayer.setAutoPlay(true);

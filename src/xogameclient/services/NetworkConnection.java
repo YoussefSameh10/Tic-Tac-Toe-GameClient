@@ -96,7 +96,7 @@ public class NetworkConnection {
                 try {
                     while ((server.isConnected())) {
                         response = dis.readLine();
-                
+                        System.out.println("The response is : "+response);
                         
                         manage();
                     }try {

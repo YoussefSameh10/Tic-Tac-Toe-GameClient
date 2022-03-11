@@ -98,18 +98,7 @@ public class FXMLDocumentController implements Initializable {
 //        stage.setTitle("PlayGame");
 //        stage.show();
     }
-/*
-    private void didPressProfile(MouseEvent event) throws IOException {
-        Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
-        Parent profileScene = FXMLLoader.load(getClass().getResource("Profile.fxml"));
-        Scene scene = new Scene(profileScene);
-        //scene.getStylesheets().add("onlineuserslist.css");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Profile");
-        stage.show();
-    }
-*/    
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         configureUI();

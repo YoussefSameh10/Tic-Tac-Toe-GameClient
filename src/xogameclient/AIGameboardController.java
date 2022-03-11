@@ -434,7 +434,7 @@ public class AIGameboardController implements Initializable {
           
           VideoAlertController vc = loader.getController();
           vc.fxmlName = "AIGameboard.fxml";
-          vc.setLoserVideo();
+          vc.setLoserVideo(true);
           vc.setWinnerName(p1);
           vc.playerO = texto.getText();
           stg = (Stage) cell0.getScene().getWindow(); // exceptions
@@ -454,7 +454,7 @@ public class AIGameboardController implements Initializable {
           Scene scene = new Scene(root);
           
           VideoAlertController vc = loader.getController();
-          vc.setWinnerVideo();
+          vc.setWinnerVideo(true);
            vc.fxmlName = "AIGameboard.fxml";
           vc.setWinnerName(p1);
          // System.out.println("score x before is "+ scoreX);
