@@ -78,6 +78,16 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         backgroundImage.setImage(background);
         player1Card.setImage(imageX);
         player2Card.setImage(imageO);
+        cell0.getProperties().put("TYPE", "U");
+        cell1.getProperties().put("TYPE", "U");
+        cell2.getProperties().put("TYPE", "U");
+        cell3.getProperties().put("TYPE", "U");
+        cell4.getProperties().put("TYPE", "U");
+        cell5.getProperties().put("TYPE", "U");
+        cell6.getProperties().put("TYPE", "U");
+        cell7.getProperties().put("TYPE", "U");
+        cell8.getProperties().put("TYPE", "U");
+
     }
 
     @FXML
@@ -155,6 +165,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
             resize(imageviewO);
             cell.setGraphic(imageviewO);
         }
+        cell.getProperties().put("TYPE", "P");
     }
 
     private void resize(ImageView imgView) {
@@ -170,15 +181,16 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
     }
 
     public void setButtonsDisabled(boolean isEnabled) {
-        cell0.setDisable(isEnabled);
-        cell1.setDisable(isEnabled);
-        cell2.setDisable(isEnabled);
-        cell3.setDisable(isEnabled);
-        cell4.setDisable(isEnabled);
-        cell5.setDisable(isEnabled);
-        cell6.setDisable(isEnabled);
-        cell7.setDisable(isEnabled);
-        cell8.setDisable(isEnabled);
+        cell0.setDisable(isEnabled || cell0.getProperties().get("TYPE").equals("P"));
+        cell1.setDisable(isEnabled || cell1.getProperties().get("TYPE").equals("P"));
+        cell2.setDisable(isEnabled || cell2.getProperties().get("TYPE").equals("P"));
+        cell3.setDisable(isEnabled || cell3.getProperties().get("TYPE").equals("P"));
+        cell4.setDisable(isEnabled || cell4.getProperties().get("TYPE").equals("P"));
+        cell5.setDisable(isEnabled || cell5.getProperties().get("TYPE").equals("P"));
+        cell6.setDisable(isEnabled || cell6.getProperties().get("TYPE").equals("P"));
+        cell7.setDisable(isEnabled || cell7.getProperties().get("TYPE").equals("P"));
+        cell8.setDisable(isEnabled || cell8.getProperties().get("TYPE").equals("P"));
+        //edit
     }
 
     public void setUesers(String p1) {
@@ -199,7 +211,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 
         VideoAlertController vc = loader.getController();
         vc.fxmlName = "AIGameboard.fxml";
-        vc.setLoserVideo(false);
+        vc.setLoserVideo();
         vc.setWinnerName(p1);
         vc.playerO = texto.getText();
         stg = (Stage) cell0.getScene().getWindow(); // exceptions
@@ -220,7 +232,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         Scene scene = new Scene(root);
 
         VideoAlertController vc = loader.getController();
-        vc.setWinnerVideo(false);
+        vc.setWinnerVideo();
         vc.fxmlName = "AIGameboard.fxml";
         vc.setWinnerName(p1);
         // System.out.println("score x before is "+ scoreX);
@@ -330,26 +342,24 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
             cell6.setStyle("-fx-background-color: #ff0000;");
         }
 
-        setButtonsDisabled(true);
         switch (status) {
             case "Win":
-                gotToAlert(texto.getText(), true);
+
                 break;
             case "Lose":
-                gotToAlert(texto.getText(), false);
                 break;
             default:
                 break;
         }
 
-        
-        
+        setButtonsDisabled(true);
+        gotToAlert(texto.getText());
         initializeScores(8, 8);
         //showAlert(scoreO);
         //alert(texto.getText());
     }
 
-    private void gotToAlert(String player, boolean isWinner) {
+    private void gotToAlert(String player) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
         Parent root = null;
         try {
@@ -362,13 +372,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         Scene scene = new Scene(root);
 
         VideoAlertController vc = loader.getController();
-        if(isWinner) {
-           vc.setWinnerVideo(false); 
-        }
-        else {
-            vc.setLoserVideo(false);
-        }
-        
+        vc.setWinnerVideo();
         vc.setWinnerName(player);
 //          vc.scoreO = scoreO;
 //          vc.scoreX = scoreX;

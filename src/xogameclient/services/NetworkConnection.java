@@ -228,7 +228,7 @@ public class NetworkConnection {
          String score2 = ((ChallengeRequest)action).getScore2();
          String first  = ((ChallengeRequest)action).getFirst();
          ((OnlineUsersListController) presenter).showAleart( id1,  id2,  name1,  name2,score1,score2,first);
-        
+        //edit
     }
      
       private void manageChallengeRsponse(ClientActions action) {

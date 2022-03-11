@@ -59,6 +59,8 @@ public class MultiplayerGameBoardPresenter implements Presenters {
             server = networkConnection.getServer();
             dis = networkConnection.getDataInputStream();
             ps = networkConnection.getPrintStream();
+            //edit
+            
             
         } catch (IOException ex) {
             Logger.getLogger(MultiplayerGameBoardPresenter.class.getName()).log(Level.SEVERE, null, ex);
