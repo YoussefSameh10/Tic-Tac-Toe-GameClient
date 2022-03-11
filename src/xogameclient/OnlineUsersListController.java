@@ -85,6 +85,16 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     private ArrayList<Pair<String, Integer>> onlinePlayers = new ArrayList<Pair<String, Integer>>();
     
     private String currentUsername;
+    private int currentID;
+    private int currentScore;
+
+    public void setCurrentID(int currentID) {
+        this.currentID = currentID;
+    }
+
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
+    }
     private NetworkConnection networkConnection;
     private DataInputStream dis;
     private PrintStream ps;
@@ -145,6 +155,9 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             dis = networkConnection.getDataInputStream();
             ps = networkConnection.getPrintStream();
             networkConnection.setPresenter(this);
+            System.out.println("MY ID initialize IS: "+currentID);
+            System.out.println("MY initialize USERNAME IS: "+currentUsername);
+            System.out.println("MY initialize SCORE IS: "+currentScore);
             ps.println("GetOnlinePlayersList");
             
         } catch (IOException ex) {
@@ -157,8 +170,11 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
                 String name = centerList.getSelectionModel().getSelectedItem();
                 int index = centerList.getSelectionModel().getSelectedIndex();
                 int id = onlinePlayers.get(index).getValue();
+                System.out.println("MY ID IS: "+currentID);
+                System.out.println("MY USERNAME IS: "+currentUsername);
+                System.out.println("MY SCORE IS: "+currentScore);
                 // need  my name 
-                ps.println("ChallengeRequest," + "1," + id);
+                ps.println("ChallengeRequest," + currentID + "," + id);
             }
         });
     }

@@ -16,9 +16,9 @@
             <Button fx:id="lanMultiplayerButton" mnemonicParsing="false" onAction="#didPressLanMultiplayerModeButton" prefHeight="55.0" prefWidth="211.5" style="-fx-background-color: tansparent;" />
          </children>
       </VBox>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="837.0" layoutY="14.0" onMouseClicked="#didPressProfile" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="837.0" layoutY="14.0" onMouseClicked="#didPressRecords" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@homeAssets/avatar.png" />
+            <Image url="@homeAssets/list.png" />
          </image>
       </ImageView>
    </children>

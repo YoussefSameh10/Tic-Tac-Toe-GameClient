@@ -5,3 +5,8 @@ O0X1O4X8O5X3O7X6O2,a vs b
 O2X5O8X4O1X3,a vs q
 O0X1O4X3O8,hehh vs hih
 O1X0O3X4O7X8,kji vs ijiji
+O0X4O8X1O5X7,AI vs asdf
+O0X1O2X5O8X4O3X6O7,qwerty vs asdfgh
+O0X1O3X4O6,asdf vs qwer
+O0X1O3X4O6,Youssef vs Sameh
+O0X4O2X1O7X3O5X8O6,AI vs sameh

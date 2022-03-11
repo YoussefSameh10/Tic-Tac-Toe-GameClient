@@ -8,8 +8,6 @@ package xogameclient;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,18 +67,17 @@ public class LoginController implements Initializable, LoginControllerInterface 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loginPresenter = new LoginPresenter(this);
-        //configureUI();
+        configureUI();
     }
 
     public void configureUI() {
-        configureButton(loginBtn, "assets/login.png");
-        configureButton(registerBtn, "assets/register.png");
-        configureImage(logoImg, "assets/tic-tac-toe.png");
-        configureImage(leftImage, "assets/Panel.PNG");
-        configureImage(rightImage, "assets/Panel2.png");
-        configureImage(usernameImg, "assets/user.png");
-        configureImage(passwordImage, "assets/lock.png");
-
+        configureButton(loginBtn, "homeAssets/login.png");
+        configureButton(registerBtn, "homeAssets/register.png");
+        configureImage(logoImg, "homeAssets/tic-tac-toe.png");
+        configureImage(leftImage, "homeAssets/Panel.PNG");
+        configureImage(rightImage, "homeAssets/Panel2.png");
+        configureImage(usernameImg, "homeAssets/user.png");
+        configureImage(passwordImage, "homeAssets/lock.png");
     }
 
     public void configureButton(Button b, String path) {
@@ -108,7 +105,7 @@ public class LoginController implements Initializable, LoginControllerInterface 
     }
 
     @Override
-    public void gotoListOfOnlineUsers() {
+    public void gotoListOfOnlineUsers(String username, int id, int score) {
         try {
             
             FXMLLoader Loader = new FXMLLoader();
@@ -117,7 +114,9 @@ public class LoginController implements Initializable, LoginControllerInterface 
             Stage stage = (Stage)((Node)loginBtn).getScene().getWindow();
             Scene scene = new Scene(root);
             OnlineUsersListController vc = Loader.getController();
-            vc.setCurrentUsername(usernameTxt.getText());
+            vc.setCurrentUsername(username);
+            vc.setCurrentID(id);
+            vc.setCurrentScore(score);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("List Of Online Users");
