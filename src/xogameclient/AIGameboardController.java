@@ -79,6 +79,7 @@ public class AIGameboardController implements Initializable {
     private ImageView player1Card;
     @FXML
     private ImageView player2Card;
+    String s;
 
     private final int iconSize = 75;
     private final Image background = new Image(getClass().getResourceAsStream("homeAssets/background.jpg"));
@@ -489,6 +490,13 @@ public class AIGameboardController implements Initializable {
         enabelCells();
         emptyArray();
         emptyCells();
+        
+        
+        
+        
+        
+        
+        
     }
        
    
