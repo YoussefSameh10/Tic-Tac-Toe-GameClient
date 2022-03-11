@@ -54,6 +54,7 @@ public class VideoAlertController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
        
     }    
@@ -88,43 +89,39 @@ public class VideoAlertController implements Initializable {
     }
     @FXML
     private void didPressReload(MouseEvent event) throws IOException {
-          if (fxmlName.equalsIgnoreCase("AIGameboard.fxml")) {
-               FXMLLoader loader = new FXMLLoader(getClass().getResource("AIGameboard.fxml"));
-                Parent root = null;
-                try {
-                    root = loader.load();
-                } catch (IOException ex) {
-                    Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-              mediaPlayer.stop();
-              Scene scene = new Scene(root);
-              AIGameboardController vc = loader.getController();
-    
-              //vc.setScores(scoreX, scoreO);
-             // vc.scoreO = scoreO;
-             // vc.scoreX = scoreX;
-             // vc.playerX = playerX;
-              vc.texto.setText(playerO);
-             // vc.initializeScores(scoreX, scoreO);
-              vc.setUesers( playerO);
-              Stage stage =(Stage)reloadImg.getScene().getWindow();
-              stage.setResizable(false);
-              stage.setScene(scene);
-              stage.show();
+        if (fxmlName.equalsIgnoreCase("AIGameboard.fxml")) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AIGameboard.fxml"));
+            Parent root = null;
+            try {
+               root = loader.load();
+            } catch (IOException ex) {
+               Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mediaPlayer.stop();
+            Scene scene = new Scene(root);
+            AIGameboardController vc = loader.getController();
+            vc.scoreO = scoreO;
+            vc.scoreX = scoreX;
+            vc.texto.setText(playerO);
+            vc.initializeScores(scoreX, scoreO);
+            vc.setUesers( playerO);
+            Stage stage =(Stage)reloadImg.getScene().getWindow();
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
               
         }
         if (fxmlName.equalsIgnoreCase("gameboard.fxml")){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("gameboard.fxml"));
-              Parent root = null;
-              try {
-                  root = loader.load();
-              } catch (IOException ex) {
-                  Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
-              }
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             mediaPlayer.stop();
             Scene scene = new Scene(root);
             GameboardController vc = loader.getController();
-            //vc.setScores(scoreX, scoreO);
             vc.scoreO = scoreO;
             vc.scoreX = scoreX;
             vc.playerX = playerX;
@@ -135,7 +132,7 @@ public class VideoAlertController implements Initializable {
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
-              }
+        }
     }
 
     @FXML
