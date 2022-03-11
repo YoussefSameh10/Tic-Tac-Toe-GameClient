@@ -52,7 +52,9 @@ public class AIGameboardController implements Initializable {
      boolean playerTurn; //O
      char [][] charForBoard = {{' ', ' ', ' '},{' ', ' ',' '},{' ', ' ',' '}};
      boolean flag = false;
-       Stage stg;
+     int scoreX = 0, scoreO = 0;
+    String playerX, playerO;
+    Stage stg;
     @FXML
     private ImageView backgroundImage;
     @FXML
@@ -105,8 +107,15 @@ public class AIGameboardController implements Initializable {
         backgroundImage.setImage(background);
         player1Card.setImage(imageX);
         player2Card.setImage(imageO);
-
+       // xScore.setText(Integer.toString(scoreX));
+        initializeScores(scoreX, scoreO);
     }
+    
+     public void initializeScores(int scoreX, int scoreO) {
+        xScore.setText(String.valueOf(scoreX));
+        oScore.setText(String.valueOf(scoreO));
+    }
+
 
     @FXML
     private void cell0Pressed() {
@@ -116,7 +125,6 @@ public class AIGameboardController implements Initializable {
             gameRecord += res + "0";
             cellPressed(cell0);
         }
-
     }
 
     @FXML
@@ -210,7 +218,7 @@ public class AIGameboardController implements Initializable {
             return;
         }
         turn = !turn;
-        int[] move = NewMiniMax.getBestMove(charForBoard, 6);
+        int[] move = NewMiniMax.getBestMove(charForBoard, 0);
         if (turn) {
             addAIMove(move[0], move[1]);
         }
@@ -389,24 +397,28 @@ public class AIGameboardController implements Initializable {
            
        }
        return false;
-   }
+    }
    public void xWins(Button a,Button b, Button c){
        a.setStyle("-fx-background-color: #ff0000;");
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
+       scoreX++;
        flag = true;
        alertx(textx.getText());
+       initializeScores(scoreX, scoreO);
       
-   }
+    }
     public void oWins(Button a,Button b, Button c){
        a.setStyle("-fx-background-color: #ff0000;");
        b.setStyle("-fx-background-color: #ff0000;");
        c.setStyle("-fx-background-color: #ff0000;");
        buttonDisabel();
+       scoreO++;
        flag = true;
        alert(texto.getText());
-   }
+       initializeScores(scoreX, scoreO);
+    }
     public void buttonDisabel(){
         cell0.setDisable(true);
         cell1.setDisable(true);
@@ -418,92 +430,75 @@ public class AIGameboardController implements Initializable {
         cell7.setDisable(true);
         cell8.setDisable(true);
     }
-      public void setUesers(String p1){
-         
-          texto.setText(p1);
-      }
-        private void alertx(String p1) {
-            writeGameRecordToFile();
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
-          Parent root = null;
-          try {
-              root = loader.load();
+    public void setUesers(String p1){
+       texto.setText(p1);
+    }
+    private void alertx(String p1) {
+        writeGameRecordToFile();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
+        Parent root = null;
+        try {
+           root = loader.load();
               
-          } catch (IOException ex) {
-          }
-          Scene scene = new Scene(root);
-          
-          VideoAlertController vc = loader.getController();
-          vc.fxmlName = "AIGameboard.fxml";
-          vc.setLoserVideo(true);
-          vc.setWinnerName(p1);
-          vc.playerO = texto.getText();
-          stg = (Stage) cell0.getScene().getWindow(); // exceptions
-          stg.setScene(scene);
-          stg.show();
+        } catch (IOException ex) {
         }
+        Scene scene = new Scene(root);
+        VideoAlertController vc = loader.getController();
+        vc.fxmlName = "AIGameboard.fxml";
+        vc.setLoserVideo(true);
+        vc.setWinnerName(p1);
+        vc.scoreO = scoreO;
+        vc.scoreX = scoreX;
+        vc.playerO = texto.getText();
+        stg = (Stage) cell0.getScene().getWindow(); // exceptions
+        stg.setScene(scene);
+        stg.show();
+    }
         
-        private void alert(String p1) {
-            writeGameRecordToFile();
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
-          Parent root = null;
-          try {
-              root = loader.load();
+    private void alert(String p1) {
+        writeGameRecordToFile();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
+        Parent root = null;
+        try {
+           root = loader.load();
               
-          } catch (IOException ex) {
-          }
-          Scene scene = new Scene(root);
-          
-          VideoAlertController vc = loader.getController();
-          vc.setWinnerVideo(true);
-           vc.fxmlName = "AIGameboard.fxml";
-          vc.setWinnerName(p1);
-         // System.out.println("score x before is "+ scoreX);
-          //System.out.println("score o before is "+ scoreO);
-         // vc.scoreO = scoreO;
-         // vc.scoreX = scoreX;
-         // vc.playerX = playerX;
-          vc.playerO = texto.getText();
-         // System.out.println("score x is "+ scoreX);
-         // System.out.println("score o is "+ scoreO);
-         // System.out.println("buguyguguy"+scene);
-          stg = (Stage) cell0.getScene().getWindow(); // exceptions
-          stg.setScene(scene);
-          stg.show();
+        } catch (IOException ex) {
+        }
+        Scene scene = new Scene(root);
+        VideoAlertController vc = loader.getController();
+        vc.setWinnerVideo(true);
+        vc.fxmlName = "AIGameboard.fxml";
+        vc.setWinnerName(p1);
+        vc.scoreO = scoreO;
+        vc.scoreX = scoreX;
+        vc.playerO = texto.getText();
+        stg = (Stage) cell0.getScene().getWindow(); // exceptions
+        stg.setScene(scene);
+        stg.show();
 
     }
 
-         public void showAlertforTie(){
-             writeGameRecordToFile();
+    public void showAlertforTie(){
+        writeGameRecordToFile();
         stg = (Stage) cell0.getScene().getWindow();
-
         Alert.AlertType type = Alert.AlertType.WARNING;
         Alert alert = new Alert(type);
-
         alert.initModality(Modality.WINDOW_MODAL);
         alert.initOwner(stg);
         alert.setTitle("Oopps");
         alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
         alert.setHeaderText("Tieee");
         alert.showAndWait();
-        System.out.println("removeeeeee");
         enabelCells();
         emptyArray();
         emptyCells();
-        
-        
-        
-        
-        
-        
-        
     }
        
    
     
     public void enabelCells(){
         turn = !turn;
-         cell0.setDisable(false);
+        cell0.setDisable(false);
         cell1.setDisable(false);
         cell2.setDisable(false);
         cell3.setDisable(false);
@@ -512,8 +507,6 @@ public class AIGameboardController implements Initializable {
         cell6.setDisable(false);
         cell7.setDisable(false);
         cell8.setDisable(false);
-       
-        
     }
     public void emptyArray(){
         for (int i = 0; i < 3; i++) {
