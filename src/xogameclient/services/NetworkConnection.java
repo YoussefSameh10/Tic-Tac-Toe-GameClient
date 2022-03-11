@@ -174,10 +174,17 @@ public class NetworkConnection {
     }
     
     private void manageGettingOnlinePlayersList(ClientActions action) {
-        if (((GetOnlinePlayersListResponse) action).isSuccess == true) {
-            ((OnlineUsersListController) presenter).performSuccessAction();
-        } else {
-           //((OnlineUsersListController) presenter).performFailureAction();
+        
+        if (presenter instanceof OnlineUsersListController)
+        {
+            if (((GetOnlinePlayersListResponse) action).isSuccess == true) {
+                Platform.runLater(() -> {
+                    ((OnlineUsersListController) presenter).performSuccessAction();
+                });
+            
+            } else {
+               //((OnlineUsersListController) presenter).performFailureAction();
+            }
         }
     }
     
