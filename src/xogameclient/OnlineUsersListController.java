@@ -131,13 +131,16 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     @FXML
     private void didPressProfile(MouseEvent event) {
         try {
-            Stage stage = (Stage) leftImg.getScene().getWindow();
-            Parent profileScene = FXMLLoader.load(getClass().getResource("Profile.fxml"));
-            Scene scene = new Scene(profileScene);
-            //scene.getStylesheets().add("onlineuserslist.css");
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("Profile.fxml"));
+            Parent root = Loader.load();
+            Stage stage = (Stage)((Node)leftImg).getScene().getWindow();
+            Scene scene = new Scene(root);
+            ProfileController vc = Loader.getController();
+            vc.updateData(currentUsername, currentScore);
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("Profile");
+            stage.setTitle("List Of Online Users");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);

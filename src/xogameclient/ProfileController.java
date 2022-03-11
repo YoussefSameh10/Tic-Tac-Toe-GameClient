@@ -35,6 +35,9 @@ public class ProfileController implements Initializable {
     private Label nameLabel;
     @FXML
     private Label emailLabel;
+    
+    private String username;
+    private int score;
 
     /**
      * Initializes the controller class.
@@ -42,29 +45,24 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          ImageView imageView = new ImageView(getClass().getResource("homeAssets/buttn.png").toExternalForm());
-        imageView.setFitHeight(55);
-       imageView.setFitWidth(250);
-
+         imageView.setFitHeight(55);
+         imageView.setFitWidth(250);
+         
         // TODO
-    }    
-
-
-    @FXML
-    private void didPressRecords(MouseEvent event) throws IOException {
-        Stage stage = (Stage) profileImage.getScene().getWindow();
-        Parent recordsScene = FXMLLoader.load(getClass().getResource("Records.fxml"));
-        Scene scene = new Scene(recordsScene);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Records");
-        stage.show();
+    } 
+    
+    public void updateData(String username, int score) {
+        nameLabel.setText(username);
+        emailLabel.setText(Integer.toString(score));
     }
-
+    
     @FXML
     private void didPressBack(MouseEvent event) {
         try {
+            System.out.println("Name in Profile when back clicked: "+username);
+            System.out.println("Score in Profile when back clicked: "+score);
             Stage stage = (Stage) nameLabel.getScene().getWindow();
-            Parent mainScene = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+            Parent mainScene = FXMLLoader.load(getClass().getResource("OnlineUsersList.fxml"));
             Scene scene = new Scene(mainScene);
             //scene.getStylesheets().add("onlineuserslist.css");
             stage.setScene(scene);
@@ -75,5 +73,9 @@ public class ProfileController implements Initializable {
             Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    @FXML
+    private void didPressLogout(MouseEvent event) {
+    }
 }
+

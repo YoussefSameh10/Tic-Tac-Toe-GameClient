@@ -47,14 +47,14 @@
             <Font name="Comic Sans MS" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="50.0" fitWidth="200.0" layoutX="347.0" layoutY="415.0" onMouseClicked="#didPressRecords" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@homeAssets/buttn.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="65.0" fitWidth="70.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#didPressBack" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@homeAssets/previous.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="842.0" layoutY="26.0" onMouseClicked="#didPressLogout" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@homeAssets/logout.png" />
          </image>
       </ImageView>
    </children>
