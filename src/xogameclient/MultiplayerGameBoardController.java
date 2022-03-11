@@ -78,6 +78,16 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         backgroundImage.setImage(background);
         player1Card.setImage(imageX);
         player2Card.setImage(imageO);
+        cell0.getProperties().put("TYPE", "U");
+        cell1.getProperties().put("TYPE", "U");
+        cell2.getProperties().put("TYPE", "U");
+        cell3.getProperties().put("TYPE", "U");
+        cell4.getProperties().put("TYPE", "U");
+        cell5.getProperties().put("TYPE", "U");
+        cell6.getProperties().put("TYPE", "U");
+        cell7.getProperties().put("TYPE", "U");
+        cell8.getProperties().put("TYPE", "U");
+
     }
 
     @FXML
@@ -155,6 +165,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
             resize(imageviewO);
             cell.setGraphic(imageviewO);
         }
+        cell.getProperties().put("TYPE", "P");
     }
 
     private void resize(ImageView imgView) {
@@ -170,15 +181,15 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
     }
 
     public void setButtonsDisabled(boolean isEnabled) {
-        cell0.setDisable(isEnabled);
-        cell1.setDisable(isEnabled);
-        cell2.setDisable(isEnabled);
-        cell3.setDisable(isEnabled);
-        cell4.setDisable(isEnabled);
-        cell5.setDisable(isEnabled);
-        cell6.setDisable(isEnabled);
-        cell7.setDisable(isEnabled);
-        cell8.setDisable(isEnabled);
+        cell0.setDisable(isEnabled || cell0.getProperties().get("TYPE").equals("P"));
+        cell1.setDisable(isEnabled || cell1.getProperties().get("TYPE").equals("P"));
+        cell2.setDisable(isEnabled || cell2.getProperties().get("TYPE").equals("P"));
+        cell3.setDisable(isEnabled || cell3.getProperties().get("TYPE").equals("P"));
+        cell4.setDisable(isEnabled || cell4.getProperties().get("TYPE").equals("P"));
+        cell5.setDisable(isEnabled || cell5.getProperties().get("TYPE").equals("P"));
+        cell6.setDisable(isEnabled || cell6.getProperties().get("TYPE").equals("P"));
+        cell7.setDisable(isEnabled || cell7.getProperties().get("TYPE").equals("P"));
+        cell8.setDisable(isEnabled || cell8.getProperties().get("TYPE").equals("P"));
     }
 
     public void setUesers(String p1) {
