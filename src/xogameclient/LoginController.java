@@ -24,6 +24,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
@@ -69,6 +70,7 @@ public class LoginController implements Initializable, LoginControllerInterface 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loginPresenter = new LoginPresenter(this);
+        loginBtn.setDisable(true);
         //configureUI();
     }
 
@@ -145,7 +147,12 @@ public class LoginController implements Initializable, LoginControllerInterface 
 
     @FXML
     private void didPressLogin(ActionEvent event) {
-        loginPresenter.loginPlayer(usernameTxt.getText(), passwordTxt.getText());
+        if(!usernameTxt.getText().isEmpty() && !passwordTxt.getText().isEmpty()){
+            loginPresenter.loginPlayer(usernameTxt.getText(), passwordTxt.getText());
+        }else{
+            showLoginErrorAlert();
+            
+        }
     }
 
     @FXML
@@ -157,4 +164,21 @@ public class LoginController implements Initializable, LoginControllerInterface 
         stage.show();
     }
 
+    @FXML
+    private void userNameChanged(KeyEvent event) {
+        shouldEnableButton();
+    }
+
+    @FXML
+    private void passChanged(KeyEvent event) {
+        shouldEnableButton();
+    }
+
+    private void shouldEnableButton() {
+        if(usernameTxt.getText().isEmpty() || passwordTxt.getText().isEmpty()){
+            loginBtn.setDisable(true);
+        }else{
+            loginBtn.setDisable(false);
+        }
+    }
 }
