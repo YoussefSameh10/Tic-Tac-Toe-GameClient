@@ -85,6 +85,16 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     private ArrayList<Pair<String, Integer>> onlinePlayers = new ArrayList<Pair<String, Integer>>();
     
     private String currentUsername;
+    private int currentID;
+    private int currentScore;
+
+    public void setCurrentID(int currentID) {
+        this.currentID = currentID;
+    }
+
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
+    }
     private NetworkConnection networkConnection;
     private DataInputStream dis;
     private PrintStream ps;

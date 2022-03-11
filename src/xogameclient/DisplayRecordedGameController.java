@@ -202,7 +202,7 @@ public class DisplayRecordedGameController implements Initializable {
 
                 for (int i = 1; i < gameRecord.length(); i += 2) {
                     try {
-                        sleep(2000);
+                        sleep(1000);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(DisplayRecordedGameController.class.getName()).log(Level.SEVERE, null, ex);
                     }

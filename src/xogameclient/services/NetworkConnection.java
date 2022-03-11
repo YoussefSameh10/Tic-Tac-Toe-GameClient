@@ -152,7 +152,7 @@ public class NetworkConnection {
     private void manageLogin(ClientActions action) {
         if (((LoginResponse) action).loginSuccess == true) {
             Platform.runLater(() -> {
-                presenter.performSuccessAction();
+                ((LoginPresenter)presenter).performSuccessAction();
             });
         } else {
             Platform.runLater(() -> {
