@@ -52,18 +52,21 @@ public class ResponseManager {
         }
         if(AvailableActions.LoginResponse.getString().equals(parts[0])) {
             String result = parts[1];
-            int userId = Integer.parseInt(parts[2]);
-            String userName = parts[3];
-            int score = Integer.parseInt(parts[4]);
-            boolean loginSuccess;
+            
+            boolean loginSuccess =false;
             if(result.equals("Success")) {
+                int userId = Integer.parseInt(parts[2]);
+                String userName = parts[3];
+                int score = Integer.parseInt(parts[4]);
                 loginSuccess = true;
+                return new LoginResponse(userId , userName , score , loginSuccess);
             }
             else {
-                
                 loginSuccess = false;
+                return new LoginResponse(-1 , "" , -1 , loginSuccess);
             }
-            return new LoginResponse(userId , userName , score , loginSuccess);
+            //System.out.println("Login Response is : "+ userId+userName+score+loginSuccess);
+            
         }
         if(AvailableActions.Move.getString().equals(parts[0])) {
             int playerOneId = Integer.parseInt(parts[1]) ;
