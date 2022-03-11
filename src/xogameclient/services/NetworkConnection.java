@@ -152,7 +152,10 @@ public class NetworkConnection {
     private void manageLogin(ClientActions action) {
         if (((LoginResponse) action).loginSuccess == true) {
             Platform.runLater(() -> {
-                ((LoginPresenter)presenter).performSuccessAction();
+                String username = ((LoginResponse) action).userName; 
+                int id = ((LoginResponse) action).userId; 
+                int score = ((LoginResponse) action).score;
+                ((LoginPresenter)presenter).performSuccessActionWithParams(username, id, score);
             });
         } else {
             Platform.runLater(() -> {
