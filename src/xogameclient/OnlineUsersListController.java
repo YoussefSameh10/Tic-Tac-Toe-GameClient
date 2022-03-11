@@ -60,6 +60,9 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     /**
      * Initializes the controller class.
      */
+    Socket server;
+    DataInputStream dis;
+    PrintStream ps;
     /*
     ObservableList<String> names = FXCollections.observableArrayList(
           "Sandra George", "Tasnim Hatem", "Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr","Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr","Sameh Reda", "Youssef Sameh", "Mohamed Amr", "Sarah Nassrat", "Eman Abo Bakr");
@@ -82,7 +85,7 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     @FXML
     private ImageView rightImg;
     
-    private ArrayList<Pair<String, Integer>> onlinePlayers = new ArrayList<Pair<String, Integer>>();
+    private ArrayList<Pair<String, Integer> > onlinePlayers;
     
     private String currentUsername;
     private int currentID;
@@ -203,7 +206,7 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
 //        BGImage.setImage(image);
 //    }
     private void configureListView() {
-        
+        centerList.getItems().clear();
         for (int i = 0; i < onlinePlayers.size(); i++) {
             if (!onlinePlayers.get(i).getKey().equals(currentUsername)) {
                 centerList.getItems().add(onlinePlayers.get(i).getKey());
@@ -230,6 +233,8 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     
     @Override
     public void performSuccessAction() {
+        onlinePlayers = new ArrayList<Pair<String, Integer> > ();
+        
         String serverResponse = networkConnection.getResponse();
         String[] parsedResponse = serverResponse.split(",");
         String[] allUsers = parsedResponse[1].split(" ");
