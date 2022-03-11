@@ -52,6 +52,7 @@ public class GameboardController implements Initializable {
     Random randam = new Random();
     boolean playerTurn; //O
     char[][] charForBoard = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+    
     String gameRecord = "";
 
     @FXML
@@ -365,6 +366,44 @@ public class GameboardController implements Initializable {
         alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
         alert.setHeaderText("Tieee");
         alert.showAndWait();
+        System.out.println("removeeeeeeeeeeeeeee");
+        enabelCells();
+        emptyArray();
+        emptyCells();
+    }
+    
+    public void enabelCells(){
+         turn = !turn;
+         cell0.setDisable(false);
+        cell1.setDisable(false);
+        cell2.setDisable(false);
+        cell3.setDisable(false);
+        cell4.setDisable(false);
+        cell5.setDisable(false);
+        cell6.setDisable(false);
+        cell7.setDisable(false);
+        cell8.setDisable(false);
+       
+        
+    }
+    public void emptyArray(){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+             charForBoard[i][j] = ' ';
+            }
+        }
+    }
+    
+    public void emptyCells(){
+       cell0.setGraphic(null);
+       cell1.setGraphic(null);
+       cell2.setGraphic(null);
+       cell3.setGraphic(null);
+       cell4.setGraphic(null);
+       cell5.setGraphic(null);
+       cell6.setGraphic(null);
+       cell7.setGraphic(null);
+       cell8.setGraphic(null);
     }
 
     public void xWins(Button a, Button b, Button c) {
@@ -447,23 +486,6 @@ public class GameboardController implements Initializable {
         oScore.setText(String.valueOf(scoreO));
     }
 
-    /*private void alert(String p1) {
-            MediaPlayer player = new MediaPlayer(new Media(getClass().getResource("viedo/p2.mp4").toExternalForm()));
-            MediaView mediaView = new MediaView(player);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("You Win");
-            alert.setHeaderText("");
-
-            Label label = new Label("Congatrions " +p1);
-            label.setStyle("-fx-font: 20px \"sans-serif\";-fx-font-weight: bold;");
-            VBox content = new VBox(10, label, mediaView);
-            content.setAlignment(Pos.CENTER);
-            alert.getDialogPane().setContent(content);
-            player.setCycleCount(MediaPlayer.INDEFINITE);
-            alert.setOnShowing(e -> player.play());
-            alert.getDialogPane().setPrefSize(600, 800);
-            alert.showAndWait();
-    }*/
     @FXML
     private void didPressedBack(MouseEvent event) throws IOException {
         Stage stage = (Stage) backBtn.getScene().getWindow();

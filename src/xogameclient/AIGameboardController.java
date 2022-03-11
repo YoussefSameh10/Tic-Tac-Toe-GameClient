@@ -485,6 +485,46 @@ public class AIGameboardController implements Initializable {
         alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
         alert.setHeaderText("Tieee");
         alert.showAndWait();
+        System.out.println("removeeeeee");
+        enabelCells();
+        emptyArray();
+        emptyCells();
+    }
+       
+   
+    
+    public void enabelCells(){
+        turn = !turn;
+         cell0.setDisable(false);
+        cell1.setDisable(false);
+        cell2.setDisable(false);
+        cell3.setDisable(false);
+        cell4.setDisable(false);
+        cell5.setDisable(false);
+        cell6.setDisable(false);
+        cell7.setDisable(false);
+        cell8.setDisable(false);
+       
+        
+    }
+    public void emptyArray(){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+             charForBoard[i][j] = ' ';
+            }
+        }
+    }
+    
+    public void emptyCells(){
+       cell0.setGraphic(null);
+       cell1.setGraphic(null);
+       cell2.setGraphic(null);
+       cell3.setGraphic(null);
+       cell4.setGraphic(null);
+       cell5.setGraphic(null);
+       cell6.setGraphic(null);
+       cell7.setGraphic(null);
+       cell8.setGraphic(null);
     }
 
     @FXML
