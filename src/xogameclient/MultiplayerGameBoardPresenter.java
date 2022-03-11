@@ -15,7 +15,7 @@ import javafx.application.Platform;
 import xogameclient.services.NetworkConnection;
 import xogameclient.services.ResponseManager;
 import xogameclient.services.responsemodels.BoardStatus;
-
+//edit
 /**
  *
  * @author amin
