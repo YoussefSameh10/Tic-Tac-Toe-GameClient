@@ -467,9 +467,8 @@ public class GameboardController implements Initializable {
             //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
         Scene scene = new Scene(root);
-
         VideoAlertController vc = loader.getController();
-        vc.setWinnerVideo();
+        vc.setWinnerVideo(true);
         vc.setWinnerName(player);
         vc.scoreO = scoreO;
         vc.scoreX = scoreX;
