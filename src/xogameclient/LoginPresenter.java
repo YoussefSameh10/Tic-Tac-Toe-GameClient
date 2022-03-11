@@ -41,24 +41,29 @@ public class LoginPresenter implements LoginPresenterInterface, Presenters{
             networkConnection.setPresenter(this);
             ps.println("Login,"+userName+","+password);
         }catch (IOException ex) {
-            Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
             performFailureAction();
         }
         return 0;
     }
     
-    public void performSuccessAction() {
+    public void performSuccessActionWithParams(String username, int id, int score) {
         Platform.runLater(() ->{  
-            loginController.gotoListOfOnlineUsers();
+            loginController.gotoListOfOnlineUsers(username, id, score);
         });
     }
     
+    @Override
+    public void performSuccessAction() {
+        
+    }
+    
+    @Override
     public void performFailureAction() {
         Platform.runLater(() ->{  
             loginController.showLoginErrorAlert();
         });
     }
-    
     
     
 }

@@ -21,13 +21,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import xogameclient.services.responsemodels.BoardStatus;
 
 /**
  * FXML Controller class
  *
  * @author Youssef
  */
-public class MultiplayerGameBoardController implements Initializable {
+public class MultiplayerGameBoardController implements Initializable, MultiPlayerGameControllerInterface {
 
     @FXML
     private ImageView backgroundImage;
@@ -64,100 +65,83 @@ public class MultiplayerGameBoardController implements Initializable {
     @FXML
     private Label oScore;
 
-    MultiplayerGameBoardPresenter presenter ;
-    
+    MultiplayerGameBoardPresenter presenter;
+
     private final int iconSize = 75;
     private final Image background = new Image(getClass().getResourceAsStream("homeAssets/background.jpg"));
     private final Image imageX = new Image(getClass().getResourceAsStream("homeAssets/X.jpg"));
     private final Image imageO = new Image(getClass().getResourceAsStream("homeAssets/O.jpg"));
     Stage stg;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         backgroundImage.setImage(background);
         player1Card.setImage(imageX);
         player2Card.setImage(imageO);
-        setButtonsEnabled(false);
-
     }
 
     @FXML
     private void cell0Pressed() {
-        System.out.println("Pressed 0");
-        presenter.playMove(0);
         addXorO(cell0);
+        presenter.playMove(0);
 
     }
 
     @FXML
     private void cell1Pressed() {
-        System.out.println("Pressed 1");
-                presenter.playMove(1);
-                        addXorO(cell1);
-
+        addXorO(cell1);
+        presenter.playMove(1);
 
     }
 
     @FXML
     private void cell2Pressed() {
-        System.out.println("Pressed 2");
-                presenter.playMove(2);
-                                        addXorO(cell2);
-
+        addXorO(cell2);
+        presenter.playMove(2);
 
     }
 
     @FXML
     private void cell3Pressed() {
-        System.out.println("Pressed 3");
-                presenter.playMove(3);
-                                        addXorO(cell3);
-
+        addXorO(cell3);
+        presenter.playMove(3);
 
     }
 
     @FXML
     private void cell4Pressed() {
-        System.out.println("Pressed 4");
-                presenter.playMove(4);
-                                        addXorO(cell4);
-
+        addXorO(cell4);
+        presenter.playMove(4);
 
     }
 
     @FXML
     private void cell5Pressed() {
-        System.out.println("Pressed 5");
-                presenter.playMove(5);
-                                        addXorO(cell5);
-
+        addXorO(cell5);
+        presenter.playMove(5);
 
     }
 
     @FXML
     private void cell6Pressed() {
-        System.out.println("Pressed 6");
-                presenter.playMove(6);
-                                        addXorO(cell6);
+        addXorO(cell6);
 
+        presenter.playMove(6);
 
     }
 
     @FXML
     private void cell7Pressed() {
-        System.out.println("Pressed 7");
-                presenter.playMove(7);
-                                        addXorO(cell7);
-
+        addXorO(cell7);
+        presenter.playMove(7);
 
     }
 
     @FXML
     private void cell8Pressed() {
-        System.out.println("Pressed 8");
-                presenter.playMove(8);
-                                        addXorO(cell8);
+        addXorO(cell8);
 
+        presenter.playMove(8);
 
     }
 
@@ -185,7 +169,7 @@ public class MultiplayerGameBoardController implements Initializable {
         alertx(winnerName);
     }
 
-    public void setButtonsEnabled(boolean isEnabled) {
+    public void setButtonsDisabled(boolean isEnabled) {
         cell0.setDisable(isEnabled);
         cell1.setDisable(isEnabled);
         cell2.setDisable(isEnabled);
@@ -249,7 +233,6 @@ public class MultiplayerGameBoardController implements Initializable {
         // System.out.println("score o is "+ scoreO);
         // System.out.println("buguyguguy"+scene);
         stg = (Stage) cell0.getScene().getWindow(); // exceptions
-        System.out.println("helooooooo" + stg);
         stg.setScene(scene);
         stg.show();
 
@@ -275,4 +258,128 @@ public class MultiplayerGameBoardController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    @Override
+    public void playOpponentMoveAt(int cell) {
+        switch (cell) {
+            case 0:
+                addXorO(cell0);
+                break;
+            case 1:
+                addXorO(cell1);
+                break;
+            case 2:
+                addXorO(cell2);
+                break;
+            case 3:
+                addXorO(cell3);
+                break;
+            case 4:
+                addXorO(cell4);
+                break;
+            case 5:
+                addXorO(cell5);
+                break;
+            case 6:
+                addXorO(cell6);
+                break;
+            case 7:
+                addXorO(cell7);
+                break;
+            case 8:
+                addXorO(cell8);
+                break;
+
+        }
+
+    }
+
+    public void showResult(String status, BoardStatus position) {
+
+        if (position == BoardStatus.Col0) {
+            cell0.setStyle("-fx-background-color: #ff0000;");
+            cell3.setStyle("-fx-background-color: #ff0000;");
+            cell6.setStyle("-fx-background-color: #ff0000;");
+        } else if (position == BoardStatus.Col1) {
+            cell1.setStyle("-fx-background-color: #ff0000;");
+            cell4.setStyle("-fx-background-color: #ff0000;");
+            cell7.setStyle("-fx-background-color: #ff0000;");
+        } else if (position == BoardStatus.Col2) {
+            cell2.setStyle("-fx-background-color: #ff0000;");
+            cell5.setStyle("-fx-background-color: #ff0000;");
+            cell8.setStyle("-fx-background-color: #ff0000;");
+        } else if (position == BoardStatus.Row0) {
+            cell0.setStyle("-fx-background-color: #ff0000;");
+            cell1.setStyle("-fx-background-color: #ff0000;");
+            cell2.setStyle("-fx-background-color: #ff0000;");
+        } else if (position == BoardStatus.Row1) {
+            cell3.setStyle("-fx-background-color: #ff0000;");
+            cell4.setStyle("-fx-background-color: #ff0000;");
+            cell5.setStyle("-fx-background-color: #ff0000;");
+        } else if (position == BoardStatus.Row2) {
+            cell6.setStyle("-fx-background-color: #ff0000;");
+            cell7.setStyle("-fx-background-color: #ff0000;");
+            cell8.setStyle("-fx-background-color: #ff0000;");
+        } else if (position == BoardStatus.DiagonalTopLeftToBottomRight) {
+            cell0.setStyle("-fx-background-color: #ff0000;");
+            cell4.setStyle("-fx-background-color: #ff0000;");
+            cell8.setStyle("-fx-background-color: #ff0000;");
+        } else if (position == BoardStatus.DiagonalTopRightToBottomLeft) {
+            cell2.setStyle("-fx-background-color: #ff0000;");
+            cell4.setStyle("-fx-background-color: #ff0000;");
+            cell6.setStyle("-fx-background-color: #ff0000;");
+        }
+
+        switch (status) {
+            case "Win":
+
+                break;
+            case "Lose":
+                break;
+            default:
+                break;
+        }
+
+        setButtonsDisabled(true);
+        gotToAlert(texto.getText());
+        initializeScores(8, 8);
+        //showAlert(scoreO);
+        //alert(texto.getText());
+    }
+
+    private void gotToAlert(String player) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene scene = new Scene(root);
+
+        VideoAlertController vc = loader.getController();
+        vc.setWinnerVideo();
+        vc.setWinnerName(player);
+//          vc.scoreO = scoreO;
+//          vc.scoreX = scoreX;
+//          vc.playerX = playerX;
+//          vc.playerO = playerO;
+        vc.fxmlName = "gameboard.fxml";
+        stg = (Stage) cell0.getScene().getWindow(); // exceptions
+        stg.setScene(scene);
+        stg.show();
+    }
+
+    public void initializeScores(int scoreX, int scoreO) {
+        xScore.setText(String.valueOf(scoreX));
+        oScore.setText(String.valueOf(scoreO));
+    }
+
+    @Override
+    public void setViewButtonsDisabled(boolean isDisabled) {
+        setButtonsDisabled(isDisabled);
+    }
+
 }

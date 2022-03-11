@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,6 +39,8 @@ public class SingelPlayerController implements Initializable {
     private ImageView usernameImg;
     @FXML
     private ImageView backBtn;
+    @FXML
+    private CheckBox recordCheckbox;
 
     /**
      * Initializes the controller class.
@@ -69,6 +72,7 @@ public class SingelPlayerController implements Initializable {
             AIGameboardController vc = Loader.getController();
             vc.setUesers(player1.getText());
            // vc.setUesers(player1);
+           vc.permitRecord = recordCheckbox.isSelected();
             Stage windo =(Stage)((Node)event.getSource()).getScene().getWindow();
             windo.setResizable(false);
             windo.setScene(scene);

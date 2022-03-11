@@ -10,6 +10,6 @@ package xogameclient;
  * @author sandra
  */
 public interface LoginControllerInterface {
-    public void gotoListOfOnlineUsers();
+    public void gotoListOfOnlineUsers(String username, int id, int score);
     public void showLoginErrorAlert();
 }

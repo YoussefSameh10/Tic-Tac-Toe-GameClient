@@ -12,5 +12,9 @@ import xogameclient.services.ClientActions;
  * @author Youssef
  */
 public class ServerClose implements ClientActions {
-    
+    public boolean isClose;
+
+    public ServerClose(boolean isClose) {
+        this.isClose = isClose;
+    }    
 }

@@ -1,3 +1,4 @@
 /build/
 dist/XOGameClient.jar
 *.png
+/dist/

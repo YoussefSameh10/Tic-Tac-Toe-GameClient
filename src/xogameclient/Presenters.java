@@ -13,6 +13,5 @@ import javafx.application.Platform;
  */
 public interface Presenters {
     public void performSuccessAction();
-    
     public void performFailureAction();
 }

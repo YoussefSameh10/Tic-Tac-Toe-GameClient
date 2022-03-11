@@ -15,7 +15,7 @@ public enum AvailableActions {
     RegisterResponse("RegisterResponse"), //DONE
     LoginResponse("LoginResponse"), //DONE
     GetOnlinePlayersListResponse("GetOnlinePlayersListResponse"),
-    ChallengeRequest("ChallengeRequests"),
+    ChallengeRequest("ChallengeRequest"),
     ChallengeResponse("ChallengeResponse"),
     Move("Move"),
     GameResult("GameResult"),
