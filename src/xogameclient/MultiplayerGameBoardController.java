@@ -190,6 +190,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         cell6.setDisable(isEnabled || cell6.getProperties().get("TYPE").equals("P"));
         cell7.setDisable(isEnabled || cell7.getProperties().get("TYPE").equals("P"));
         cell8.setDisable(isEnabled || cell8.getProperties().get("TYPE").equals("P"));
+        //edit
     }
 
     public void setUesers(String p1) {
