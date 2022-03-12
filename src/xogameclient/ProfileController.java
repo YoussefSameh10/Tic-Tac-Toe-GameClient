@@ -80,7 +80,8 @@ public class ProfileController implements Initializable {
             stage.setTitle("List Of Online Users");
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            XOGameClient.showAlertForError("Can't get back to online users screen!");
+            //Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         

@@ -146,6 +146,7 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             stage.setTitle("List Of Online Users");
             stage.show();
         } catch (IOException ex) {
+            XOGameClient.showAlertForError("Can't navigate to profile screen!!");
             Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -186,7 +187,8 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             System.out.println("MY initialize SCORE IS: "+currentScore);
             ps.println("GetOnlinePlayersList");
         } catch (IOException ex) {
-            Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
+            XOGameClient.showAlertForError("Something went wrong!!\nCan't contact with the server");
+            //Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -320,7 +322,8 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             stage.setTitle("PlayGame");
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
+            XOGameClient.showAlertForError("Can't navigate to gameboard screen");
+            //Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

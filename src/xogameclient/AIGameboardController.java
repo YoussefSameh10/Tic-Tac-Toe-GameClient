@@ -279,23 +279,6 @@ public class AIGameboardController implements Initializable {
         imgView.setFitWidth(iconSize);
         imgView.setFitHeight(iconSize);
     }
-//       public void firstTurn(){
-//        
-//         try {
-//             Thread.sleep(2000);
-//         } catch (InterruptedException ex) {
-//             Logger.getLogger(AIGameboardController.class.getName()).log(Level.SEVERE, null, ex);
-//         }
-//        
-//       if(randam.nextInt(2)==0){
-//           playerTurn = true;
-//           textx.setText("X Turn");
-//           
-//       }else{
-//            playerTurn = false;
-//           texto.setText("O Turn");
-//       }
-//   } 
 
     boolean hasEmptyCell;
 
@@ -446,6 +429,7 @@ public class AIGameboardController implements Initializable {
            root = loader.load();
               
         } catch (IOException ex) {
+            XOGameClient.showAlertForError("Can't load the alert controller");
         }
         Scene scene = new Scene(root);
         VideoAlertController vc = loader.getController();
@@ -469,6 +453,7 @@ public class AIGameboardController implements Initializable {
            root = loader.load();
               
         } catch (IOException ex) {
+            XOGameClient.showAlertForError("Can't load the alert controller");
         }
         Scene scene = new Scene(root);
         VideoAlertController vc = loader.getController();
@@ -551,7 +536,8 @@ public class AIGameboardController implements Initializable {
                 writer.append(gameRecord + "," + "AI" + " vs " + texto.getText() + "\n");
                 writer.close();
             } catch (IOException ex) {
-                Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
+                XOGameClient.showAlertForError("Can't record the game");
+                //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

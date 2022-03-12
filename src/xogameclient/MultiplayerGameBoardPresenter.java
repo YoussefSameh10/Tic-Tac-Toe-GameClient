@@ -64,7 +64,8 @@ public class MultiplayerGameBoardPresenter implements Presenters {
             
             
         } catch (IOException ex) {
-            Logger.getLogger(MultiplayerGameBoardPresenter.class.getName()).log(Level.SEVERE, null, ex);
+            XOGameClient.showAlertForError("Can't initiate the gameboard");
+            //Logger.getLogger(MultiplayerGameBoardPresenter.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

@@ -99,6 +99,7 @@ public class RecordsController implements Initializable {
       }
       myReader.close();
     } catch (FileNotFoundException e) {
+        XOGameClient.showAlertForError("Can't record the game");
       e.printStackTrace();
     }
         configureListView();
@@ -131,7 +132,8 @@ public class RecordsController implements Initializable {
                     gotoDisplayGameScreen();
                     myReader.close();
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(RecordsController.class.getName()).log(Level.SEVERE, null, ex);
+                    XOGameClient.showAlertForError("Can't record the game");
+                    //Logger.getLogger(RecordsController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -150,7 +152,8 @@ public class RecordsController implements Initializable {
             window.setScene(scene);
             window.show();
         } catch (IOException ex) {
-            Logger.getLogger(RecordsController.class.getName()).log(Level.SEVERE, null, ex);
+            XOGameClient.showAlertForError("Can't display gameboard screen");
+            //Logger.getLogger(RecordsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -165,7 +168,8 @@ public class RecordsController implements Initializable {
             stage.setTitle("Home");
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(RecordsController.class.getName()).log(Level.SEVERE, null, ex);
+            XOGameClient.showAlertForError("Can't get back to Home Screen");
+            //Logger.getLogger(RecordsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -205,6 +205,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
             root = loader.load();
 
         } catch (IOException ex) {
+            XOGameClient.showAlertForError("Can't load the alert controller");
             //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
         Scene scene = new Scene(root);
@@ -227,6 +228,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
             root = loader.load();
 
         } catch (IOException ex) {
+            XOGameClient.showAlertForError("Can't load the alert controller");
             //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
         Scene scene = new Scene(root);
@@ -368,6 +370,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
             root = loader.load();
 
         } catch (IOException ex) {
+            XOGameClient.showAlertForError("Can't load the alert controller");
             ex.printStackTrace();
             //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
         }

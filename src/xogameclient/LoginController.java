@@ -81,7 +81,8 @@ public class LoginController implements Initializable, LoginControllerInterface 
             configureUI();
             loginBtn.setDisable(true);
         } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            XOGameClient.showAlertForError("Can't initialize login screen");
+            //Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
