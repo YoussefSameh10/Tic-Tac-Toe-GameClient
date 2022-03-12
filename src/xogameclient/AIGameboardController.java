@@ -54,6 +54,7 @@ public class AIGameboardController implements Initializable {
      boolean flag = false;
      int scoreX = 0, scoreO = 0;
     String playerX, playerO;
+    int depth;
     Stage stg;
     @FXML
     private ImageView backgroundImage;
@@ -109,6 +110,10 @@ public class AIGameboardController implements Initializable {
         player2Card.setImage(imageO);
        // xScore.setText(Integer.toString(scoreX));
         initializeScores(scoreX, scoreO);
+    }
+    
+    public void setDepth(int depth){
+        this.depth = depth;
     }
     
      public void initializeScores(int scoreX, int scoreO) {
@@ -218,7 +223,7 @@ public class AIGameboardController implements Initializable {
             return;
         }
         turn = !turn;
-        int[] move = NewMiniMax.getBestMove(charForBoard, 0);
+        int[] move = NewMiniMax.getBestMove(charForBoard, depth);
         if (turn) {
             addAIMove(move[0], move[1]);
         }
@@ -449,6 +454,7 @@ public class AIGameboardController implements Initializable {
         vc.setWinnerName(p1);
         vc.scoreO = scoreO;
         vc.scoreX = scoreX;
+        vc.setDepth(depth);
         vc.playerO = texto.getText();
         stg = (Stage) cell0.getScene().getWindow(); // exceptions
         stg.setScene(scene);

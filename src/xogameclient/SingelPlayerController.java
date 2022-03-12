@@ -41,6 +41,8 @@ public class SingelPlayerController implements Initializable {
     private ImageView backBtn;
     @FXML
     private CheckBox recordCheckbox;
+    @FXML
+    private CheckBox difficultCheckbox1;
 
     /**
      * Initializes the controller class.
@@ -71,7 +73,9 @@ public class SingelPlayerController implements Initializable {
             Scene scene = new Scene(controller);
             AIGameboardController vc = Loader.getController();
             vc.setUesers(player1.getText());
-           // vc.setUesers(player1);
+            if(difficultCheckbox1.isSelected()){vc.setDepth(6);}else{vc.setDepth(0);}
+            System.out.println(difficultCheckbox1.isSelected());
+            // vc.setUesers(player1);
            vc.permitRecord = recordCheckbox.isSelected();
             Stage windo =(Stage)((Node)event.getSource()).getScene().getWindow();
             windo.setResizable(false);
