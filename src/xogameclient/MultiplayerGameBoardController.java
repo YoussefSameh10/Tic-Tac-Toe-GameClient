@@ -252,8 +252,10 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 
     public void showAlertforTie() {
         stg = (Stage) cell0.getScene().getWindow();
+
         Alert.AlertType type = Alert.AlertType.WARNING;
         Alert alert = new Alert(type);
+
         alert.initModality(Modality.WINDOW_MODAL);
         alert.initOwner(stg);
         alert.setTitle("Oopps");
@@ -342,7 +344,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
             cell6.setStyle("-fx-background-color: #ff0000;");
         }
         setButtonsDisabled(true);
-  setButtonsDisabled(true);
+        setButtonsDisabled(true);
         switch (status) {
             case "Win":
                 gotToAlert(texto.getText(), true);
@@ -351,14 +353,15 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
                 gotToAlert(texto.getText(), false);
                 break;
             default:
+                showAlertforTie();
                 break;
         }
-        initializeScores(8, 8);
+        //  initializeScores(8, 8);
         //showAlert(scoreO);
         //alert(texto.getText());
     }
 
-   private void gotToAlert(String player, boolean isWinner) {
+    private void gotToAlert(String player, boolean isWinner) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("VideoAlert.fxml"));
         Parent root = null;
         try {
@@ -371,13 +374,12 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         Scene scene = new Scene(root);
 
         VideoAlertController vc = loader.getController();
-        if(isWinner) {
-           vc.setWinnerVideo(false); 
-        }
-        else {
+        if (isWinner) {
+            vc.setWinnerVideo(false);
+        } else {
             vc.setLoserVideo(false);
         }
-        
+
         vc.setWinnerName(player);
 //          vc.scoreO = scoreO;
 //          vc.scoreX = scoreX;
@@ -397,6 +399,21 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
     @Override
     public void setViewButtonsDisabled(boolean isDisabled) {
         setButtonsDisabled(isDisabled);
+    }
+
+    @Override
+    public void setPlayersData(String playerOneName, String playerTwoName, String playerOneScore, String playerTwoScore, boolean isUIDiabled) {
+        if (!isUIDiabled) {
+            texto.setText(playerTwoName);
+            textx.setText(playerOneName);
+            oScore.setText(playerTwoScore);
+            xScore.setText(playerOneScore);
+        } else {
+            texto.setText(playerOneName);
+            textx.setText(playerTwoName);
+            oScore.setText(playerOneScore);
+            xScore.setText(playerTwoScore);
+        }
     }
 
 }

@@ -109,6 +109,8 @@ public class ResponseManager {
             String score1 = parts[5];
             String score2 = parts[6];
             String first = parts[7];
+                                System.out.println("@Parsing" +  name1 +"score" + score1 + "&& "+name2 + " score " + score2);
+
             return new ChallengeRequest(id1,id2,name1,name2,score1,score2,first);
         }
         

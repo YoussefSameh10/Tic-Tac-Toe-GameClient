@@ -106,9 +106,10 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
         Platform.runLater(() -> {
             int idd1 = Integer.parseInt(id1);
             int idd2 = Integer.parseInt(id2);
+  
             boolean b1 = Boolean.parseBoolean(first);
             System.out.println("@go to Game id1 = "  + idd1 +" id2 " + idd2 + " is UI Disabled = "+ b1);
-            navigateToGameScreen(name1, name2, idd1, idd2, 0, 0, b1);
+            navigateToGameScreen(name1, name2, idd1, idd2,score1 , score2, b1);
         });
     }
     
@@ -263,6 +264,8 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
     
     @Override
     public void showAleart(String id1, String id2, String name1, String name2, String score1, String score2, String first) {
+                    System.out.println("@showAlert to game screen" +  name1 +"score" + score1 + "&& "+name2 + " score " + score2);
+
         Platform.runLater(() -> {
             Confirem(id1, id2, name1, name2, score1, score2);
         });
@@ -287,23 +290,27 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             
           int idd1 = Integer.parseInt(id1);
             int idd2 = Integer.parseInt(id2);
+
             System.out.println("@Confirm  id1 = "  + idd1 +" id2 " + idd2 + " is UI Disabled = "+ true);
-            navigateToGameScreen(name2, name1, idd2, idd1, 0, 0, true);
+                        System.out.println("@confiirm to game screen" +  name1 +"score" + score1 + "&& "+name2 + " score " + score2);
+
+            navigateToGameScreen(name2, name1, idd2, idd1, score2, score1, true);
         } else {
             ps.println("ChallengeResponse,notAccept," + id1 + "," + id2);
         }
     }
     
-    public void navigateToGameScreen( String name1, String name2,int id1, int id2, int score1, int score2, boolean isUiDisabled) {
+    public void navigateToGameScreen( String name1, String name2,int id1, int id2, String score1, String score2, boolean isUiDisabled) {
         
         try {
             Stage stage = (Stage) ((Node) rightImg).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiplayerGameBoard.fxml"));
             Parent gameScene = loader.load();
             MultiplayerGameBoardController controller = (MultiplayerGameBoardController) loader.getController();
-            
+            System.out.println("@navigate to game screen" +  name1 +"score" + score1 + "&& "+name2 + " score " + score2);
             MultiplayerGameBoardPresenter boardPresenter = new MultiplayerGameBoardPresenter(name1, name2, id1, id2,score1, score2, isUiDisabled);
             controller.setButtonsDisabled(isUiDisabled);//false if you are the game initiative
+            controller.setPlayersData(name1 , name2, score1, score2, isUiDisabled);
             controller.presenter = boardPresenter;
             boardPresenter.multiPlayerGameController = controller;
             NetworkConnection.getInstance().setPresenter(boardPresenter);
