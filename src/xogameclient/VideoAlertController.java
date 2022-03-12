@@ -41,7 +41,7 @@ public class VideoAlertController implements Initializable {
     
     MediaPlayer mediaPlayer;
    
-    int scoreX, scoreO;
+    int scoreX, scoreO,depth;
     
     Media media;
     @FXML
@@ -57,7 +57,11 @@ public class VideoAlertController implements Initializable {
         
         // TODO
        
-    }    
+    } 
+    
+    public void setDepth(int depth){
+        this.depth = depth;
+    }
     
     public void setWinnerVideo(boolean isReplayAllowed){
         reloadImg.setVisible(isReplayAllowed);
@@ -102,6 +106,7 @@ public class VideoAlertController implements Initializable {
             AIGameboardController vc = loader.getController();
             vc.scoreO = scoreO;
             vc.scoreX = scoreX;
+            vc.setDepth(depth);
             vc.texto.setText(playerO);
             vc.initializeScores(scoreX, scoreO);
             vc.setUesers( playerO);
