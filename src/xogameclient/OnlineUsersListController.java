@@ -195,12 +195,17 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             public void handle(MouseEvent event) {
                 String name = centerList.getSelectionModel().getSelectedItem();
                 int index = centerList.getSelectionModel().getSelectedIndex();
-                int id = onlinePlayers.get(index).getValue();
+                int id = 0;
+                if (index < onlinePlayers.size())
+                {
+                    id = onlinePlayers.get(index).getValue();
+                    ps.println("ChallengeRequest," + currentID + "," + id);
+                }
                 System.out.println("MY ID IS: "+currentID);
                 System.out.println("MY USERNAME IS: "+currentUsername);
                 System.out.println("MY SCORE IS: "+currentScore);
                 // need  my name 
-                ps.println("ChallengeRequest," + currentID + "," + id);
+                
             }
         });
     }

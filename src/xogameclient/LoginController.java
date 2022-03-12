@@ -115,10 +115,10 @@ public class LoginController implements Initializable, LoginControllerInterface 
 
         Stage stage = (Stage) registerBtn.getScene().getWindow();
         Parent onlineUsersScene = FXMLLoader.load(getClass().getResource("register.fxml"));
-        Scene scene = new Scene(onlineUsersScene);
+        Scene scene = new Scene(onlineUsersScene);          
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.setTitle("Online Users");
+        stage.setTitle("Register");
         stage.show();
     }
 
