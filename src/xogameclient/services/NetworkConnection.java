@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import xogameclient.LoginController;
 import xogameclient.LoginPresenter;
 import xogameclient.OnlineUsersListController;
 import xogameclient.Presenters;
@@ -46,14 +47,14 @@ public class NetworkConnection {
     private String response;
     ResponseManager responseManager;
     private Presenters presenter;
-    private XOGameClient presenter2;
+    private LoginController presenter2;
     ClientActions action;
 
     public void setPresenter(Presenters presenter) {
         this.presenter = presenter;
     }
 
-    public void setPresenter2(XOGameClient presenter2) {
+    public void setPresenter2(LoginController presenter2) {
         this.presenter2 = presenter2;
     }
 
@@ -121,6 +122,19 @@ public class NetworkConnection {
                 }
             }
         }.start();
+    }
+    
+    public void closePlayerConnection(){
+        try {
+            System.out.println("before close");
+            ps.println("ClientClose");
+            System.out.println("after close");
+            dis.close();
+            ps.close();
+            server.close();
+        } catch (IOException ex) {
+            Logger.getLogger(XOGameClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void manage() {

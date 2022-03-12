@@ -5,9 +5,14 @@
  */
 package xogameclient;
 
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +33,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import xogameclient.services.NetworkConnection;
+import xogameclient.services.ResponseManager;
 
 /**
  * FXML Controller class
@@ -61,15 +67,23 @@ public class LoginController implements Initializable, LoginControllerInterface 
     private LoginPresenterInterface loginPresenter;
     @FXML
     private ImageView backBtn;
-
+    NetworkConnection networkConnection;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loginPresenter = new LoginPresenter(this);
-        configureUI();
-        loginBtn.setDisable(true);
+        try {
+            networkConnection = NetworkConnection.getInstance();
+            loginPresenter = new LoginPresenter(this);
+            networkConnection.setPresenter2(this);
+            configureUI();
+            loginBtn.setDisable(true);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public void configureUI() {
@@ -93,6 +107,8 @@ public class LoginController implements Initializable, LoginControllerInterface 
         Image myImage = new Image(getClass().getResourceAsStream(path));
         img.setImage(myImage);
     }
+    
+    
 
     @FXML
     public void handleRegisterButtonPress(ActionEvent event) throws IOException {
@@ -146,6 +162,12 @@ public class LoginController implements Initializable, LoginControllerInterface 
 
     @FXML
     private void didPressLogin(ActionEvent event) {
+        Stage stage = (Stage) registerBtn.getScene().getWindow();
+        stage.setOnCloseRequest((events) -> {
+            System.out.println("HELLO FROM LOGIN INIT");
+            networkConnection.closePlayerConnection();
+
+        });
         if(!usernameTxt.getText().isEmpty() && !passwordTxt.getText().isEmpty()){
             loginPresenter.loginPlayer(usernameTxt.getText(), passwordTxt.getText());
         }else{
@@ -179,5 +201,30 @@ public class LoginController implements Initializable, LoginControllerInterface 
         }else{
             loginBtn.setDisable(false);
         }
+    }
+    
+    
+
+    public void performSuccessAction() {
+        Stage stg = (Stage) registerBtn.getScene().getWindow();
+        Platform.runLater(() ->{  
+            serverClosedConnectionAlert(stg);
+        });
+    }
+
+    public void performFailureAction() {
+        System.out.println("SERVER CAN'T CLOSE CONNECTION");
+    }
+    
+    
+    public void serverClosedConnectionAlert(Stage stg) {
+        Alert.AlertType type = Alert.AlertType.INFORMATION;
+        Alert alert = new Alert(type);
+        alert.initModality(Modality.WINDOW_MODAL);
+        alert.initOwner(stg);
+        alert.setTitle("Connection Closed");
+        alert.getDialogPane().setContentText("Server Closed Connection !!");
+        alert.setHeaderText("Connection Closed!!");
+        alert.showAndWait();
     }
 }

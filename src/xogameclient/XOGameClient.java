@@ -27,20 +27,13 @@ import xogameclient.services.ResponseManager;
  * @author Youssef
  */
 public class XOGameClient extends Application{
-    NetworkConnection networkConnection;
-    ResponseManager responseManager;
-    DataInputStream dis;
-    PrintStream ps;
+
     Stage stg;
             
     @Override
     public void start(Stage stage) throws Exception {
         stg = stage;
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        networkConnection.setPresenter2(this);
-        stage.setOnCloseRequest((event) -> {
-            performClientCloseConnection();
-        });
         Scene scene = new Scene(root);
         stage.setResizable(false);
         stage.setScene(scene);
@@ -50,7 +43,7 @@ public class XOGameClient extends Application{
     @Override
     public void init() throws Exception {
         super.init(); //To change body of generated methods, choose Tools | Templates.
-        networkConnection = NetworkConnection.getInstance();
+        //networkConnection = NetworkConnection.getInstance();
     }
     
     
@@ -62,48 +55,48 @@ public class XOGameClient extends Application{
         launch(args);
     }
     
-    public void closePlayerConnection(){
-        try {
-            responseManager = ResponseManager.getInstance();
-            networkConnection = NetworkConnection.getInstance();
-            dis = networkConnection.getDataInputStream();
-            ps = networkConnection.getPrintStream();
-            //networkConnection.setPresenter(this);
-            ps.println("ClientClose");
-            dis.close();
-            ps.close();
-            networkConnection.getServer().close();
-        } catch (IOException ex) {
-            Logger.getLogger(XOGameClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void performSuccessAction() {
-        Platform.runLater(() ->{  
-            serverClosedConnectionAlert();
-        });
-    }
-
-    public void performFailureAction() {
-        System.out.println("SERVER CAN'T CLOSE CONNECTION");
-    }
-    
-    public void performClientCloseConnection(){
-        closePlayerConnection();
-        Platform.runLater(() ->{  
-            serverClosedConnectionAlert();
-        });
-    }
-    
-    public void serverClosedConnectionAlert() {
-        Alert.AlertType type = Alert.AlertType.INFORMATION;
-        Alert alert = new Alert(type);
-        alert.initModality(Modality.WINDOW_MODAL);
-        alert.initOwner(stg);
-        alert.setTitle("Connection Closed");
-        alert.getDialogPane().setContentText("Server Closed Connection !!");
-        alert.setHeaderText("Connection Closed!!");
-        alert.showAndWait();
-    }
+//    public void closePlayerConnection(){
+//        try {
+//            responseManager = ResponseManager.getInstance();
+//            networkConnection = NetworkConnection.getInstance();
+//            dis = networkConnection.getDataInputStream();
+//            ps = networkConnection.getPrintStream();
+//            //networkConnection.setPresenter(this);
+//            ps.println("ClientClose");
+//            dis.close();
+//            ps.close();
+//            networkConnection.getServer().close();
+//        } catch (IOException ex) {
+//            Logger.getLogger(XOGameClient.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//
+//    public void performSuccessAction() {
+//        Platform.runLater(() ->{  
+//            serverClosedConnectionAlert();
+//        });
+//    }
+//
+//    public void performFailureAction() {
+//        System.out.println("SERVER CAN'T CLOSE CONNECTION");
+//    }
+//    
+//    public void performClientCloseConnection(){
+//        closePlayerConnection();
+//        Platform.runLater(() ->{  
+//            serverClosedConnectionAlert();
+//        });
+//    }
+//    
+//    public void serverClosedConnectionAlert() {
+//        Alert.AlertType type = Alert.AlertType.INFORMATION;
+//        Alert alert = new Alert(type);
+//        alert.initModality(Modality.WINDOW_MODAL);
+//        alert.initOwner(stg);
+//        alert.setTitle("Connection Closed");
+//        alert.getDialogPane().setContentText("Server Closed Connection !!");
+//        alert.setHeaderText("Connection Closed!!");
+//        alert.showAndWait();
+//    }
     
 }

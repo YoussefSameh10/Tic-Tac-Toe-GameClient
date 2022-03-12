@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -74,6 +75,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void didPressLanMultiplayerModeButton() throws IOException {
         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
+        
         Parent registerScene = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(registerScene);
         //scene.getStylesheets().add("onlineuserslist.css");
@@ -81,22 +83,17 @@ public class FXMLDocumentController implements Initializable {
         stage.setResizable(false);
         stage.setTitle("PlayGame");
         stage.show();
-        
-        
-        
-//         Stage stage = (Stage) lanMultiplayerButton.getScene().getWindow();
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("MultiplayerGameBoard.fxml"));
-//
-//        Parent registerScene = loader.load();
-//        MultiplayerGameBoardController controller = (MultiplayerGameBoardController)loader.getController();
-//       MultiplayerGameBoardPresenter  boardPresenter = new MultiplayerGameBoardPresenter("Sameh1", "Sameh2",1,2 , 0, 0, true);
-//        controller.presenter = boardPresenter ;
-//        Scene scene = new Scene(registerScene);
-//        //scene.getStylesheets().add("onlineuserslist.css");
-//        stage.setScene(scene);
-//        stage.setResizable(false);
-//        stage.setTitle("PlayGame");
-//        stage.show();
+    }
+    
+    public void serverClosedConnectionAlert(Stage stg) {
+        Alert.AlertType type = Alert.AlertType.INFORMATION;
+        Alert alert = new Alert(type);
+        alert.initModality(Modality.WINDOW_MODAL);
+        alert.initOwner(stg);
+        alert.setTitle("Connection Closed");
+        alert.getDialogPane().setContentText("Server Closed Connection !!");
+        alert.setHeaderText("Connection Closed!!");
+        alert.showAndWait();
     }
    
     @Override
