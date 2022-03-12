@@ -160,16 +160,14 @@ public class RecordsController implements Initializable {
     private void didPressback(MouseEvent event) {
         try {
             Stage stage = (Stage) leftImg.getScene().getWindow();
-            Parent profileScene = FXMLLoader.load(getClass().getResource("Profile.fxml"));
-            Scene scene = new Scene(profileScene);
-            //scene.getStylesheets().add("onlineuserslist.css");
+            Parent mainScene = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+            Scene scene = new Scene(mainScene);
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("Profile");
+            stage.setTitle("Home");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(RecordsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

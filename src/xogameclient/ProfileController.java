@@ -39,6 +39,7 @@ public class ProfileController implements Initializable {
     
     private String username;
     private int score;
+    private int id;
 
     /**
      * Initializes the controller class.
@@ -52,9 +53,12 @@ public class ProfileController implements Initializable {
         // TODO
     } 
     
-    public void updateData(String username, int score) {
+    public void updateData(int id, String username, int score) {
         nameLabel.setText(username);
         emailLabel.setText(Integer.toString(score));
+        this.id = id;
+        this.username = username;
+        this.score = score;
     }
     
     @FXML
@@ -67,8 +71,10 @@ public class ProfileController implements Initializable {
             Scene scene = new Scene(root);
             OnlineUsersListController vc = Loader.getController();
             vc.setCurrentUsername(username);
-            vc.setCurrentID(0);//yousef
+            vc.setCurrentID(id);
             vc.setCurrentScore(score);
+            System.out.println("MY profile USERNAME IS: "+username);
+            //vc.init(id, username, score);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("List Of Online Users");
