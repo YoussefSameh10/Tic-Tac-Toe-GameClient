@@ -101,8 +101,5 @@ public class ProfileController implements Initializable {
         
     }
 
-    @FXML
-    private void didPressLogout(MouseEvent event) {
-    }
 }
 

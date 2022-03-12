@@ -14,17 +14,17 @@
    <children>
       <ImageView fitHeight="620.0" fitWidth="309.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@homeAssets/2.jpg" />
+            <Image url="@homeAssets/leftImg.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="620.0" fitWidth="320.0" layoutX="629.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@homeAssets/1.jpg" />
+            <Image url="@homeAssets/rightImg.jpg" />
          </image>
       </ImageView>
       <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="200.0" layoutX="406.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@homeAssets/3.png" />
+            <Image url="@homeAssets/avatar.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="39.0" fitWidth="150.0" layoutX="288.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
@@ -50,11 +50,6 @@
       <ImageView fitHeight="65.0" fitWidth="70.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#didPressBack" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@homeAssets/previous.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="842.0" layoutY="26.0" onMouseClicked="#didPressLogout" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@homeAssets/logout.png" />
          </image>
       </ImageView>
    </children>

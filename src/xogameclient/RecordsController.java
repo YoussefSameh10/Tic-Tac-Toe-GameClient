@@ -144,9 +144,7 @@ public class RecordsController implements Initializable {
             Parent controller =  Loader.load();
             Scene scene = new Scene(controller);
             DisplayRecordedGameController vc = Loader.getController();
-            
             vc.gameRecord = record;
-            
             Stage window =(Stage)rightImg.getScene().getWindow();
             window.setResizable(false);
             window.setScene(scene);

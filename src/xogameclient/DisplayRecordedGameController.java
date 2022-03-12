@@ -66,8 +66,8 @@ public class DisplayRecordedGameController implements Initializable {
 
     private final int iconSize = 75;
     private final Image background = new Image(getClass().getResourceAsStream("homeAssets/background.jpg"));
-    private final Image imageX = new Image(getClass().getResourceAsStream("homeAssets/X.jpg"));
-    private final Image imageO = new Image(getClass().getResourceAsStream("homeAssets/O.jpg"));
+    private final Image imageX = new Image(getClass().getResourceAsStream("homeAssets/X.png"));
+    private final Image imageO = new Image(getClass().getResourceAsStream("homeAssets/O.png"));
     @FXML
     private Label textx;
     @FXML
