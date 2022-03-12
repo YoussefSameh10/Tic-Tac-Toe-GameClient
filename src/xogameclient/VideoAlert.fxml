@@ -18,12 +18,12 @@
          <image>
             <Image url="@homeAssets/rr.png" />
          </image></ImageView>
-      <Label fx:id="congrats" layoutX="198.0" layoutY="21.0" prefHeight="39.0" prefWidth="215.0" style="-fx-font-weight: bold;" text="Congratulations" textFill="WHITE">
+      <Label fx:id="congrats" layoutX="309.0" layoutY="34.0" prefHeight="39.0" prefWidth="215.0" style="-fx-font-weight: bold;" text="Wins" textFill="WHITE">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-      <Label fx:id="winnerPlayer" layoutX="413.0" layoutY="21.0" prefHeight="39.0" prefWidth="207.0" style="-fx-font-weight: bold;" text="Player" textFill="WHITE">
+      <Label fx:id="winnerPlayer" layoutX="197.0" layoutY="33.0" prefHeight="39.0" prefWidth="111.0" style="-fx-font-weight: bold;" text="Player" textFill="WHITE">
          <font>
             <Font size="27.0" />
          </font>
