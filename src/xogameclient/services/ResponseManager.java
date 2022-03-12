@@ -5,6 +5,7 @@
  */
 package xogameclient.services;
 
+import java.util.ArrayList;
 import xogameclient.services.responsemodels.ChallengeRequest;
 import xogameclient.services.responsemodels.ChallengeResponse;
 import xogameclient.services.responsemodels.GetOnlinePlayersListResponse;
@@ -16,6 +17,7 @@ import xogameclient.services.responsemodels.UnsupportedAction;
 import xogameclient.services.responsemodels.BoardStatus;
 import xogameclient.services.responsemodels.GameResult;
 import xogameclient.services.responsemodels.GameStatusResponse;
+import xogameclient.services.responsemodels.GetMyGamesResponse;
 
 /**
  *
@@ -124,6 +126,12 @@ public class ResponseManager {
             String score2 = parts[7];
             String first = parts[8];
             return new ChallengeResponse(respons,id1,id2,name1,name2,score1,score2,first);
+        }
+         
+        if(AvailableActions.GetMyGamesResponse.getString().equals(parts[0])) {
+            String response = parts[1];
+            String[] records = response.split("$");
+            return new GetMyGamesResponse(records);
         }
         
         return new UnsupportedAction("unsupported action error");

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="OUBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xogameclient.OnlineUsersListController">
+<BorderPane fx:id="OUBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="xogameclient.RecordsController">
    <left>
       <AnchorPane fx:id="leftAnchor" prefHeight="612.0" prefWidth="228.0" BorderPane.alignment="CENTER">
          <children>
@@ -15,9 +15,9 @@
                   <Image url="@homeAssets/leftImg.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="58.0" fitWidth="64.0" layoutX="25.0" layoutY="-24.0" onMouseClicked="#didPressLogout" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="76.0" fitWidth="84.0" layoutX="14.0" layoutY="-24.0" onMouseClicked="#didPressback" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@homeAssets/logout.png" />
+                  <Image url="@homeAssets/previous.png" />
                </image>
             </ImageView>
          </children>
@@ -31,18 +31,13 @@
                   <Image url="@homeAssets/rightImg.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="67.0" fitWidth="69.0" layoutX="100.0" layoutY="-23.0" onMouseClicked="#didPressProfile" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@homeAssets/avatar.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
    </right>
    <top>
       <ImageView fx:id="OUTopImg" fitHeight="96.0" fitWidth="488.0" pickOnBounds="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@homeAssets/OU.png" />
+            <Image url="@homeAssets/button.png" />
          </image>
       </ImageView>
    </top>

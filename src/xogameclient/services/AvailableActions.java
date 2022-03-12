@@ -19,8 +19,8 @@ public enum AvailableActions {
     ChallengeResponse("ChallengeResponse"),
     Move("Move"),
     GameResult("GameResult"),
+    GetMyGamesResponse("GetMyGamesResponse"),
     ServerClose("ServerClose");
-    
     private String action;
  
     AvailableActions(String action) {

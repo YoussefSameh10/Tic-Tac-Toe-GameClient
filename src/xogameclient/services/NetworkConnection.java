@@ -24,10 +24,12 @@ import xogameclient.services.responsemodels.ChallengeResponse;
 import xogameclient.services.responsemodels.GetOnlinePlayersListResponse;
 import xogameclient.XOGameClient;
 import xogameclient.MultiplayerGameBoardPresenter;
+import xogameclient.OnlineRecordsController;
 import xogameclient.Presenters;
 import xogameclient.RegisterPresenter;
 import xogameclient.services.responsemodels.BoardStatus;
 import xogameclient.services.responsemodels.GameStatusResponse;
+import xogameclient.services.responsemodels.GetMyGamesResponse;
 import xogameclient.services.responsemodels.LoginResponse;
 import xogameclient.services.responsemodels.Move;
 import xogameclient.services.responsemodels.RegisterResponse;
@@ -153,16 +155,15 @@ public class NetworkConnection {
         } else if (action instanceof ServerClose) {
             manageServerClose(action);
         } else if (action instanceof Move) {
-
             manageMove(action);
         } else if (action instanceof GameStatusResponse) {
             manageGameResponse(action);
         } else if (action instanceof ChallengeRequest) {
-
             manageChallengeRequest(action);
         } else if (action instanceof ChallengeResponse) {
-
             manageChallengeRsponse(action);
+        } else if (action instanceof GetMyGamesResponse) {
+            manageGetMyGamesResponse(action);
         }
     }
 
@@ -264,6 +265,14 @@ public class NetworkConnection {
             ((OnlineUsersListController) presenter).showrefuseAleart(name2);
 
         }
-
+    }
+    
+    private void manageGetMyGamesResponse(ClientActions action) {
+        if(((GetMyGamesResponse)action).records.length == 0) {
+            ((OnlineRecordsController)presenter).performFailureAction();
+        }
+        else {
+            ((OnlineRecordsController)presenter).updateList(((GetMyGamesResponse)action).records);
+        }
     }
 }

@@ -83,23 +83,25 @@ public class ProfileController implements Initializable {
             XOGameClient.showAlertForError("Can't get back to online users screen!");
             //Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    }
+
+    @FXML
+    private void didPressRecords(MouseEvent event) {
+        try {
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("OnlineRecords.fxml"));
+            Parent root = Loader.load();
+            Stage stage = (Stage)((Node)nameLabel).getScene().getWindow();
+            Scene scene = new Scene(root);
+            OnlineRecordsController vc = Loader.getController();
+            vc.init(id);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("List Of Online Users");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
