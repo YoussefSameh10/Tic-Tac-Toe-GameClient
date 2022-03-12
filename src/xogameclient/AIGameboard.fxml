@@ -45,11 +45,11 @@
       </GridPane>
       <ImageView fx:id="player1Card" fitHeight="150.0" fitWidth="154.0" layoutX="42.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@homeAssets/X.jpg" />
+            <Image url="@homeAssets/X.png" />
          </image></ImageView>
       <ImageView fx:id="player2Card" fitHeight="150.0" fitWidth="154.0" layoutX="757.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@homeAssets/O.jpg" />
+            <Image url="@homeAssets/O.png" />
          </image></ImageView>
       <Label fx:id="textx" layoutX="85.0" layoutY="186.0" text="Player X" textFill="#f8f6f6">
          <font>

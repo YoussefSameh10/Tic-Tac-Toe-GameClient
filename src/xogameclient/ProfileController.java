@@ -45,7 +45,7 @@ public class ProfileController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         ImageView imageView = new ImageView(getClass().getResource("homeAssets/buttn.png").toExternalForm());
+         ImageView imageView = new ImageView(getClass().getResource("homeAssets/button.png").toExternalForm());
          imageView.setFitHeight(55);
          imageView.setFitWidth(250);
          

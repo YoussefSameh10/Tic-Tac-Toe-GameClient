@@ -84,8 +84,8 @@ public class GameboardController implements Initializable {
 
     private final int iconSize = 75;
     private final Image background = new Image(getClass().getResourceAsStream("homeAssets/background.jpg"));
-    private final Image imageX = new Image(getClass().getResourceAsStream("homeAssets/X.jpg"));
-    private final Image imageO = new Image(getClass().getResourceAsStream("homeAssets/O.jpg"));
+    private final Image imageX = new Image(getClass().getResourceAsStream("homeAssets/X.png"));
+    private final Image imageO = new Image(getClass().getResourceAsStream("homeAssets/O.png"));
     @FXML
     private Label textx;
     @FXML
@@ -251,7 +251,9 @@ public class GameboardController implements Initializable {
 
     public void check() {
         if (tieGame()) { //el moo4kla hena
-            showAlertforTie();
+            if(checkXWin() == false && checkOWin() == false){
+                showAlertforTie();
+            }
         } else {
             // x win
             checkXWin();
@@ -265,50 +267,60 @@ public class GameboardController implements Initializable {
     }
 
     public boolean checkXWin() {
-
+        boolean xwin = false;
         if (charForBoard[0][0] == 'X' && charForBoard[0][1] == 'X' && charForBoard[0][2] == 'X') {
 
             scoreX++;
+            xwin = true;
             xWins(cell0, cell1, cell2);
         } else if (charForBoard[1][0] == 'X' && charForBoard[1][1] == 'X' && charForBoard[1][2] == 'X') {
 
             scoreX++;
+            xwin = true;
             xWins(cell3, cell4, cell5);
         } else if (charForBoard[2][0] == 'X' && charForBoard[2][1] == 'X' && charForBoard[2][2] == 'X') {
 
             scoreX++;
+            xwin = true;
             xWins(cell6, cell7, cell8);
         } else if (charForBoard[0][0] == 'X' && charForBoard[1][0] == 'X' && charForBoard[2][0] == 'X') {
 
             scoreX++;
+            xwin = true;
             xWins(cell0, cell3, cell6);
         } else if (charForBoard[0][1] == 'X' && charForBoard[1][1] == 'X' && charForBoard[2][1] == 'X') {
             scoreX++;
+            xwin = true;
             xWins(cell1, cell4, cell7);
         } else if (charForBoard[0][2] == 'X' && charForBoard[1][2] == 'X' && charForBoard[2][2] == 'X') {
 
             scoreX++;
+            xwin = true;
             xWins(cell2, cell5, cell8);
         } else if (charForBoard[0][0] == 'X' && charForBoard[1][1] == 'X' && charForBoard[2][2] == 'X') {
 
             scoreX++;
+            xwin = true;
             xWins(cell0, cell4, cell8);
         } else if (charForBoard[0][2] == 'X' && charForBoard[1][1] == 'X' && charForBoard[2][0] == 'X') {
 
             scoreX++;
+            xwin = true;
             xWins(cell2, cell4, cell6);
         }
-        return true;
+        return xwin;
     }
 
     public boolean checkOWin() {
-
+        boolean Owin = false;
         if (charForBoard[0][0] == 'O' && charForBoard[0][1] == 'O' && charForBoard[0][2] == 'O') {
             scoreO++;
+            Owin =true;
             oWins(cell0, cell1, cell2);
         } else if (charForBoard[1][0] == 'O' && charForBoard[1][1] == 'O' && charForBoard[1][2] == 'O') {
 
             scoreO++;
+            Owin =true;
             oWins(cell3, cell4, cell5);
         } else if (charForBoard[2][0] == 'O' && charForBoard[2][1] == 'O' && charForBoard[2][2] == 'O') {
 
@@ -317,32 +329,37 @@ public class GameboardController implements Initializable {
         } else if (charForBoard[0][0] == 'O' && charForBoard[1][0] == 'O' && charForBoard[2][0] == 'O') {
 
             scoreO++;
+            Owin =true;
             oWins(cell0, cell3, cell6);
         } else if (charForBoard[0][1] == 'O' && charForBoard[1][1] == 'O' && charForBoard[2][1] == 'O') {
 
             scoreO++;
+            Owin =true;
             oWins(cell1, cell4, cell7);
         } else if (charForBoard[0][2] == 'O' && charForBoard[1][2] == 'O' && charForBoard[2][2] == 'O') {
             scoreO++;
+            Owin =true;
             oWins(cell2, cell5, cell8);
 
         } else if (charForBoard[0][0] == 'O' && charForBoard[1][1] == 'O' && charForBoard[2][2] == 'O') {
             scoreO++;
+            Owin =true;
             oWins(cell0, cell4, cell8);
 
         } else if (charForBoard[0][2] == 'O' && charForBoard[1][1] == 'O' && charForBoard[2][0] == 'O') {
             scoreO++;
+            Owin =true;
             oWins(cell2, cell4, cell6);
 
         }
-        return true;
+        return Owin;
     }
 
     public boolean tieGame() {
         boolean hasEmptyCell = false;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if (charForBoard[i][j] == ' ') {
+                if (charForBoard[i][j] == ' ' ) {
                     hasEmptyCell = true;
                     break;
                 }
