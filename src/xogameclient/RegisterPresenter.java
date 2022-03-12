@@ -38,7 +38,7 @@ public class RegisterPresenter implements RegisterPresenterInterface, Presenters
             ps.println("Register,"+username+","+password);
             
         } catch (IOException ex) {
-            Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(RegisterPresenter.class.getName()).log(Level.SEVERE, null, ex);
             performFailureAction();
         }
     }

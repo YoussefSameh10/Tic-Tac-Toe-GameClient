@@ -380,8 +380,8 @@ public class GameboardController implements Initializable {
         alert.initModality(Modality.WINDOW_MODAL);
         alert.initOwner(stg);
         alert.setTitle("Oopps");
-        alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
-        alert.setHeaderText("Tieee");
+        alert.getDialogPane().setContentText("No one Wins, Hard Luck!!");
+        alert.setHeaderText("Tie Game");
         alert.showAndWait();
         System.out.println("removeeeeeeeeeeeeeee");
         enabelCells();
@@ -481,6 +481,7 @@ public class GameboardController implements Initializable {
             root = loader.load();
 
         } catch (IOException ex) {
+            XOGameClient.showAlertForError("Can't load the alert controller");
             //Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
         Scene scene = new Scene(root);
@@ -519,6 +520,7 @@ public class GameboardController implements Initializable {
                 writer.append(gameRecord + "," + playerX + " vs " + playerO + "\n");
                 writer.close();
             } catch (IOException ex) {
+                XOGameClient.showAlertForError("Can't record the game!!");
                 Logger.getLogger(GameboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

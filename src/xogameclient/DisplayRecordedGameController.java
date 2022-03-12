@@ -204,7 +204,8 @@ public class DisplayRecordedGameController implements Initializable {
                     try {
                         sleep(1000);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(DisplayRecordedGameController.class.getName()).log(Level.SEVERE, null, ex);
+                        XOGameClient.showAlertForError("Can't record the game!!");
+                        //Logger.getLogger(DisplayRecordedGameController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     if (gameRecord.charAt(i) == '0') {
                         Platform.runLater(() -> {

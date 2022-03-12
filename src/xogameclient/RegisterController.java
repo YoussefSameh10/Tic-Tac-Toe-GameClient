@@ -117,7 +117,7 @@ public class RegisterController implements Initializable, RegisterControllerInte
             stage.setTitle("Login");
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
             showRegisterErrorAlert();
         }
     }

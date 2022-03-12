@@ -129,6 +129,7 @@ public class FXMLDocumentController implements Initializable {
             stage.setTitle("Records");
             stage.show();
         } catch (IOException ex) {
+            XOGameClient.showAlertForError("Can't record the game");
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

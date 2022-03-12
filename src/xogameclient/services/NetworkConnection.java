@@ -107,7 +107,8 @@ public class NetworkConnection {
                         ps.close();
                         stop();
                     } catch (IOException ex1) {
-                        Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex1);
+                        XOGameClient.showAlertForError("Server Connection Error!!");
+                        //Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex1);
                     }
                 } catch (IOException ex) {
                     try {
@@ -115,9 +116,11 @@ public class NetworkConnection {
                         dis.close();
                         ps.close();
                         stop();
-                        Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex);
+                        //XOGameClient.showAlertForError("Server Connection Stopped!!");
+                        //Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex1) {
-                        Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex1);
+                        XOGameClient.showAlertForError("Server Connection Error!!");
+                        //Logger.getLogger(NetworkConnection.class.getName()).log(Level.SEVERE, null, ex1);
                     }
                 }
             }
@@ -133,7 +136,8 @@ public class NetworkConnection {
             ps.close();
             server.close();
         } catch (IOException ex) {
-            Logger.getLogger(XOGameClient.class.getName()).log(Level.SEVERE, null, ex);
+            XOGameClient.showAlertForError("Client Connection Error!!");
+            //Logger.getLogger(XOGameClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

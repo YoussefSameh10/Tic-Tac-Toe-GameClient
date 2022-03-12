@@ -99,7 +99,8 @@ public class VideoAlertController implements Initializable {
             try {
                root = loader.load();
             } catch (IOException ex) {
-               Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
+                XOGameClient.showAlertForError("Can't Load AI GameBoard Screen!!");
+               //Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
             }
             mediaPlayer.stop();
             Scene scene = new Scene(root);
@@ -122,7 +123,8 @@ public class VideoAlertController implements Initializable {
             try {
                 root = loader.load();
             } catch (IOException ex) {
-                Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
+                XOGameClient.showAlertForError("Can't Load GameBoard Screen!!");
+                //Logger.getLogger(VideoAlertController.class.getName()).log(Level.SEVERE, null, ex);
             }
             mediaPlayer.stop();
             Scene scene = new Scene(root);
