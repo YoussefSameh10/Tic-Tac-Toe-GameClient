@@ -77,8 +77,8 @@ The game developed using `JavaFX`, and `Derby` database for storing data.
 ![Server](https://raw.githubusercontent.com/YoussefSameh10/Tic-Tac-Toe-GameClient/main/README%20Assets/Server.PNG)
 
 # Contributors
-- [Mohammad Amr](https://github.com/YoussefSameh10/Tic-Tac-Toe-GameClient)
-- [Sameh Reda](https://github.com/YoussefSameh10/Tic-Tac-Toe-GameClient)
-- [Youssef Sameh](https://github.com/YoussefSameh10/Tic-Tac-Toe-GameClient)
-- [Sandra George](https://github.com/YoussefSameh10/Tic-Tac-Toe-GameClient)
-- [Mohammad Amr Mohamma\](https://github.com/YoussefSameh10/Tic-Tac-Toe-GameClient)
+- [Mohammad Amr](https://github.com/MohammadAmr)
+- [Sameh Reda](https://github.com/SamehRedaHassan)
+- [Youssef Sameh](https://github.com/YoussefSameh10)
+- [Sandra George](https://github.com/SandraGeorge19)
+- [Tasneen Hatem](https://github.com/TasnemHatem)
