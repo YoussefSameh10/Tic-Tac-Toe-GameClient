@@ -81,4 +81,4 @@ The game developed using `JavaFX`, and `Derby` database for storing data.
 - [Sameh Reda](https://github.com/SamehRedaHassan)
 - [Youssef Sameh](https://github.com/YoussefSameh10)
 - [Sandra George](https://github.com/SandraGeorge19)
-- [Tasneen Hatem](https://github.com/TasnemHatem)
+- [Tasneem Hatem](https://github.com/TasnemHatem)
