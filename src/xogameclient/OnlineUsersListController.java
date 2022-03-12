@@ -138,7 +138,8 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             Stage stage = (Stage)((Node)leftImg).getScene().getWindow();
             Scene scene = new Scene(root);
             ProfileController vc = Loader.getController();
-            vc.updateData(currentUsername, currentScore);
+            System.out.println("MY navigate USERNAME IS: "+currentUsername);
+            vc.updateData(currentID, currentUsername, currentScore);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("List Of Online Users");
@@ -167,8 +168,12 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
         
     }
     
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
         try {
             responseManager = ResponseManager.getInstance();
             networkConnection = NetworkConnection.getInstance();
@@ -179,10 +184,11 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             System.out.println("MY initialize USERNAME IS: "+currentUsername);
             System.out.println("MY initialize SCORE IS: "+currentScore);
             ps.println("GetOnlinePlayersList");
-            
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         centerList.setOnMouseClicked(new EventHandler<MouseEvent>() {
             
             @Override
