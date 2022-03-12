@@ -148,6 +148,10 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @FXML
+    private void didPressLogout(MouseEvent event) {
+    }
     
     public class UsersCustomCell extends ListCell<String> {
         
