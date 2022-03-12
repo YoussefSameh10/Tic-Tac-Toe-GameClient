@@ -236,6 +236,8 @@ public class NetworkConnection {
         String score1 = ((ChallengeRequest) action).getScore1();
         String score2 = ((ChallengeRequest) action).getScore2();
         String first = ((ChallengeRequest) action).getFirst();
+                            System.out.println("@manageChallangeRequest to game screen" +  name1 +"score" + score1 + "&& "+name2 + " score " + score2);
+
         ((OnlineUsersListController) presenter).showAleart(id1, id2, name1, name2, score1, score2, first);
         //edit
     }
@@ -251,6 +253,8 @@ public class NetworkConnection {
             String score1 = ((ChallengeResponse) action).getScore1();
             String score2 = ((ChallengeResponse) action).getScore2();
             String first = ((ChallengeResponse) action).getFirst();
+                                        System.out.println("@manageChallengeRsponse to game screen" +  name1 +"score" + score1 + "&& "+name2 + " score " + score2);
+
             ((OnlineUsersListController) presenter).gotoGamme(id1, id2, name1, name2, score1, score2, first);
         } else {
             ((OnlineUsersListController) presenter).showrefuseAleart(name2);

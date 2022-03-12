@@ -23,17 +23,17 @@ import xogameclient.services.responsemodels.BoardStatus;
 interface MultiPlayerGameControllerInterface {
     
     void playOpponentMoveAt(int cell);
-    
     void setViewButtonsDisabled(boolean isDisabled);
-    
     void showResult(String status, BoardStatus position);
+    void setPlayersData(String playerOneName, String playerTwoName, String playerOneScore ,String playerTwoScore, boolean isUIDiabled);
+    
 }
 
 public class MultiplayerGameBoardPresenter implements Presenters {
     
     MultiPlayerGameControllerInterface multiPlayerGameController;
     private String playerOneName, playerTwoName;
-    private int playerOneScore, playerTwoScore;
+    private String playerOneScore, playerTwoScore;
     private int playerOneId, playerTwoId;
     private boolean isMyTurn = true;
     private boolean isUiDisabled;
@@ -44,7 +44,7 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     private PrintStream ps;
     private ResponseManager responseManager;
     
-    public MultiplayerGameBoardPresenter(String playerOneName, String playerTwoName, int playerOneId, int playerTwoId, int playerOneScore, int playerTwoScore, boolean isUIdiabled) {
+    public MultiplayerGameBoardPresenter(String playerOneName, String playerTwoName, int playerOneId, int playerTwoId, String playerOneScore, String playerTwoScore, boolean isUIdiabled) {
         try {
             this.playerOneName = playerOneName;
             this.playerTwoName = playerTwoName;
@@ -59,6 +59,7 @@ public class MultiplayerGameBoardPresenter implements Presenters {
             server = networkConnection.getServer();
             dis = networkConnection.getDataInputStream();
             ps = networkConnection.getPrintStream();
+            
             //edit
             
             
@@ -83,11 +84,11 @@ public class MultiplayerGameBoardPresenter implements Presenters {
         return playerTwoName;
     }
     
-    public int getPlayerOneScore() {
+    public String getPlayerOneScore() {
         return playerOneScore;
     }
     
-    public int getPlayerTwoScore() {
+    public String getPlayerTwoScore() {
         return playerTwoScore;
     }
     

@@ -69,7 +69,7 @@ public class ChallengeRequest implements ClientActions {
     public void setScore2(String score2) {
         this.score2 = score2;
     }
-    public ChallengeRequest(String id1,String id2,String name1,String name2,String score1,String Score2,String first){
+    public ChallengeRequest(String id1,String id2,String name1,String name2,String score1,String score2,String first){
         this.id1 = id1;
         this.id2 = id2;
         this.name1 = name1;
