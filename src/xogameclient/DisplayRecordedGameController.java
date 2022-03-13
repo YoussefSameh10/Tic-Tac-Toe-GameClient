@@ -74,10 +74,6 @@ public class DisplayRecordedGameController implements Initializable {
     private Label texto;
     @FXML
     private ImageView backBtn;
-    @FXML
-    private Label xScore;
-    @FXML
-    private Label oScore;
 
     String playerX, playerO;
     Stage stg;

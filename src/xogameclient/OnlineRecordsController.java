@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -63,10 +64,11 @@ public class OnlineRecordsController implements Initializable, Presenters {
 
     
     ObservableList<String> records = FXCollections.observableArrayList();
+    ArrayList<String> fullRecords = new ArrayList<String>();
     String record = "No Record";
     NetworkConnection networkConnection;
     PrintStream ps;
-
+    int id;
     
     
     public class UsersCustomCell extends ListCell<String>{
@@ -104,6 +106,7 @@ public class OnlineRecordsController implements Initializable, Presenters {
     
     public void init(int id) {
         ps.println("GetMyGames,"+id);
+        this.id = id;
     }
     
     private void configureListView(){
@@ -122,7 +125,7 @@ public class OnlineRecordsController implements Initializable, Presenters {
             public void handle(MouseEvent event) {
                
                 int requiredLineNumber = centerList.getSelectionModel().getSelectedIndex();
-                record = records.get(requiredLineNumber);
+                record = fullRecords.get(requiredLineNumber);
                 gotoDisplayGameScreen();
             }
         });
@@ -136,6 +139,7 @@ public class OnlineRecordsController implements Initializable, Presenters {
             Scene scene = new Scene(controller);
             DisplayOnlineRecordedGameController vc = Loader.getController();
             vc.gameRecord = record;
+            vc.id = id;
             Stage window =(Stage)rightImg.getScene().getWindow();
             window.setResizable(false);
             window.setScene(scene);
@@ -163,7 +167,9 @@ public class OnlineRecordsController implements Initializable, Presenters {
     
     public void updateList(String[] recordsResponse) {
         for(int i = 0; i < recordsResponse.length; i++) {
-            records.add(recordsResponse[i]);
+            System.out.println("RESULTTT: "+recordsResponse[i]);
+            fullRecords.add(recordsResponse[i]);
+            records.add(recordsResponse[i].split(":")[1]);
         }
     }
     

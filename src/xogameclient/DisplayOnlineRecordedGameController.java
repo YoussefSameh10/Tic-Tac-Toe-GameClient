@@ -16,6 +16,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -74,12 +75,9 @@ public class DisplayOnlineRecordedGameController implements Initializable {
     private Label texto;
     @FXML
     private ImageView backBtn;
-    @FXML
-    private Label xScore;
-    @FXML
-    private Label oScore;
 
     String playerX, playerO;
+    public int  id;
     Stage stg;
 
     @Override
@@ -195,7 +193,7 @@ public class DisplayOnlineRecordedGameController implements Initializable {
                 while (gameRecord.equals("")) {
 
                 }
-                playerNames = gameRecord.split(",")[1];
+                playerNames = gameRecord.split(":")[1];
                 playerX = playerNames.split("vs")[0];
                 playerO = playerNames.split("vs")[1];
                 setUesers(playerX, playerO);
@@ -281,12 +279,16 @@ public class DisplayOnlineRecordedGameController implements Initializable {
 
     @FXML
     private void didPressedBack(MouseEvent event) throws IOException {
-        Stage stage = (Stage) backBtn.getScene().getWindow();
-        Parent prevScreen = FXMLLoader.load(getClass().getResource("Records.fxml"));
-        Scene scene = new Scene(prevScreen);
+        FXMLLoader Loader = new FXMLLoader();
+        Loader.setLocation(getClass().getResource("OnlineRecords.fxml"));
+        Parent root = Loader.load();
+        Stage stage = (Stage) ((Node) cell0).getScene().getWindow();
+        Scene scene = new Scene(root);
+        OnlineRecordsController vc = Loader.getController();
+        vc.init(id);
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("List Of Online Users");
         stage.show();
     }
-
-    
 }
