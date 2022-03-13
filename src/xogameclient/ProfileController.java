@@ -94,7 +94,7 @@ public class ProfileController implements Initializable {
             Stage stage = (Stage)((Node)nameLabel).getScene().getWindow();
             Scene scene = new Scene(root);
             OnlineRecordsController vc = Loader.getController();
-            vc.init(id);
+            vc.init(id, score, username);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("List Of Online Users");

@@ -21,6 +21,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -69,6 +70,8 @@ public class OnlineRecordsController implements Initializable, Presenters {
     NetworkConnection networkConnection;
     PrintStream ps;
     int id;
+    int score;
+    String username;
     
     
     public class UsersCustomCell extends ListCell<String>{
@@ -104,9 +107,11 @@ public class OnlineRecordsController implements Initializable, Presenters {
         }
     }    
     
-    public void init(int id) {
+    public void init(int id, int score, String username) {
         ps.println("GetMyGames,"+id);
         this.id = id;
+        this.score = score;
+        this.username = username;
     }
     
     private void configureListView(){
@@ -140,6 +145,8 @@ public class OnlineRecordsController implements Initializable, Presenters {
             DisplayOnlineRecordedGameController vc = Loader.getController();
             vc.gameRecord = record;
             vc.id = id;
+            vc.score = score;
+            vc.username = username;
             Stage window =(Stage)rightImg.getScene().getWindow();
             window.setResizable(false);
             window.setScene(scene);
@@ -152,12 +159,16 @@ public class OnlineRecordsController implements Initializable, Presenters {
     @FXML
     private void didPressback(MouseEvent event) {
         try {
-            Stage stage = (Stage) leftImg.getScene().getWindow();
-            Parent mainScene = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-            Scene scene = new Scene(mainScene);
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("Profile.fxml"));
+            Parent root = Loader.load();
+            Stage stage = (Stage)((Node)leftImg).getScene().getWindow();
+            Scene scene = new Scene(root);
+            ProfileController vc = Loader.getController();
+            vc.updateData(id, username, score);
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("Home");
+            stage.setTitle("List Of Online Users");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(RecordsController.class.getName()).log(Level.SEVERE, null, ex);

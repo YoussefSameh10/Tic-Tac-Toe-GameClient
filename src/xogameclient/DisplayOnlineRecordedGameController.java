@@ -78,6 +78,8 @@ public class DisplayOnlineRecordedGameController implements Initializable {
 
     String playerX, playerO;
     public int  id;
+    public int score;
+    public String username;
     Stage stg;
 
     @Override
@@ -285,7 +287,7 @@ public class DisplayOnlineRecordedGameController implements Initializable {
         Stage stage = (Stage) ((Node) cell0).getScene().getWindow();
         Scene scene = new Scene(root);
         OnlineRecordsController vc = Loader.getController();
-        vc.init(id);
+        vc.init(id, score, username);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("List Of Online Users");
