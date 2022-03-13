@@ -20,6 +20,7 @@ public enum AvailableActions {
     Move("Move"),
     GameResult("GameResult"),
     GetMyGamesResponse("GetMyGamesResponse"),
+    GameEndedResponse("GameEndedResponse"),
     ServerClose("ServerClose");
     private String action;
  

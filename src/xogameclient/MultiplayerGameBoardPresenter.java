@@ -26,6 +26,8 @@ interface MultiPlayerGameControllerInterface {
     void setViewButtonsDisabled(boolean isDisabled);
     void showResult(String status, BoardStatus position);
     void setPlayersData(String playerOneName, String playerTwoName, String playerOneScore ,String playerTwoScore, boolean isUIDiabled);
+    void showEndGameAlert();
+    void goBack();
     
 }
 
@@ -34,7 +36,7 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     MultiPlayerGameControllerInterface multiPlayerGameController;
     private String playerOneName, playerTwoName;
     private String playerOneScore, playerTwoScore;
-    private int playerOneId, playerTwoId;
+     int playerOneId, playerTwoId;
     private boolean isMyTurn = true;
     private boolean isUiDisabled;
     
@@ -111,6 +113,11 @@ public class MultiplayerGameBoardPresenter implements Presenters {
     
     public void manageGameResult(String status, BoardStatus position) {
         multiPlayerGameController.showResult(status, position);
+    }
+    
+    public void showGameEndedAlert(){
+        multiPlayerGameController.showEndGameAlert();
+        multiPlayerGameController.goBack();
     }
     
     @Override

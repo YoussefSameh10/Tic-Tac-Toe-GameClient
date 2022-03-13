@@ -109,7 +109,7 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
   
             boolean b1 = Boolean.parseBoolean(first);
             System.out.println("@go to Game id1 = "  + idd1 +" id2 " + idd2 + " is UI Disabled = "+ b1);
-            navigateToGameScreen(name1, name2, idd1, idd2,score1 , score2, b1);
+            navigateToGameScreen(name1, name2, idd1, idd2,score1 , score2, b1,currentID,currentUsername ,currentScore);
         });
     }
     
@@ -300,13 +300,13 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             System.out.println("@Confirm  id1 = "  + idd1 +" id2 " + idd2 + " is UI Disabled = "+ true);
                         System.out.println("@confiirm to game screen" +  name1 +"score" + score1 + "&& "+name2 + " score " + score2);
 
-            navigateToGameScreen(name2, name1, idd2, idd1, score2, score1, true);
+            navigateToGameScreen(name2, name1, idd2, idd1, score2, score1, true,currentID,currentUsername ,currentScore);
         } else {
             ps.println("ChallengeResponse,notAccept," + id1 + "," + id2);
         }
     }
     
-    public void navigateToGameScreen( String name1, String name2,int id1, int id2, String score1, String score2, boolean isUiDisabled) {
+    public void navigateToGameScreen( String name1, String name2,int id1, int id2, String score1, String score2, boolean isUiDisabled,int currentID,String currentName , int currentScore) {
         
         try {
             Stage stage = (Stage) ((Node) rightImg).getScene().getWindow();
@@ -317,6 +317,9 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
             MultiplayerGameBoardPresenter boardPresenter = new MultiplayerGameBoardPresenter(name1, name2, id1, id2,score1, score2, isUiDisabled);
             controller.setButtonsDisabled(isUiDisabled);//false if you are the game initiative
             controller.setPlayersData(name1 , name2, score1, score2, isUiDisabled);
+            controller.currentID = currentID;
+            controller.currentName = currentName;
+            controller.currentScore = currentScore;
             controller.presenter = boardPresenter;
             boardPresenter.multiPlayerGameController = controller;
             NetworkConnection.getInstance().setPresenter(boardPresenter);
