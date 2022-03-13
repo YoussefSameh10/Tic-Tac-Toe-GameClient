@@ -131,7 +131,8 @@ public class ResponseManager {
          
         if(AvailableActions.GetMyGamesResponse.getString().equals(parts[0])) {
             String response = parts[1];
-            String[] records = response.split("$");
+            String[] records = response.split("\\$");
+            System.out.println("MANAGER: "+response);
             return new GetMyGamesResponse(records);
         }
         

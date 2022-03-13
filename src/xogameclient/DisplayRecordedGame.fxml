@@ -69,15 +69,5 @@
             <Image url="@homeAssets/previous.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="368.0" prefHeight="44.0" prefWidth="54.0" text="0" textAlignment="RIGHT" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" fx:id="xScore">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="oScore" alignment="CENTER" layoutX="808.0" layoutY="368.0" prefHeight="44.0" prefWidth="54.0" text="0" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
