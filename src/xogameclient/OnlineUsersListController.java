@@ -153,6 +153,20 @@ public class OnlineUsersListController implements Initializable, OnlineUsersList
 
     @FXML
     private void didPressLogout(MouseEvent event) {
+        try {
+            ps.println("Logout");
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+            Parent root = Loader.load();
+            Stage stage = (Stage)((Node)leftImg).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Main");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(OnlineUsersListController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public class UsersCustomCell extends ListCell<String> {
