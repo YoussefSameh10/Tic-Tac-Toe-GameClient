@@ -162,6 +162,7 @@ public class VideoAlertController implements Initializable {
                 Stage stage = (Stage) ((Node) cancelBtn).getScene().getWindow();
                 Scene scene = new Scene(root);
                 OnlineUsersListController vc = Loader.getController();
+                mediaPlayer.stop();
                 vc.setCurrentUsername(onlineUserName);
                 vc.setCurrentID(onlineId);
                 vc.setCurrentScore(onlineScore);

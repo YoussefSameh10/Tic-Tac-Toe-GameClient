@@ -364,6 +364,14 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
                 break;
             default:
                 showAlertforTie();
+        
+            try {
+                navigateBack();
+            } catch (IOException ex) {
+                XOGameClient.showAlertForError("Error");
+                Logger.getLogger(MultiplayerGameBoardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
                 break;
         }
         //  initializeScores(8, 8);
