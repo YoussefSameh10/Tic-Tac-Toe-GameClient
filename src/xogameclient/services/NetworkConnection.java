@@ -28,6 +28,7 @@ import xogameclient.OnlineRecordsController;
 import xogameclient.Presenters;
 import xogameclient.RegisterPresenter;
 import xogameclient.services.responsemodels.BoardStatus;
+import xogameclient.services.responsemodels.GameEndedResponse;
 import xogameclient.services.responsemodels.GameStatusResponse;
 import xogameclient.services.responsemodels.GetMyGamesResponse;
 import xogameclient.services.responsemodels.LoginResponse;
@@ -164,6 +165,8 @@ public class NetworkConnection {
             manageChallengeRsponse(action);
         } else if (action instanceof GetMyGamesResponse) {
             manageGetMyGamesResponse(action);
+        }else if (action instanceof GameEndedResponse) {
+            manageGameEndedResponse(action);
         }
     }
 
@@ -275,4 +278,13 @@ public class NetworkConnection {
             ((OnlineRecordsController)presenter).updateList(((GetMyGamesResponse)action).records);
         }
     }
+    private void manageGameEndedResponse( ClientActions action){
+    
+    MultiplayerGameBoardPresenter pres = (MultiplayerGameBoardPresenter) presenter;
+        Platform.runLater(() -> {
+            pres.showGameEndedAlert();
+        });
+    
+    }
+    
 }

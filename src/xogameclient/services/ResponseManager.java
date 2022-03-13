@@ -15,6 +15,7 @@ import xogameclient.services.responsemodels.RegisterResponse;
 import xogameclient.services.responsemodels.ServerClose;
 import xogameclient.services.responsemodels.UnsupportedAction;
 import xogameclient.services.responsemodels.BoardStatus;
+import xogameclient.services.responsemodels.GameEndedResponse;
 import xogameclient.services.responsemodels.GameResult;
 import xogameclient.services.responsemodels.GameStatusResponse;
 import xogameclient.services.responsemodels.GetMyGamesResponse;
@@ -132,6 +133,11 @@ public class ResponseManager {
             String response = parts[1];
             String[] records = response.split("$");
             return new GetMyGamesResponse(records);
+        }
+        
+              if(AvailableActions.GameEndedResponse.getString().equals(parts[0])) {
+           
+            return new GameEndedResponse();
         }
         
         return new UnsupportedAction("unsupported action error");

@@ -8,9 +8,12 @@ package xogameclient;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -21,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import xogameclient.services.NetworkConnection;
 import xogameclient.services.responsemodels.BoardStatus;
 
 /**
@@ -72,6 +76,10 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
     private final Image imageX = new Image(getClass().getResourceAsStream("homeAssets/X.png"));
     private final Image imageO = new Image(getClass().getResourceAsStream("homeAssets/O.png"));
     Stage stg;
+
+    String currentName;
+    int currentID;
+    int currentScore;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -268,11 +276,9 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 
     @FXML
     private void didPressedBack(MouseEvent event) throws IOException {
-        Stage stage = (Stage) backBtn.getScene().getWindow();
-        Parent prevScreen = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        Scene scene = new Scene(prevScreen);
-        stage.setScene(scene);
-        stage.show();
+            int secondPlayerId = (currentID == (presenter.playerOneId)) ? presenter.playerTwoId : presenter.playerOneId;
+            NetworkConnection.getInstance().getPrintStream().println("BackToOnline," + secondPlayerId);
+        navigateBack();
     }
 
     @Override
@@ -389,6 +395,10 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
 //          vc.playerX = playerX;
 //          vc.playerO = playerO;
         vc.fxmlName = "gameboard.fxml";
+        vc.isOnlineMode = true;
+        vc.onlineId = currentID;
+        vc.onlineUserName = currentName;
+        vc.onlineScore = currentScore;
         stg = (Stage) cell0.getScene().getWindow(); // exceptions
         stg.setScene(scene);
         stg.show();
@@ -419,4 +429,51 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         }
     }
 
+    @Override
+    public void showEndGameAlert() {
+        System.out.println("ALEEEERRRRRTTTTTT");
+        Alert.AlertType type = Alert.AlertType.INFORMATION;
+        Alert alert = new Alert(type);
+
+        alert.initModality(Modality.WINDOW_MODAL);
+        //alert.initOwner(stg);
+        alert.setTitle("Information !");
+        alert.getDialogPane().setContentText("Your opponent  left the game");
+        alert.setHeaderText("Information");
+        alert.showAndWait();
+    }
+
+    @Override
+    public void goBack() {
+
+        try {
+
+        
+            navigateBack();
+        } catch (IOException ex) {
+            Logger.getLogger(MultiplayerGameBoardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void navigateBack() throws IOException {
+
+        try {
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("OnlineUsersList.fxml"));
+            Parent root = Loader.load();
+            Stage stage = (Stage) ((Node) backBtn).getScene().getWindow();
+            Scene scene = new Scene(root);
+            OnlineUsersListController vc = Loader.getController();
+            vc.setCurrentUsername(currentName);
+            vc.setCurrentID(currentID);
+            vc.setCurrentScore(currentScore);
+            NetworkConnection.getInstance().setPresenter(vc);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("List Of Online Users");
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

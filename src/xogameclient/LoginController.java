@@ -126,7 +126,6 @@ public class LoginController implements Initializable, LoginControllerInterface 
     @Override
     public void gotoListOfOnlineUsers(String username, int id, int score) {
         try {
-            
             FXMLLoader Loader = new FXMLLoader();
             Loader.setLocation(getClass().getResource("OnlineUsersList.fxml"));
             Parent root = Loader.load();
