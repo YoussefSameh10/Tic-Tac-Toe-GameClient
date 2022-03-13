@@ -269,7 +269,7 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         alert.initModality(Modality.WINDOW_MODAL);
         alert.initOwner(stg);
         alert.setTitle("Oopps");
-        alert.getDialogPane().setContentText("No one Wins, Try play ageain later!");
+        alert.getDialogPane().setContentText("No one Wins, Try play again later!");
         alert.setHeaderText("Tieee");
         alert.showAndWait();
     }
@@ -353,12 +353,14 @@ public class MultiplayerGameBoardController implements Initializable, MultiPlaye
         }
         setButtonsDisabled(true);
         setButtonsDisabled(true);
+
         switch (status) {
             case "Win":
-                gotToAlert(texto.getText(), true);
+                currentScore += 10;
+                gotToAlert(currentName, true);
                 break;
             case "Lose":
-                gotToAlert(texto.getText(), false);
+                gotToAlert(presenter.getPlayerTwoName(), false);
                 break;
             default:
                 showAlertforTie();
